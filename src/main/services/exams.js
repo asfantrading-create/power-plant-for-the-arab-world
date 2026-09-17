@@ -29,6 +29,17 @@ class Exams {
     this.store = store;
     this.bank = bank;       // {topics, questions}
     this.dataset = dataset; // {plants, countries, technologies}
+    this.featuresProvider = null; // () => { modules, technologies } of the active license, set by main
+  }
+
+  /** Technologies allowed by the license intersected with the requested scope (null = no restriction). */
+  scopedTechnologies(requested) {
+    const f = this.featuresProvider ? this.featuresProvider() : null;
+    const allowed = f && Array.isArray(f.technologies) && f.technologies.length ? f.technologies : null;
+    const req = Array.isArray(requested) ? requested.filter(Boolean) : [];
+    if (!allowed) return req;
+    const both = req.length ? req.filter(t => allowed.includes(t)) : allowed.slice();
+    return both.length ? both : allowed.slice();
   }
 
   list() { return this.store.list('exams'); }
@@ -76,7 +87,7 @@ class Exams {
     let bankPool = this.bank.questions.filter(q => !topics || topics.includes(q.topic));
     if (bankPool.length === 0) bankPool = this.bank.questions.slice();
     const bankQs = gen.shuffle(rng, bankPool).slice(0, exam.questionCount - wantGenerated).map(q => ({ ...q, generated: false }));
-    const genQs = wantGenerated > 0 ? gen.generate(this.dataset, { count: wantGenerated, countries: exam.plantScope?.countries, technologies: exam.plantScope?.technologies, seed }) : [];
+    const genQs = wantGenerated > 0 ? gen.generate(this.dataset, { count: wantGenerated, countries: exam.plantScope?.countries, technologies: this.scopedTechnologies(exam.plantScope?.technologies), seed }) : [];
     let all = [...bankQs, ...genQs];
     if (all.length < exam.questionCount) {
       // top up from any bank question not used yet

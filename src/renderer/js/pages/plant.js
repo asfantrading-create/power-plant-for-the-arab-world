@@ -1,6 +1,6 @@
 import { t, L, LT, isAr } from '../i18n.js';
 import { api } from '../api.js';
-import { state, plantById, countryByIso, complexById, tech } from '../state.js';
+import { state, plantById, countryByIso, complexById, tech, hasModule, techAllowed } from '../state.js';
 import { h, icon, fmt, fuelBadge, badge, empty, dataTable } from '../ui.js';
 import { createMap } from '../lib/map.js';
 import { barChart, destroyChart } from '../lib/charts.js';
@@ -26,11 +26,13 @@ export async function render(container, params, ctx) {
 
   const head = h('div', { class: 'page-head' },
     h('div', null,
-      h('div', { class: 'flex wrap', style: { marginBottom: '6px' } }, h('span', { class: 'country-flag' }, c.flag), h('a', { href: `#/plants?country=${p.country}` }, L(c, 'name')), fuelBadge(p.fuel), badge(L(tk, 'name')), badge(t('status.' + p.status), p.status === 'operational' ? 'success' : 'warning'), badge(t('quality.' + p.dataQuality)), p.hero ? badge('3D', 'primary') : null),
+      h('div', { class: 'flex wrap', style: { marginBottom: '6px' } }, h('span', { class: 'country-flag' }, c.flag), h('a', { href: `#/plants?country=${p.country}` }, L(c, 'name')), fuelBadge(p.fuel), badge(L(tk, 'name')), badge(t('status.' + p.status), p.status === 'operational' ? 'success' : 'warning'), badge(t('quality.' + p.dataQuality)), p.hero ? badge('3D', 'primary') : null, !techAllowed(p.technology) ? badge('🔒 ' + t('license.locked'), 'warning') : null),
       h('h1', null, L(p, 'name')), isAr() && p.nameAr ? h('p', { class: 'ltr' }, p.name) : (p.nameAr ? h('p', null, p.nameAr) : null)),
     h('div', { class: 'flex wrap' },
-      h('button', { class: 'btn primary lg', onClick: () => navigate(`/twin/${p.id}`) }, icon('twin'), t('plant.openTwin')),
-      h('button', { class: 'btn', onClick: () => navigate(`/practice?plantId=${p.id}`) }, icon('practice'), t('plant.practice')),
+      hasModule('twin') && techAllowed(p.technology)
+        ? h('button', { class: 'btn primary lg', onClick: () => navigate(`/twin/${p.id}`) }, icon('twin'), t('plant.openTwin'))
+        : h('button', { class: 'btn lg', disabled: true, title: t('license.lockedTech') }, '🔒 ', t('plant.openTwin')),
+      hasModule('exams') ? h('button', { class: 'btn', onClick: () => navigate(`/practice?plantId=${p.id}`) }, icon('practice'), t('plant.practice')) : null,
       p.sourceUrl ? h('button', { class: 'btn ghost', onClick: () => api('app:openExternal', { url: p.sourceUrl }) }, icon('globe'), t('plant.sourceLink')) : null));
 
   const overview = h('div', { class: 'card' }, h('h3', null, t('plant.overview')), h('dl', { class: 'kv' },

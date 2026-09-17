@@ -1,6 +1,6 @@
 import { t, L, isAr } from '../i18n.js';
 import { api } from '../api.js';
-import { state, isRole } from '../state.js';
+import { state, isRole, hasModule, techAllowed } from '../state.js';
 import { h, icon, statCard, fmt, fuelBadge, badge, empty } from '../ui.js';
 import { barChart, doughnutChart, destroyChart, FUEL_COLORS } from '../lib/charts.js';
 import { navigate } from '../app.js';
@@ -11,7 +11,7 @@ export async function render(container, params, ctx) {
   const operational = ds.plants.filter(p => p.status === 'operational' && !p.excludeFromTotals);
   const totalMw = operational.reduce((a, p) => a + p.capacityMw, 0);
   const renMw = operational.filter(p => ['Solar', 'Wind', 'Hydro', 'Biomass'].includes(p.fuel)).reduce((a, p) => a + p.capacityMw, 0);
-  const heroes = ds.plants.filter(p => p.hero).sort((a, b) => b.capacityMw - a.capacityMw).slice(0, 8);
+  const heroes = ds.plants.filter(p => p.hero && techAllowed(p.technology)).sort((a, b) => b.capacityMw - a.capacityMw).slice(0, 8);
   const charts = [];
 
   const head = h('div', { class: 'page-head' }, h('div', null, h('h1', null, t('dash.welcome', { name: user.displayName || user.username })), h('p', null, t('dash.dataNote', { date: (ds.generatedAt || '').slice(0, 10) }))));
@@ -20,13 +20,13 @@ export async function render(container, params, ctx) {
     statCard('bolt', fmt.gw(totalMw), t('dash.capacity')), statCard('sun', `${fmt.pct(renMw / totalMw * 100, 1)} · ${fmt.gw(renMw)}`, t('dash.renewables')));
   const quick = h('div', { class: 'grid cols-3 mt' },
     h('a', { href: '#/plants', class: 'card flex' }, h('div', { class: 'tech-icon', style: { background: 'var(--primary-soft)', color: 'var(--primary)' } }, icon('map')), h('div', null, h('b', null, t('nav.plants')), h('div', { class: 'muted small' }, t('dash.quick.explore')))),
-    h('a', { href: heroes[0] ? `#/twin/${heroes[0].id}` : '#/plants', class: 'card flex' }, h('div', { class: 'tech-icon', style: { background: 'var(--accent-soft)', color: 'var(--accent)' } }, icon('twin')), h('div', null, h('b', null, t('nav.twin')), h('div', { class: 'muted small' }, t('dash.quick.twin')))),
-    h('a', { href: '#/practice', class: 'card flex' }, h('div', { class: 'tech-icon', style: { background: 'var(--success-soft)', color: 'var(--success)' } }, icon('practice')), h('div', null, h('b', null, t('nav.practice')), h('div', { class: 'muted small' }, t('dash.quick.practice')))));
+    hasModule('twin') ? h('a', { href: heroes[0] ? `#/twin/${heroes[0].id}` : '#/plants', class: 'card flex' }, h('div', { class: 'tech-icon', style: { background: 'var(--accent-soft)', color: 'var(--accent)' } }, icon('twin')), h('div', null, h('b', null, t('nav.twin')), h('div', { class: 'muted small' }, t('dash.quick.twin')))) : null,
+    hasModule('exams') ? h('a', { href: '#/practice', class: 'card flex' }, h('div', { class: 'tech-icon', style: { background: 'var(--success-soft)', color: 'var(--success)' } }, icon('practice')), h('div', null, h('b', null, t('nav.practice')), h('div', { class: 'muted small' }, t('dash.quick.practice')))) : null);
 
   // exams / results panel
   const side = h('div', { class: 'card' });
-  const examsPanel = h('div', { class: 'card' }, h('h3', null, t('dash.myExams')), h('div', { class: 'muted' }, t('common.loading')));
-  api('exams:list').then(list => {
+  const examsPanel = h('div', { class: 'card' }, h('h3', null, t('dash.myExams')), h('div', { class: 'muted' }, hasModule('exams') ? t('common.loading') : t('license.lockedModule')));
+  if (hasModule('exams')) api('exams:list').then(list => {
     examsPanel.replaceChildren(h('h3', null, t('dash.myExams')));
     if (!list.length) examsPanel.append(h('div', { class: 'muted' }, t('dash.noExams')));
     for (const e of list.slice(0, 5)) examsPanel.append(h('div', { class: 'flex between', style: { padding: '8px 0', borderBottom: '1px solid var(--border)' } }, h('div', null, h('b', null, isAr() && e.titleAr ? e.titleAr : e.title || e.titleAr), h('div', { class: 'muted small' }, `${e.questionCount} ${t('exams.questions')} · ${e.durationMinutes} ${t('common.min')}`)), h('a', { href: '#/exams', class: 'btn sm primary' }, t('dash.startExam'))));

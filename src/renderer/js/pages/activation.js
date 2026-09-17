@@ -1,6 +1,6 @@
 import { t, errorMessage } from '../i18n.js';
 import { api } from '../api.js';
-import { state } from '../state.js';
+import { state, features } from '../state.js';
 import { h, icon, toast, copyText, field } from '../ui.js';
 
 export function licenseSummary(lic) {
@@ -10,9 +10,13 @@ export function licenseSummary(lic) {
     [t('license.licensee'), L.licensee.name || '—'], [t('license.org'), L.licensee.org || '—'],
     [t('license.type'), L.type === 'term' ? t('license.term') : t('license.lifetime')],
     [t('license.expires'), L.type === 'term' ? L.expiresAt : '∞'],
-    [t('license.seats'), String(L.seats)], [t('license.issued'), L.issuedAt], [t('license.id'), L.id],
+    [t('license.seats'), L.seats > 0 ? String(L.seats) : t('license.unlimited')], [t('license.issued'), L.issuedAt], [t('license.id'), L.id],
     [t('license.machineLock'), L.machineId ? L.machineId : t('common.no')],
   ];
+  const f = lic.features || features();
+  rows.push([t('license.modules'), f.modules.map(m => t('module.' + m)).join('، ')]);
+  const techNames = f.technologies ? f.technologies.map(c => { const tk = state.dataset && state.dataset.technologies[c]; return tk ? (document.documentElement.lang === 'ar' ? tk.nameAr : tk.nameEn) : c; }).join('، ') : t('license.allTechnologies');
+  rows.push([t('license.technologies'), techNames]);
   return h('dl', { class: 'kv' }, rows.map(([k, v]) => [h('dt', null, k), h('dd', null, v)]));
 }
 

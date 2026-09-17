@@ -1,5 +1,5 @@
 import { t, L, lang } from '../i18n.js';
-import { state, countryByIso } from '../state.js';
+import { state, countryByIso, techAllowed } from '../state.js';
 import { h, clear, icon, fmt, fuelBadge, badge, dataTable, selectEl, debounce } from '../ui.js';
 import { createMap } from '../lib/map.js';
 import { navigate, ensureMap } from '../app.js';
@@ -51,11 +51,11 @@ export async function render(container, params, ctx) {
     clear(listEl);
     if (filters.view === 'cards') {
       listEl.append(h('div', { class: 'grid auto' }, list.slice(0, 200).map(p => { const c = countryByIso(p.country); return h('div', { class: 'card plant-card pad-sm', onClick: () => navigate(`/plant/${p.id}`) },
-        h('div', { class: 'name' }, L(p, 'name')), h('div', { class: 'meta' }, h('span', { class: 'country-flag' }, c.flag), L(c, 'name'), fuelBadge(p.fuel), p.hero ? badge('3D', 'primary') : null),
+        h('div', { class: 'name' }, L(p, 'name')), h('div', { class: 'meta' }, h('span', { class: 'country-flag' }, c.flag), L(c, 'name'), fuelBadge(p.fuel), p.hero ? badge('3D', 'primary') : null, !techAllowed(p.technology) ? badge('🔒', 'warning') : null),
         h('div', { class: 'flex between' }, h('b', { class: 'num' }, fmt.mw(p.capacityMw)), h('span', { class: 'muted small' }, L(ds.technologies[p.technology], 'name')))); })));
     } else {
       listEl.append(dataTable({ pageSize: 30, rows: list, onRowClick: p => navigate(`/plant/${p.id}`), columns: [
-        { key: 'name', label: t('common.name'), get: p => L(p, 'name'), render: (v, p) => h('span', null, h('b', null, v), p.hero ? [' ', badge('3D', 'primary')] : null) },
+        { key: 'name', label: t('common.name'), get: p => L(p, 'name'), render: (v, p) => h('span', null, h('b', null, v), p.hero ? [' ', badge('3D', 'primary')] : null, !techAllowed(p.technology) ? [' ', badge('🔒', 'warning')] : null) },
         { key: 'country', label: t('common.country'), get: p => L(countryByIso(p.country), 'name'), render: (v, p) => `${countryByIso(p.country).flag} ${v}` },
         { key: 'fuel', label: t('common.fuel'), render: v => fuelBadge(v) },
         { key: 'technology', label: t('common.technology'), get: p => L(ds.technologies[p.technology], 'name') },

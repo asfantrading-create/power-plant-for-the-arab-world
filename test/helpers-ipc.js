@@ -17,11 +17,12 @@ function buildMainContext(workspace) {
   let licenseKey = null;
   const settings = { data: { language: 'ar', theme: 'dark', institutionName: 'Test University', workspaceDir: null, updateFeedUrl: null, autoCheckUpdates: true }, get(k) { return this.data[k]; }, set(k, v) { this.data[k] = v; return this.data; }, all() { return { ...this.data }; } };
   const updater = { state: { status: 'disabled-dev', currentVersion: '1.0.0' }, check() { return this.state; }, download() { return this.state; }, install() { return this.state; } };
-  const licenseStatus = () => licenseKey ? { ...license.verify(licenseKey, { publicKeyPems: [keys.publicKeyPem] }), machineId: 'APT-TEST', source: 'memory', devKeysAccepted: true, productionKeyConfigured: true } : { valid: false, reason: 'missing', license: null, daysLeft: null, machineId: 'APT-TEST', source: null, devKeysAccepted: true, productionKeyConfigured: true };
+  const licenseStatus = () => { if (!licenseKey) return { valid: false, reason: 'missing', license: null, daysLeft: null, features: null, machineId: 'APT-TEST', source: null, devKeysAccepted: true, productionKeyConfigured: true }; const r = license.verify(licenseKey, { publicKeyPems: [keys.publicKeyPem] }); return { ...r, features: r.valid ? license.featuresOf(r.license) : null, machineId: 'APT-TEST', source: 'memory', devKeysAccepted: true, productionKeyConfigured: true }; };
+  exams.featuresProvider = () => { const s = licenseStatus(); return s.valid ? s.features : null; };
   const ctx = {
     log: { warn() {}, info() {}, error() {} }, settings, getWindow: () => null, store: () => store, auth: () => auth, exams: () => exams, dataset, map, bank, updater,
     bootstrap: () => ({ version: '1.0.0', platform: 'test', isPackaged: false, machineId: 'APT-TEST', userDataPath: workspace, workspaceDir: workspace, workspaceError: null, settings: settings.all(), license: licenseStatus(), needsSetup: !auth.hasSuperAdmin(), currentUser: auth.current(), updater: updater.state, datasetGeneratedAt: '2026-09-17', plantCount: dataset.plants.length }),
-    licenseStatus, activateLicense: key => { const r = license.verify(key, { publicKeyPems: [keys.publicKeyPem] }); if (r.valid) licenseKey = key; return { ...r, machineId: 'APT-TEST' }; }, removeLicense: () => { licenseKey = null; }, setWorkspaceDir: () => settings.all(), workspaceError: null,
+    licenseStatus, activateLicense: key => { const r = license.verify(key, { publicKeyPems: [keys.publicKeyPem] }); if (r.valid) licenseKey = key; return { ...r, features: r.valid ? license.featuresOf(r.license) : null, machineId: 'APT-TEST' }; }, removeLicense: () => { licenseKey = null; }, setWorkspaceDir: () => settings.all(), workspaceError: null,
   };
   const handlers = {};
   const orig = Module._load;
@@ -31,7 +32,8 @@ function buildMainContext(workspace) {
   };
   try { delete require.cache[require.resolve('../src/main/ipc/index.js')]; delete require.cache[require.resolve('../src/main/services/exporter.js')]; require('../src/main/ipc/index.js').register(ctx); } finally { Module._load = orig; }
   const validKey = license.issue({ licensee: { name: 'Smoke Tester', org: 'Test University' }, type: 'lifetime', seats: 10 }, keys.privateKeyPem);
-  return { handlers, validKey, auth, store, exams };
+  const issue = input => license.issue(input, keys.privateKeyPem);
+  return { handlers, validKey, auth, store, exams, issue };
 }
 
 

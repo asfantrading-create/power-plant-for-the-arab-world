@@ -22,6 +22,13 @@
 - التصدير: CSV (يفتح في Excel مع دعم العربية) أو JSON للجدول المعروض، وتقرير PDF لكل طالب (النتائج + جلسات المحاكاة)، وتقرير PDF لكل محاولة من صفحة النتيجة.
 - جلسات المحاكاة: الإدارة ← جلسات المحاكاة يعرض لكل طالب المحطة والمدة والطاقة المولّدة ومعامل القدرة والفصلات والأحداث.
 
+## الترخيص وما يتحكم به
+- الإدارة ← الترخيص تعرض: النوع وتاريخ الانتهاء، المقاعد، الوحدات المشمولة، التقنيات المشمولة، ومعرّف الجهاز.
+- **المقاعد**: الحد الأقصى للحسابات النشطة بجميع الأدوار. عند بلوغه لا يمكن إضافة مستخدم أو استيراده أو إعادة تفعيله؛ يمكن تعطيل حساب قديم (الحالة: غير نشط) لتحرير مقعد، أو طلب ترخيص بمقاعد أكثر من البائع.
+- **الوحدات**: إن لم يشمل الترخيص «الاختبارات» تختفي صفحات الاختبارات والتدريب والنتائج؛ وإن لم يشمل «التوأم الرقمي» تختفي المحاكاة وجلساتها.
+- **التقنيات**: محطات التقنيات غير المشمولة تظهر بعلامة 🔒 (تصفح البيانات فقط، بلا محاكاة) ولا تدخل في الأسئلة المولّدة ولا في التدريب.
+- للتجديد أو توسيع الصلاحيات يرسل البائع مفتاحاً جديداً يُدخل من الإدارة ← الترخيص ← تفعيل مفتاح جديد.
+
 ## النسخ الاحتياطي والاستعادة
 الإدارة ← البيانات والنسخ الاحتياطي: تصدير ملف JSON واحد يحوي كل السجلات، واستعادته (دمج أو استبدال) على جهاز آخر أو بعد إعادة التثبيت.
 
@@ -30,4 +37,4 @@
 
 ---
 ## English
-Super admin (everything) > instructor (students, groups, exams, all results, sessions) > student (own results). Import students from CSV (`username,password,displayName,studentNumber,groupName,email`). Exams mix bank questions with questions generated from real plant data; every student receives a shuffled variant; answers are never sent before submission. Results page offers filters, statistics, charts, CSV/JSON export and per-student PDF reports. Backup/restore exports all records to one JSON file.
+Super admin (everything) > instructor (students, groups, exams, all results, sessions) > student (own results). Import students from CSV (`username,password,displayName,studentNumber,groupName,email`). Exams mix bank questions with questions generated from real plant data; every student receives a shuffled variant; answers are never sent before submission. Results page offers filters, statistics, charts, CSV/JSON export and per-student PDF reports. Backup/restore exports all records to one JSON file. The license (Administration → License) sets the seat limit (maximum active accounts), the included modules (twin / exams) and the included technologies; plants of other technologies show a 🔒 badge and cannot be simulated.

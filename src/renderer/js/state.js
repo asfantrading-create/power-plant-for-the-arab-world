@@ -23,6 +23,13 @@ export function complexById(id) {
   return state.dataset.complexes.find(c => c.id === id) || null;
 }
 export function tech(code) { return state.dataset ? state.dataset.technologies[code] || null : null; }
+/** Effective license features: { modules: [...], technologies: [...]|null }. */
+export function features() {
+  const f = state.license && state.license.features;
+  return f && Array.isArray(f.modules) ? f : { modules: ['twin', 'exams'], technologies: null };
+}
+export function hasModule(m) { return features().modules.includes(m); }
+export function techAllowed(code) { const t = features().technologies; return !t || t.includes(code); }
 export function isRole(min) {
   const rank = { superadmin: 3, instructor: 2, student: 1 };
   return !!state.user && rank[state.user.role] >= rank[min];

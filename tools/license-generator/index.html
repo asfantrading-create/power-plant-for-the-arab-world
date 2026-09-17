@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>مولّد تراخيص Arab Power Twin · License Generator</title>
+<style>
+  :root { --bg:#f3f6f9; --panel:#fff; --line:#d9e1ea; --text:#0f1c2a; --muted:#5b6b7f; --accent:#0f8fa5; --accent-soft:#e3f4f7; --warn:#b45309; --crit:#dc2626; --ok:#0f9d58; }
+  * { box-sizing:border-box; } body { margin:0; background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,'Noto Sans Arabic',Tahoma,sans-serif; font-size:14px; }
+  header { background:var(--panel); border-bottom:1px solid var(--line); padding:14px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  h1 { font-size:18px; margin:0; } h2 { font-size:15px; margin:0 0 10px; } h3 { font-size:14px; margin:14px 0 6px; }
+  main { max-width:1180px; margin:20px auto; padding:0 16px; display:grid; gap:16px; grid-template-columns:1fr 1fr; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .full { grid-column:1 / -1; }
+  label { display:block; font-size:12px; color:var(--muted); margin:10px 0 4px; }
+  input, select, textarea { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:8px; font:inherit; background:#fff; color:var(--text); }
+  textarea { font-family:Consolas,monospace; font-size:12px; min-height:100px; direction:ltr; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:8px; padding:9px 14px; font:inherit; font-weight:600; cursor:pointer; margin-top:12px; }
+  button.secondary { background:#fff; color:var(--text); border:1px solid var(--line); } button.danger { background:#fff; color:var(--crit); border:1px solid var(--crit); }
+  .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; } .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:0 12px; }
+  .out { font-family:Consolas,monospace; font-size:12px; word-break:break-all; background:#f8fafc; border:1px dashed var(--line); border-radius:8px; padding:10px; direction:ltr; text-align:left; min-height:60px; }
+  .muted { color:var(--muted); font-size:12px; } .ok { color:var(--ok); font-weight:600; } .bad { color:var(--crit); font-weight:600; } .warn { color:var(--warn); }
+  .lang { border:1px solid var(--line); border-radius:8px; overflow:hidden; display:inline-flex; } .lang button { margin:0; border-radius:0; background:#fff; color:var(--text); padding:6px 10px; } .lang button.active { background:var(--accent-soft); color:var(--accent); }
+  .checks { display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; margin-top:6px; } .checks label { display:flex; align-items:center; gap:8px; margin:0; font-size:13px; color:var(--text); cursor:pointer; } .checks input { width:auto; } .checks label.all { grid-column:1 / -1; font-weight:600; border-bottom:1px solid var(--line); padding-bottom:6px; margin-bottom:2px; }
+  .status { padding:8px 10px; border-radius:8px; background:var(--accent-soft); font-size:12px; margin-top:8px; }
+  table { width:100%; border-collapse:collapse; font-size:12px; } th, td { border-bottom:1px solid var(--line); padding:6px 8px; text-align:start; } th { color:var(--muted); font-weight:600; }
+  code { direction:ltr; unicode-bidi:isolate; }
+  @media (max-width:860px) { main { grid-template-columns:1fr; } .grid2, .checks { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div><h1 data-i18n="title">مولّد تراخيص Arab Power Twin</h1><div class="muted" data-i18n="subtitle">يعمل محلياً في متصفحك دون إنترنت، ويصدر مفاتيح بنفس صيغة الأمر npm run license</div></div>
+  <div class="lang"><button id="lang-ar" class="active" onclick="setLang('ar')">العربية</button><button id="lang-en" onclick="setLang('en')">English</button></div>
+</header>
+<main>
+  <section class="card">
+    <h2 data-i18n="privTitle">1 · المفتاح الخاص (سري، لا يُرسل للعميل أبداً)</h2>
+    <p class="muted" data-i18n="privHint">حمّل الملف vendor-private.pem من مجلد tools\license-cli\keys أو الصق محتواه. يبقى المفتاح في هذا المتصفح فقط ولا يُرسل لأي مكان.</p>
+    <textarea id="priv" placeholder="-----BEGIN PRIVATE KEY----- ... -----END PRIVATE KEY-----"></textarea>
+    <div class="row"><input type="file" id="privFile" accept=".pem,.key,.txt" style="width:auto" /><button class="secondary" onclick="rememberPriv()" data-i18n="remember">تذكّر في هذا المتصفح</button><button class="secondary" onclick="forgetPriv()" data-i18n="forget">نسيان</button></div>
+    <div id="privStatus" class="status" style="display:none"></div>
+
+    <h2 style="margin-top:18px" data-i18n="custTitle">2 · بيانات العميل والترخيص</h2>
+    <div class="grid2">
+      <div><label data-i18n="org">الجهة (جامعة / شركة / معهد)</label><input id="org" placeholder="جامعة الملك سعود" /></div>
+      <div><label data-i18n="name">اسم الشخص المسؤول</label><input id="name" placeholder="د. أحمد علي" /></div>
+    </div>
+    <label data-i18n="email">البريد الإلكتروني (اختياري)</label><input id="email" type="email" style="direction:ltr" />
+    <div class="grid2">
+      <div><label data-i18n="type">نوع الترخيص</label><select id="type" onchange="toggleExp()"><option value="lifetime" data-i18n="lifetime">مدى الحياة</option><option value="term" data-i18n="term">ينتهي بتاريخ محدد</option></select></div>
+      <div id="expRow" style="display:none"><label data-i18n="expires">تاريخ انتهاء الترخيص</label><input id="expires" type="date" /></div>
+    </div>
+    <div class="grid2">
+      <div><label data-i18n="seats">عدد المقاعد = الحد الأقصى للحسابات (0 = غير محدود)</label><input id="seats" type="number" min="0" value="0" style="direction:ltr" /></div>
+      <div><label data-i18n="machine">ربط بجهاز محدد (اختياري) – المعرّف يظهر للعميل في شاشة التفعيل</label><input id="machine" placeholder="APT-XXXX-XXXX-XXXX-XXXX" style="direction:ltr" /></div>
+    </div>
+    <label data-i18n="notes">ملاحظات داخلية (اختياري)</label><input id="notes" />
+
+    <h3 data-i18n="modulesTitle">الوحدات المشمولة</h3>
+    <div class="checks" id="modules">
+      <label><input type="checkbox" data-module="twin" checked /> <span data-i18n="modTwin">التوأم الرقمي والمحاكاة ثلاثية الأبعاد</span></label>
+      <label><input type="checkbox" data-module="exams" checked /> <span data-i18n="modExams">الاختبارات والتقييم والنتائج</span></label>
+    </div>
+    <h3 data-i18n="techTitle">تقنيات التوليد المشمولة</h3>
+    <p class="muted" data-i18n="techHint">اختر «جميع التقنيات» أو حدد ما دفع العميل ثمنه فقط؛ محطات التقنيات الأخرى تظهر مقفلة في البرنامج (لا يمكن تشغيل توأمها الرقمي ولا تظهر في الأسئلة المولّدة).</p>
+    <div class="checks" id="techs"></div>
+    <button onclick="generate()" data-i18n="generate">توليد مفتاح الترخيص</button>
+    <div id="genError" class="bad" style="margin-top:8px"></div>
+  </section>
+
+  <section class="card">
+    <h2 data-i18n="keyTitle">3 · مفتاح الترخيص – أرسله للعميل</h2>
+    <div class="out" id="out"><span class="muted" data-i18n="empty">لم يُولَّد مفتاح بعد.</span></div>
+    <div class="row"><button class="secondary" onclick="copyKey()" data-i18n="copy">نسخ</button><button class="secondary" onclick="downloadKey()" data-i18n="download">تنزيل ملف .lic</button></div>
+    <p class="muted" id="summary"></p>
+
+    <h2 style="margin-top:18px" data-i18n="verifyTitle">التحقق من مفتاح</h2>
+    <textarea id="verifyIn" placeholder="APT1...."></textarea>
+    <label data-i18n="pubLabel">المفتاح العام (اختياري – يُستخدم مفتاح الإنتاج المدمج إن تُرك فارغاً)</label>
+    <textarea id="pub" style="min-height:60px" placeholder="-----BEGIN PUBLIC KEY-----"></textarea>
+    <button class="secondary" onclick="verifyKey()" data-i18n="verify">تحقق</button>
+    <div id="verifyOut" class="muted" style="margin-top:8px"></div>
+  </section>
+
+  <section class="card full">
+    <div class="row" style="justify-content:space-between"><h2 data-i18n="registerTitle">سجل التراخيص الصادرة (محفوظ في هذا المتصفح)</h2><div class="row"><button class="secondary" onclick="exportRegister()" data-i18n="exportCsv">تصدير CSV</button><button class="danger" onclick="clearRegister()" data-i18n="clear">مسح السجل</button></div></div>
+    <div style="overflow:auto"><table id="register"><thead><tr><th data-i18n="rDate">التاريخ</th><th data-i18n="rOrg">الجهة</th><th data-i18n="rName">الاسم</th><th data-i18n="rType">النوع</th><th data-i18n="rExpires">الانتهاء</th><th data-i18n="rSeats">المقاعد</th><th data-i18n="rMachine">الجهاز</th><th data-i18n="rModules">الوحدات</th><th data-i18n="rTechs">التقنيات</th><th>ID</th></tr></thead><tbody></tbody></table></div>
+  </section>
+</main>
+<script src="license-crypto.js"></script>
+<script>
+const EMBEDDED_PUBLIC_KEY_PEM = "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAZ4uCEf8ldyazbRI1lQ2ni2bTUqkyqmSPeHBqHrcERtw=\n-----END PUBLIC KEY-----\n";
+const TECHS = [["ccgt","توربينات غازية بدورة مركبة","Combined-cycle gas turbine (CCGT)"],["ocgt","توربينات غازية بدورة مفتوحة","Open-cycle gas turbine (OCGT)"],["steam_oil","محطة بخارية تعمل بالوقود السائل/الغاز","Oil/gas-fired steam plant"],["coal_steam","محطة بخارية تعمل بالفحم","Coal-fired steam plant"],["diesel","محركات ديزل / زيت وقود ثقيل","Diesel / HFO reciprocating engines"],["pv","طاقة شمسية كهروضوئية","Solar photovoltaic (PV)"],["csp_trough","طاقة شمسية مركزة – مرايا مكافئة","Concentrated solar power – parabolic trough"],["csp_tower","طاقة شمسية مركزة – برج مركزي","Concentrated solar power – central tower"],["wind_onshore","مزرعة رياح برية","Onshore wind farm"],["hydro_dam","سد كهرومائي بخزان","Hydroelectric dam (reservoir)"],["hydro_ror","محطة كهرومائية نهرية / قناطر","Run-of-river / barrage hydro"],["nuclear_pwr","طاقة نووية – مفاعل ماء مضغوط","Nuclear – pressurised water reactor"],["biomass","كتلة حيوية / توليد مشترك من مخلفات قصب السكر","Biomass / bagasse cogeneration"],["waste_to_energy","تحويل النفايات إلى طاقة","Waste-to-energy"],["igcc","دورة مركبة بتغويز متكامل","Integrated gasification combined cycle (IGCC)"],["oil_shale","محطة بخارية تعمل بالصخر الزيتي","Oil-shale fired steam plant"]];
+const I18N = {
+  ar: { title:'مولّد تراخيص Arab Power Twin', subtitle:'يعمل محلياً في متصفحك دون إنترنت، ويصدر مفاتيح بنفس صيغة الأمر npm run license', privTitle:'1 · المفتاح الخاص (سري، لا يُرسل للعميل أبداً)', privHint:'حمّل الملف vendor-private.pem من مجلد tools\\license-cli\\keys أو الصق محتواه. يبقى المفتاح في هذا المتصفح فقط ولا يُرسل لأي مكان.', remember:'تذكّر في هذا المتصفح', forget:'نسيان', custTitle:'2 · بيانات العميل والترخيص', org:'الجهة (جامعة / شركة / معهد)', name:'اسم الشخص المسؤول', email:'البريد الإلكتروني (اختياري)', type:'نوع الترخيص', lifetime:'مدى الحياة', term:'ينتهي بتاريخ محدد', expires:'تاريخ انتهاء الترخيص', seats:'عدد المقاعد = الحد الأقصى للحسابات (0 = غير محدود)', machine:'ربط بجهاز محدد (اختياري) – المعرّف يظهر للعميل في شاشة التفعيل', notes:'ملاحظات داخلية (اختياري)', modulesTitle:'الوحدات المشمولة', modTwin:'التوأم الرقمي والمحاكاة ثلاثية الأبعاد', modExams:'الاختبارات والتقييم والنتائج', techTitle:'تقنيات التوليد المشمولة', techHint:'اختر «جميع التقنيات» أو حدد ما دفع العميل ثمنه فقط؛ محطات التقنيات الأخرى تظهر مقفلة في البرنامج (لا يمكن تشغيل توأمها الرقمي ولا تظهر في الأسئلة المولّدة).', allTechs:'جميع التقنيات (16)', generate:'توليد مفتاح الترخيص', keyTitle:'3 · مفتاح الترخيص – أرسله للعميل', empty:'لم يُولَّد مفتاح بعد.', copy:'نسخ', download:'تنزيل ملف .lic', verifyTitle:'التحقق من مفتاح', pubLabel:'المفتاح العام (اختياري – يُستخدم مفتاح الإنتاج المدمج إن تُرك فارغاً)', verify:'تحقق', registerTitle:'سجل التراخيص الصادرة (محفوظ في هذا المتصفح)', exportCsv:'تصدير CSV', clear:'مسح السجل', rDate:'التاريخ', rOrg:'الجهة', rName:'الاسم', rType:'النوع', rExpires:'الانتهاء', rSeats:'المقاعد', rMachine:'الجهاز', rModules:'الوحدات', rTechs:'التقنيات',
+        needPriv:'حمّل المفتاح الخاص أولاً', badPriv:'المفتاح الخاص غير صالح (يجب أن يكون ملف vendor-private.pem)', needOrg:'أدخل الجهة أو اسم الشخص', needDate:'أدخل تاريخ الانتهاء', needModule:'اختر وحدة واحدة على الأقل', needTech:'اختر تقنية واحدة على الأقل', badMachine:'صيغة معرّف الجهاز: APT-XXXX-XXXX-XXXX-XXXX', copied:'تم النسخ', saved:'تم حفظ المفتاح في هذا المتصفح', privLoaded:'المفتاح الخاص محمّل ✓ – المفتاح العام المشتق:', privMismatch:'تنبيه: هذا المفتاح الخاص لا يطابق مفتاح الإنتاج المدمج في البرنامج؛ التراخيص الصادرة به لن تُقبل.', valid:'التوقيع صحيح ✓', invalid:'التوقيع غير صحيح ✗', expired:'الترخيص منتهٍ', unlimited:'غير محدود', allT:'الكل', confirmClear:'مسح السجل بالكامل؟', dl:'تم إنشاء الملف', lifetimeS:'مدى الحياة', termS:'ينتهي في', summary:(p)=>`ترخيص ${p.type==='lifetime'?'مدى الحياة':'ينتهي في '+p.expiresAt} للجهة «${p.licensee.org||p.licensee.name}» – صدر بتاريخ ${p.issuedAt} – المقاعد: ${p.seats||'غير محدود'}${p.machineId?' – مرتبط بالجهاز '+p.machineId:''} – الوحدات: ${p.features.modules.join('، ')} – التقنيات: ${p.features.technologies?p.features.technologies.length:'الكل'}` },
+  en: { title:'Arab Power Twin – License Generator', subtitle:'Runs locally in your browser without internet and produces the same keys as npm run license', privTitle:'1 · Private key (secret – never send it to customers)', privHint:'Load vendor-private.pem from tools\\license-cli\\keys or paste its content. The key stays in this browser and is never uploaded.', remember:'Remember in this browser', forget:'Forget', custTitle:'2 · Customer & license details', org:'Organisation (university / company / institute)', name:'Contact person', email:'E-mail (optional)', type:'License type', lifetime:'Lifetime', term:'Expires on a date', expires:'License expiry date', seats:'Seats = maximum number of accounts (0 = unlimited)', machine:'Bind to one computer (optional) – the ID is shown to the customer on the activation screen', notes:'Internal notes (optional)', modulesTitle:'Included modules', modTwin:'Digital twin & 3D simulation', modExams:'Exams, assessment & results', techTitle:'Included generation technologies', techHint:'Choose “All technologies” or tick only what the customer paid for; plants of other technologies appear locked (no digital twin, excluded from generated questions).', allTechs:'All technologies (16)', generate:'Generate license key', keyTitle:'3 · License key – send this to the customer', empty:'No key generated yet.', copy:'Copy', download:'Download .lic file', verifyTitle:'Verify a key', pubLabel:'Public key (optional – the embedded production key is used when empty)', verify:'Verify', registerTitle:'Issued licenses register (stored in this browser)', exportCsv:'Export CSV', clear:'Clear register', rDate:'Date', rOrg:'Organisation', rName:'Name', rType:'Type', rExpires:'Expires', rSeats:'Seats', rMachine:'Machine', rModules:'Modules', rTechs:'Technologies',
+        needPriv:'Load the private key first', badPriv:'Invalid private key (must be vendor-private.pem)', needOrg:'Enter the organisation or contact name', needDate:'Enter the expiry date', needModule:'Select at least one module', needTech:'Select at least one technology', badMachine:'Machine ID format: APT-XXXX-XXXX-XXXX-XXXX', copied:'Copied', saved:'Key saved in this browser', privLoaded:'Private key loaded ✓ – derived public key:', privMismatch:'Warning: this private key does not match the production key embedded in the app; keys issued with it will be rejected.', valid:'Signature valid ✓', invalid:'Signature INVALID ✗', expired:'License expired', unlimited:'unlimited', allT:'all', confirmClear:'Clear the whole register?', dl:'File created', lifetimeS:'Lifetime', termS:'Expires', summary:(p)=>`${p.type==='lifetime'?'Lifetime':'Expires '+p.expiresAt} license for “${p.licensee.org||p.licensee.name}” – issued ${p.issuedAt} – seats: ${p.seats||'unlimited'}${p.machineId?' – bound to '+p.machineId:''} – modules: ${p.features.modules.join(', ')} – technologies: ${p.features.technologies?p.features.technologies.length:'all'}` }
+};
+let lang = 'ar'; const t = k => I18N[lang][k];
+function renderTechs() {
+  const box = document.getElementById('techs');
+  const prevAll = box.querySelector('#allTechs') ? document.getElementById('allTechs').checked : true;
+  const checked = new Set([...box.querySelectorAll('input[data-tech]:checked')].map(i => i.dataset.tech));
+  box.innerHTML = '<label class="all"><input type="checkbox" id="allTechs" ' + (prevAll ? 'checked' : '') + ' onchange="toggleAllTechs()" /> ' + t('allTechs') + '</label>' +
+    TECHS.map(([id, ar, en]) => '<label><input type="checkbox" data-tech="' + id + '" ' + (prevAll || checked.has(id) ? 'checked' : '') + ' ' + (prevAll ? 'disabled' : '') + ' /> ' + (lang === 'ar' ? ar : en) + ' <span class="muted" dir="ltr">' + id + '</span></label>').join('');
+}
+function toggleAllTechs() { const all = document.getElementById('allTechs').checked; document.querySelectorAll('#techs input[data-tech]').forEach(i => { i.disabled = all; if (all) i.checked = true; }); }
+function selectedTechs() { if (document.getElementById('allTechs').checked) return null; const ts = [...document.querySelectorAll('#techs input[data-tech]:checked')].map(i => i.dataset.tech); return ts.length === TECHS.length ? null : ts; }
+function selectedModules() { return [...document.querySelectorAll('#modules input[data-module]:checked')].map(i => i.dataset.module); }
+function setLang(l) { lang = l; document.documentElement.lang = l; document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr'; document.querySelectorAll('[data-i18n]').forEach(el => { const v = I18N[l][el.dataset.i18n]; if (typeof v === 'string') el.textContent = v; }); document.getElementById('lang-ar').classList.toggle('active', l === 'ar'); document.getElementById('lang-en').classList.toggle('active', l === 'en'); renderTechs(); renderRegister(); }
+function toggleExp() { document.getElementById('expRow').style.display = document.getElementById('type').value === 'term' ? '' : 'none'; }
+document.getElementById('privFile').addEventListener('change', e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { document.getElementById('priv').value = r.result; checkPriv(); }; r.readAsText(f); });
+document.getElementById('priv').addEventListener('input', checkPriv);
+async function checkPriv() {
+  const box = document.getElementById('privStatus'); const pem = document.getElementById('priv').value.trim();
+  if (!pem) { box.style.display = 'none'; return; }
+  try {
+    const pub = await LicenseCrypto.publicKeyFromSeed(LicenseCrypto.seedFromPrivatePem(pem));
+    const derivedPem = LicenseCrypto.publicPemFromRaw(pub);
+    const match = EMBEDDED_PUBLIC_KEY_PEM && derivedPem.replace(/\s+/g, '') === EMBEDDED_PUBLIC_KEY_PEM.replace(/\s+/g, '');
+    box.style.display = ''; box.innerHTML = '<span class="ok">' + t('privLoaded') + '</span> <code>' + derivedPem.split('\n')[1] + '…</code>' + (match ? '' : '<div class="warn">' + t('privMismatch') + '</div>');
+  } catch (e) { box.style.display = ''; box.innerHTML = '<span class="bad">' + t('badPriv') + '</span>'; }
+}
+function rememberPriv() { try { localStorage.setItem('apt.priv', document.getElementById('priv').value); alert(t('saved')); } catch {} }
+function forgetPriv() { try { localStorage.removeItem('apt.priv'); } catch {} document.getElementById('priv').value = ''; checkPriv(); }
+try { if (localStorage.getItem('apt.priv')) { document.getElementById('priv').value = localStorage.getItem('apt.priv'); } } catch {}
+let lastKey = '', lastOrg = '';
+async function generate() {
+  const err = document.getElementById('genError'); err.textContent = '';
+  const pem = document.getElementById('priv').value.trim(); if (!pem) return (err.textContent = t('needPriv'));
+  const org = document.getElementById('org').value.trim(), name = document.getElementById('name').value.trim();
+  if (!org && !name) return (err.textContent = t('needOrg'));
+  const type = document.getElementById('type').value, expires = document.getElementById('expires').value;
+  if (type === 'term' && !expires) return (err.textContent = t('needDate'));
+  const modules = selectedModules(); if (!modules.length) return (err.textContent = t('needModule'));
+  const technologies = selectedTechs(); if (Array.isArray(technologies) && !technologies.length) return (err.textContent = t('needTech'));
+  const machine = document.getElementById('machine').value.trim().toUpperCase();
+  if (machine && !/^APT-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$/.test(machine)) return (err.textContent = t('badMachine'));
+  try {
+    const { key, payload } = await LicenseCrypto.issueLicense({ licensee: { name, org, email: document.getElementById('email').value.trim() }, type, expiresAt: expires || null, seats: Number(document.getElementById('seats').value) || 0, machineId: machine || null, features: { modules, technologies }, notes: document.getElementById('notes').value.trim() }, pem);
+    lastKey = key; lastOrg = org || name;
+    document.getElementById('out').textContent = key;
+    document.getElementById('summary').textContent = t('summary')(payload);
+    addToRegister(payload);
+  } catch (e) { err.textContent = (e && e.message) || String(e); }
+}
+function copyKey() { if (!lastKey) return; navigator.clipboard.writeText(lastKey).then(() => alert(t('copied'))).catch(() => { const ta = document.createElement('textarea'); ta.value = lastKey; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); alert(t('copied')); }); }
+function downloadKey() { if (!lastKey) return; const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lastKey + '\n'], { type: 'text/plain' })); a.download = (lastOrg.replace(/[\\/:*?"<>|]+/g, '_').trim() || 'license') + '.lic'; a.click(); }
+async function verifyKey() {
+  const raw = document.getElementById('verifyIn').value; const out = document.getElementById('verifyOut');
+  const pub = document.getElementById('pub').value.trim() || EMBEDDED_PUBLIC_KEY_PEM;
+  if (!pub) { out.innerHTML = '<span class="bad">' + t('invalid') + ' (no public key)</span>'; return; }
+  try {
+    const r = await LicenseCrypto.verifyLicense(raw, pub);
+    const label = r.valid ? t('valid') : (r.reason === 'expired' ? t('expired') : t('invalid') + ' (' + r.reason + ')');
+    out.innerHTML = '<span class="' + (r.valid ? 'ok' : 'bad') + '">' + label + '</span>' + (r.license ? '<br><code>' + escapeHtml(JSON.stringify(r.license)) + '</code>' : '');
+  } catch (e) { out.innerHTML = '<span class="bad">' + t('invalid') + ' (' + e.message + ')</span>'; }
+}
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]); }
+// ---- register ----
+function loadRegister() { try { return JSON.parse(localStorage.getItem('apt.register') || '[]'); } catch { return []; } }
+function saveRegister(r) { try { localStorage.setItem('apt.register', JSON.stringify(r)); } catch {} }
+function addToRegister(p) { const r = loadRegister(); r.unshift({ at: new Date().toISOString(), id: p.id, org: p.licensee.org, name: p.licensee.name, email: p.licensee.email, type: p.type, expiresAt: p.expiresAt, seats: p.seats, machineId: p.machineId, modules: p.features.modules.join('+'), technologies: p.features.technologies ? p.features.technologies.join('+') : 'all', notes: p.notes }); saveRegister(r); renderRegister(); }
+function renderRegister() { const tb = document.querySelector('#register tbody'); const r = loadRegister(); tb.innerHTML = r.map(x => '<tr><td>' + escapeHtml(x.at.slice(0, 10)) + '</td><td>' + escapeHtml(x.org) + '</td><td>' + escapeHtml(x.name) + '</td><td>' + (x.type === 'lifetime' ? t('lifetimeS') : t('termS')) + '</td><td>' + (x.expiresAt || '∞') + '</td><td>' + (x.seats || t('unlimited')) + '</td><td dir="ltr">' + (x.machineId || '–') + '</td><td dir="ltr">' + escapeHtml(x.modules) + '</td><td dir="ltr">' + (x.technologies === 'all' ? t('allT') : escapeHtml(x.technologies)) + '</td><td dir="ltr" class="muted">' + escapeHtml(x.id.slice(0, 8)) + '</td></tr>').join(''); }
+function exportRegister() { const r = loadRegister(); const cols = ['at', 'id', 'org', 'name', 'email', 'type', 'expiresAt', 'seats', 'machineId', 'modules', 'technologies', 'notes']; const esc = v => { const s = v === null || v === undefined ? '' : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }; const csv = '\uFEFF' + cols.join(',') + '\r\n' + r.map(x => cols.map(c => esc(x[c])).join(',')).join('\r\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'arab-power-twin-licenses.csv'; a.click(); }
+function clearRegister() { if (confirm(t('confirmClear'))) { saveRegister([]); renderRegister(); } }
+renderTechs(); renderRegister(); checkPriv();
+</script>
+</body>
+</html>
