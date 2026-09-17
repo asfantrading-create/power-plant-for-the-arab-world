@@ -1,0 +1,57 @@
+# Builds the Windows installer and publishes it to GitHub Releases.
+# Trigger: push a tag like v1.2.0 (after bumping "version" in package.json), or run manually.
+# Published assets: ArabPowerTwin-Setup.exe (fixed name -> permanent download link),
+#                   ArabPowerTwin-Setup.exe.blockmap and latest.yml (auto-update feed read by installed copies).
+name: Release Windows installer
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint and test
+        run: |
+          npm run lint
+          npm test
+      - name: Verify tag matches package.json version
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION)"; exit 1; fi
+      - name: Release preconditions (license public key, data files)
+        run: node scripts/check-release.mjs
+        env:
+          ALLOW_DEV_KEY_RELEASE: ${{ vars.ALLOW_DEV_KEY_RELEASE }}
+      - name: Build renderer bundle
+        run: npm run build:renderer
+      - name: Build and publish installer
+        run: npx electron-builder --win --x64 --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload installer as workflow artifact (manual runs)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ArabPowerTwin-Setup
+          path: |
+            release/*.exe
+            release/*.blockmap
+            release/latest.yml
+          if-no-files-found: error

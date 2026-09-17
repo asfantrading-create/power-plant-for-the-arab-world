@@ -1,0 +1,624 @@
+[
+ {
+  "iso3": "DZA",
+  "iso2": "DZ",
+  "nameEn": "Algeria",
+  "nameAr": "الجزائر",
+  "capitalEn": "Algiers",
+  "capitalAr": "الجزائر العاصمة",
+  "flag": "🇩🇿",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "Sonelgaz",
+  "utilityAr": "سونلغاز",
+  "region": "maghreb",
+  "centroid": [
+   28,
+   2.6
+  ],
+  "plantCount": 69,
+  "operationalCount": 68,
+  "operationalMw": 27074,
+  "pipelineMw": 1000,
+  "renewableMw": 695,
+  "byFuel": {
+   "Gas": 26379,
+   "Solar": 670.8,
+   "Hydro": 24
+  }
+ },
+ {
+  "iso3": "BHR",
+  "iso2": "BH",
+  "nameEn": "Bahrain",
+  "nameAr": "البحرين",
+  "capitalEn": "Manama",
+  "capitalAr": "المنامة",
+  "flag": "🇧🇭",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "Electricity and Water Authority (EWA)",
+  "utilityAr": "هيئة الكهرباء والماء",
+  "region": "gulf",
+  "centroid": [
+   26.05,
+   50.55
+  ],
+  "plantCount": 9,
+  "operationalCount": 9,
+  "operationalMw": 9086,
+  "pipelineMw": 0,
+  "renewableMw": 5,
+  "byFuel": {
+   "Gas": 9074,
+   "Oil": 7.3,
+   "Solar": 5
+  }
+ },
+ {
+  "iso3": "COM",
+  "iso2": "KM",
+  "nameEn": "Comoros",
+  "nameAr": "جزر القمر",
+  "capitalEn": "Moroni",
+  "capitalAr": "موروني",
+  "flag": "🇰🇲",
+  "gridHz": 50,
+  "voltageV": 220,
+  "utilityEn": "SONELEC",
+  "utilityAr": "سونيليك",
+  "region": "africa",
+  "centroid": [
+   -11.7,
+   43.3
+  ],
+  "plantCount": 3,
+  "operationalCount": 3,
+  "operationalMw": 26,
+  "pipelineMw": 0,
+  "renewableMw": 3,
+  "byFuel": {
+   "Oil": 23,
+   "Solar": 3
+  }
+ },
+ {
+  "iso3": "DJI",
+  "iso2": "DJ",
+  "nameEn": "Djibouti",
+  "nameAr": "جيبوتي",
+  "capitalEn": "Djibouti",
+  "capitalAr": "جيبوتي",
+  "flag": "🇩🇯",
+  "gridHz": 50,
+  "voltageV": 220,
+  "utilityEn": "Électricité de Djibouti (EDD)",
+  "utilityAr": "كهرباء جيبوتي",
+  "region": "africa",
+  "centroid": [
+   11.8,
+   42.6
+  ],
+  "plantCount": 3,
+  "operationalCount": 3,
+  "operationalMw": 197,
+  "pipelineMw": 0,
+  "renewableMw": 90,
+  "byFuel": {
+   "Oil": 107.3,
+   "Wind": 60,
+   "Solar": 30
+  }
+ },
+ {
+  "iso3": "EGY",
+  "iso2": "EG",
+  "nameEn": "Egypt",
+  "nameAr": "مصر",
+  "capitalEn": "Cairo",
+  "capitalAr": "القاهرة",
+  "flag": "🇪🇬",
+  "gridHz": 50,
+  "voltageV": 220,
+  "utilityEn": "Egyptian Electricity Holding Company (EEHC)",
+  "utilityAr": "الشركة القابضة لكهرباء مصر",
+  "region": "nile",
+  "centroid": [
+   26.8,
+   30.8
+  ],
+  "plantCount": 79,
+  "operationalCount": 76,
+  "operationalMw": 53910,
+  "pipelineMw": 8300,
+  "renewableMw": 8133,
+  "byFuel": {
+   "Gas": 44777,
+   "Hydro": 3112,
+   "Solar": 2229.5,
+   "Wind": 2791.5,
+   "Oil": 1000
+  }
+ },
+ {
+  "iso3": "IRQ",
+  "iso2": "IQ",
+  "nameEn": "Iraq",
+  "nameAr": "العراق",
+  "capitalEn": "Baghdad",
+  "capitalAr": "بغداد",
+  "flag": "🇮🇶",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "Ministry of Electricity",
+  "utilityAr": "وزارة الكهرباء",
+  "region": "mashreq",
+  "centroid": [
+   33.2,
+   43.7
+  ],
+  "plantCount": 35,
+  "operationalCount": 34,
+  "operationalMw": 28411,
+  "pipelineMw": 1000,
+  "renewableMw": 2574,
+  "byFuel": {
+   "Gas": 18546.6,
+   "Oil": 7290,
+   "Hydro": 2574
+  }
+ },
+ {
+  "iso3": "JOR",
+  "iso2": "JO",
+  "nameEn": "Jordan",
+  "nameAr": "الأردن",
+  "capitalEn": "Amman",
+  "capitalAr": "عمّان",
+  "flag": "🇯🇴",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "National Electric Power Company (NEPCO)",
+  "utilityAr": "شركة الكهرباء الوطنية",
+  "region": "mashreq",
+  "centroid": [
+   31.3,
+   36.8
+  ],
+  "plantCount": 43,
+  "operationalCount": 43,
+  "operationalMw": 6553,
+  "pipelineMw": 0,
+  "renewableMw": 1222,
+  "byFuel": {
+   "Gas": 4479,
+   "Oil": 852,
+   "Solar": 767.5,
+   "Wind": 454.9
+  }
+ },
+ {
+  "iso3": "KWT",
+  "iso2": "KW",
+  "nameEn": "Kuwait",
+  "nameAr": "الكويت",
+  "capitalEn": "Kuwait City",
+  "capitalAr": "مدينة الكويت",
+  "flag": "🇰🇼",
+  "gridHz": 50,
+  "voltageV": 240,
+  "utilityEn": "Ministry of Electricity, Water and Renewable Energy (MEW)",
+  "utilityAr": "وزارة الكهرباء والماء والطاقة المتجددة",
+  "region": "gulf",
+  "centroid": [
+   29.3,
+   47.7
+  ],
+  "plantCount": 13,
+  "operationalCount": 12,
+  "operationalMw": 18339,
+  "pipelineMw": 1100,
+  "renewableMw": 80,
+  "byFuel": {
+   "Gas": 18258.5,
+   "Solar": 70,
+   "Wind": 10
+  }
+ },
+ {
+  "iso3": "LBN",
+  "iso2": "LB",
+  "nameEn": "Lebanon",
+  "nameAr": "لبنان",
+  "capitalEn": "Beirut",
+  "capitalAr": "بيروت",
+  "flag": "🇱🇧",
+  "gridHz": 50,
+  "voltageV": 220,
+  "utilityEn": "Électricité du Liban (EDL)",
+  "utilityAr": "كهرباء لبنان",
+  "region": "mashreq",
+  "centroid": [
+   33.9,
+   35.9
+  ],
+  "plantCount": 9,
+  "operationalCount": 9,
+  "operationalMw": 2342,
+  "pipelineMw": 0,
+  "renewableMw": 0,
+  "byFuel": {
+   "Oil": 1402.3,
+   "Gas": 940
+  }
+ },
+ {
+  "iso3": "LBY",
+  "iso2": "LY",
+  "nameEn": "Libya",
+  "nameAr": "ليبيا",
+  "capitalEn": "Tripoli",
+  "capitalAr": "طرابلس",
+  "flag": "🇱🇾",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "General Electricity Company of Libya (GECOL)",
+  "utilityAr": "الشركة العامة للكهرباء",
+  "region": "maghreb",
+  "centroid": [
+   27,
+   17.5
+  ],
+  "plantCount": 13,
+  "operationalCount": 13,
+  "operationalMw": 6902,
+  "pipelineMw": 0,
+  "renewableMw": 0,
+  "byFuel": {
+   "Gas": 6587,
+   "Oil": 315
+  }
+ },
+ {
+  "iso3": "MRT",
+  "iso2": "MR",
+  "nameEn": "Mauritania",
+  "nameAr": "موريتانيا",
+  "capitalEn": "Nouakchott",
+  "capitalAr": "نواكشوط",
+  "flag": "🇲🇷",
+  "gridHz": 50,
+  "voltageV": 220,
+  "utilityEn": "SOMELEC",
+  "utilityAr": "الشركة الموريتانية للكهرباء (صوملك)",
+  "region": "maghreb",
+  "centroid": [
+   20.3,
+   -10.3
+  ],
+  "plantCount": 9,
+  "operationalCount": 9,
+  "operationalMw": 596,
+  "pipelineMw": 0,
+  "renewableMw": 163,
+  "byFuel": {
+   "Gas": 300,
+   "Wind": 130,
+   "Oil": 132.8,
+   "Solar": 33
+  }
+ },
+ {
+  "iso3": "MAR",
+  "iso2": "MA",
+  "nameEn": "Morocco",
+  "nameAr": "المغرب",
+  "capitalEn": "Rabat",
+  "capitalAr": "الرباط",
+  "flag": "🇲🇦",
+  "gridHz": 50,
+  "voltageV": 220,
+  "utilityEn": "ONEE",
+  "utilityAr": "المكتب الوطني للكهرباء والماء الصالح للشرب",
+  "region": "maghreb",
+  "centroid": [
+   31.8,
+   -6.5
+  ],
+  "plantCount": 56,
+  "operationalCount": 53,
+  "operationalMw": 11118,
+  "pipelineMw": 1550,
+  "renewableMw": 4453,
+  "byFuel": {
+   "Coal": 4221,
+   "Gas": 1666,
+   "Hydro": 1676.5,
+   "Wind": 2066.8,
+   "Oil": 777.3,
+   "Solar": 710
+  }
+ },
+ {
+  "iso3": "OMN",
+  "iso2": "OM",
+  "nameEn": "Oman",
+  "nameAr": "عُمان",
+  "capitalEn": "Muscat",
+  "capitalAr": "مسقط",
+  "flag": "🇴🇲",
+  "gridHz": 50,
+  "voltageV": 240,
+  "utilityEn": "Nama Power and Water Procurement (formerly OPWP)",
+  "utilityAr": "نماء لشراء الطاقة والمياه",
+  "region": "gulf",
+  "centroid": [
+   21.5,
+   56
+  ],
+  "plantCount": 25,
+  "operationalCount": 22,
+  "operationalMw": 14123,
+  "pipelineMw": 500,
+  "renewableMw": 1654,
+  "byFuel": {
+   "Gas": 12469,
+   "Solar": 1604.4,
+   "Wind": 50
+  }
+ },
+ {
+  "iso3": "PSE",
+  "iso2": "PS",
+  "nameEn": "Palestine",
+  "nameAr": "فلسطين",
+  "capitalEn": "Jerusalem",
+  "capitalAr": "القدس",
+  "flag": "🇵🇸",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "Palestinian Energy and Natural Resources Authority (PENRA)",
+  "utilityAr": "سلطة الطاقة والموارد الطبيعية",
+  "region": "mashreq",
+  "centroid": [
+   31.9,
+   35.2
+  ],
+  "plantCount": 3,
+  "operationalCount": 2,
+  "operationalMw": 148,
+  "pipelineMw": 450,
+  "renewableMw": 8,
+  "byFuel": {
+   "Gas": 140,
+   "Solar": 7.6
+  }
+ },
+ {
+  "iso3": "QAT",
+  "iso2": "QA",
+  "nameEn": "Qatar",
+  "nameAr": "قطر",
+  "capitalEn": "Doha",
+  "capitalAr": "الدوحة",
+  "flag": "🇶🇦",
+  "gridHz": 50,
+  "voltageV": 240,
+  "utilityEn": "Kahramaa",
+  "utilityAr": "المؤسسة العامة القطرية للكهرباء والماء (كهرماء)",
+  "region": "gulf",
+  "centroid": [
+   25.3,
+   51.2
+  ],
+  "plantCount": 18,
+  "operationalCount": 16,
+  "operationalMw": 14743,
+  "pipelineMw": 4300,
+  "renewableMw": 1675,
+  "byFuel": {
+   "Gas": 13068,
+   "Solar": 1675
+  }
+ },
+ {
+  "iso3": "SAU",
+  "iso2": "SA",
+  "nameEn": "Saudi Arabia",
+  "nameAr": "المملكة العربية السعودية",
+  "capitalEn": "Riyadh",
+  "capitalAr": "الرياض",
+  "flag": "🇸🇦",
+  "gridHz": 60,
+  "voltageV": 230,
+  "utilityEn": "Saudi Electricity Company (SEC)",
+  "utilityAr": "الشركة السعودية للكهرباء",
+  "region": "gulf",
+  "centroid": [
+   24,
+   45
+  ],
+  "plantCount": 113,
+  "operationalCount": 106,
+  "operationalMw": 104209,
+  "pipelineMw": 12800,
+  "renewableMw": 6497,
+  "byFuel": {
+   "Oil": 56202.5,
+   "Gas": 41509.1,
+   "Solar": 6097,
+   "Wind": 400
+  }
+ },
+ {
+  "iso3": "SOM",
+  "iso2": "SO",
+  "nameEn": "Somalia",
+  "nameAr": "الصومال",
+  "capitalEn": "Mogadishu",
+  "capitalAr": "مقديشو",
+  "flag": "🇸🇴",
+  "gridHz": 50,
+  "voltageV": 220,
+  "utilityEn": "Private utilities (BECO, NECSOM, ...)",
+  "utilityAr": "شركات كهرباء خاصة (بيكو وغيرها)",
+  "region": "africa",
+  "centroid": [
+   5.2,
+   46.2
+  ],
+  "plantCount": 3,
+  "operationalCount": 3,
+  "operationalMw": 68,
+  "pipelineMw": 0,
+  "renewableMw": 8,
+  "byFuel": {
+   "Oil": 60,
+   "Solar": 8
+  }
+ },
+ {
+  "iso3": "SDN",
+  "iso2": "SD",
+  "nameEn": "Sudan",
+  "nameAr": "السودان",
+  "capitalEn": "Khartoum",
+  "capitalAr": "الخرطوم",
+  "flag": "🇸🇩",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "Sudanese Electricity Holding Company",
+  "utilityAr": "الشركة السودانية القابضة للكهرباء",
+  "region": "nile",
+  "centroid": [
+   15.5,
+   30
+  ],
+  "plantCount": 18,
+  "operationalCount": 18,
+  "operationalMw": 3340,
+  "pipelineMw": 0,
+  "renewableMw": 1960,
+  "byFuel": {
+   "Hydro": 1860,
+   "Gas": 590,
+   "Oil": 790.1,
+   "Biomass": 100
+  }
+ },
+ {
+  "iso3": "SYR",
+  "iso2": "SY",
+  "nameEn": "Syria",
+  "nameAr": "سوريا",
+  "capitalEn": "Damascus",
+  "capitalAr": "دمشق",
+  "flag": "🇸🇾",
+  "gridHz": 50,
+  "voltageV": 220,
+  "utilityEn": "Public Establishment of Electricity for Generation and Transmission (PEEGT)",
+  "utilityAr": "المؤسسة العامة لتوليد ونقل الطاقة الكهربائية",
+  "region": "mashreq",
+  "centroid": [
+   35,
+   38.5
+  ],
+  "plantCount": 18,
+  "operationalCount": 18,
+  "operationalMw": 7966,
+  "pipelineMw": 0,
+  "renewableMw": 1505,
+  "byFuel": {
+   "Oil": 3547,
+   "Hydro": 1505,
+   "Gas": 2914
+  }
+ },
+ {
+  "iso3": "TUN",
+  "iso2": "TN",
+  "nameEn": "Tunisia",
+  "nameAr": "تونس",
+  "capitalEn": "Tunis",
+  "capitalAr": "تونس",
+  "flag": "🇹🇳",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "STEG",
+  "utilityAr": "الشركة التونسية للكهرباء والغاز",
+  "region": "maghreb",
+  "centroid": [
+   34,
+   9.5
+  ],
+  "plantCount": 30,
+  "operationalCount": 30,
+  "operationalMw": 5612,
+  "pipelineMw": 0,
+  "renewableMw": 306,
+  "byFuel": {
+   "Gas": 5306,
+   "Solar": 110,
+   "Wind": 142,
+   "Hydro": 54.2
+  }
+ },
+ {
+  "iso3": "ARE",
+  "iso2": "AE",
+  "nameEn": "United Arab Emirates",
+  "nameAr": "الإمارات العربية المتحدة",
+  "capitalEn": "Abu Dhabi",
+  "capitalAr": "أبوظبي",
+  "flag": "🇦🇪",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "EWEC / DEWA / SEWA / Etihad WE",
+  "utilityAr": "شركة مياه وكهرباء الإمارات / هيئة كهرباء ومياه دبي / هيئة كهرباء ومياه الشارقة / الاتحاد للماء والكهرباء",
+  "region": "gulf",
+  "centroid": [
+   24,
+   54.5
+  ],
+  "plantCount": 42,
+  "operationalCount": 40,
+  "operationalMw": 46029,
+  "pipelineMw": 3300,
+  "renewableMw": 5912,
+  "byFuel": {
+   "Nuclear": 5600,
+   "Gas": 34287,
+   "Solar": 5867,
+   "Waste": 230,
+   "Wind": 45
+  }
+ },
+ {
+  "iso3": "YEM",
+  "iso2": "YE",
+  "nameEn": "Yemen",
+  "nameAr": "اليمن",
+  "capitalEn": "Sanaa",
+  "capitalAr": "صنعاء",
+  "flag": "🇾🇪",
+  "gridHz": 50,
+  "voltageV": 230,
+  "utilityEn": "Public Electricity Corporation (PEC)",
+  "utilityAr": "المؤسسة العامة للكهرباء",
+  "region": "gulf",
+  "centroid": [
+   15.5,
+   47.5
+  ],
+  "plantCount": 9,
+  "operationalCount": 8,
+  "operationalMw": 1165,
+  "pipelineMw": 60,
+  "renewableMw": 120,
+  "byFuel": {
+   "Gas": 400,
+   "Oil": 645,
+   "Solar": 120
+  }
+ }
+]

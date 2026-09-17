@@ -1,0 +1,238 @@
+[
+ {
+  "id": "jebel-ali",
+  "nameEn": "Jebel Ali Power & Desalination Complex (DEWA)",
+  "nameAr": "مجمع جبل علي للطاقة وتحلية المياه (ديوا)",
+  "country": "ARE",
+  "memberIds": [
+   "gppd-WRI1008738",
+   "gppd-WRI1008737",
+   "gppd-WRI1008732",
+   "gppd-WRI1008736",
+   "gppd-WRI1008735",
+   "gppd-WRI1008734",
+   "gppd-WRI1008733"
+  ],
+  "totalMw": 7801
+ },
+ {
+  "id": "mbr-solar-park",
+  "nameEn": "Mohammed bin Rashid Al Maktoum Solar Park",
+  "nameAr": "مجمع محمد بن راشد آل مكتوم للطاقة الشمسية",
+  "country": "ARE",
+  "hero": "mbr-solar-park",
+  "memberIds": [
+   "are-mbr-phase6",
+   "are-mbr-phase4",
+   "are-mbr-phase5",
+   "gppd-WKS0069244",
+   "gppd-WKS0065024",
+   "gppd-WKS0069243",
+   "gppd-WRI1023588"
+  ],
+  "totalMw": 2580
+ },
+ {
+  "id": "shuweihat",
+  "nameEn": "Shuweihat Power Complex",
+  "nameAr": "مجمع الشويهات للطاقة",
+  "country": "ARE",
+  "memberIds": [
+   "gppd-WRI1008743"
+  ],
+  "totalMw": 4889
+ },
+ {
+  "id": "taweelah",
+  "nameEn": "Taweelah Power Complex",
+  "nameAr": "مجمع الطويلة للطاقة",
+  "country": "ARE",
+  "memberIds": [
+   "gppd-WRI1008746",
+   "gppd-WRI1008744",
+   "gppd-WRI1008745"
+  ],
+  "totalMw": 4631
+ },
+ {
+  "id": "fujairah",
+  "nameEn": "Fujairah (Qidfa) Power Complex",
+  "nameAr": "مجمع الفجيرة (قدفع) للطاقة",
+  "country": "ARE",
+  "memberIds": [
+   "are-fujairah-f3",
+   "gppd-WRI1008731",
+   "gppd-WRI1008730"
+  ],
+  "totalMw": 5375
+ },
+ {
+  "id": "benban",
+  "nameEn": "Benban Solar Park",
+  "nameAr": "مجمع بنبان للطاقة الشمسية",
+  "country": "EGY",
+  "hero": "pv-park",
+  "memberIds": [
+   "egy-benban-other",
+   "gppd-WKS0065893",
+   "gppd-WKS0069919",
+   "gppd-WKS0069920",
+   "gppd-WKS0069918",
+   "gppd-WKS0070149",
+   "gppd-WKS0070139",
+   "gppd-WKS0069197",
+   "gppd-WKS0071521",
+   "gppd-WKS0065892",
+   "gppd-WKS0065479",
+   "gppd-WKS0067966",
+   "gppd-WKS0070745",
+   "gppd-WKS0063250"
+  ],
+  "totalMw": 1465
+ },
+ {
+  "id": "aswan",
+  "nameEn": "Aswan hydropower complex",
+  "nameAr": "مجمع أسوان الكهرومائي",
+  "country": "EGY",
+  "hero": "aswan-high-dam",
+  "memberIds": [
+   "gppd-WRI1000106",
+   "gppd-WRI1000107",
+   "egy-aswan-low-dam"
+  ],
+  "totalMw": 2930
+ },
+ {
+  "id": "gulf-of-suez-wind",
+  "nameEn": "Gulf of Suez wind corridor",
+  "nameAr": "ممر رياح خليج السويس",
+  "country": "EGY",
+  "hero": "wind-farm",
+  "memberIds": [
+   "egy-red-sea-wind",
+   "egy-gabal-el-zeit-wind",
+   "gppd-WRI1000087",
+   "egy-amunet-wind",
+   "egy-ras-ghareb-wind",
+   "egy-west-bakr-wind"
+  ],
+  "totalMw": 2792
+ },
+ {
+  "id": "noor-ouarzazate",
+  "nameEn": "Noor Ouarzazate Solar Complex",
+  "nameAr": "مجمع نور ورزازات للطاقة الشمسية",
+  "country": "MAR",
+  "hero": "noor-ouarzazate",
+  "memberIds": [
+   "gppd-WRI1061197",
+   "gppd-WRI1023680",
+   "gppd-WRI1061198",
+   "mar-noor-ouarzazate-4"
+  ],
+  "totalMw": 582
+ },
+ {
+  "id": "az-zour",
+  "nameEn": "Az Zour Power Complex",
+  "nameAr": "مجمع الزور للطاقة",
+  "country": "KWT",
+  "memberIds": [
+   "gppd-WRI1008685",
+   "gppd-WRI1023728"
+  ],
+  "totalMw": 7344
+ },
+ {
+  "id": "shagaya",
+  "nameEn": "Shagaya Renewable Energy Park",
+  "nameAr": "مجمع الشقايا للطاقة المتجددة",
+  "country": "KWT",
+  "memberIds": [
+   "kwt-al-dibdibah-pv",
+   "kwt-shagaya-csp",
+   "kwt-shagaya-pv",
+   "kwt-shagaya-wind"
+  ],
+  "totalMw": 70
+ },
+ {
+  "id": "ras-laffan",
+  "nameEn": "Ras Laffan Industrial City power complex",
+  "nameAr": "مجمع رأس لفان للطاقة",
+  "country": "QAT",
+  "memberIds": [
+   "gppd-GEODB0042860",
+   "gppd-GEODB0005023",
+   "gppd-GEODB0005022",
+   "qat-ras-laffan-pv"
+  ],
+  "totalMw": 4969
+ },
+ {
+  "id": "ras-abu-fontas",
+  "nameEn": "Ras Abu Fontas power complex",
+  "nameAr": "مجمع رأس أبو فنطاس",
+  "country": "QAT",
+  "memberIds": [
+   "qat-facility-e",
+   "gppd-GEODB0005018",
+   "gppd-GEODB0005019",
+   "gppd-GEODB0005021",
+   "gppd-GEODB0005020"
+  ],
+  "totalMw": 2178
+ },
+ {
+  "id": "shuaibah",
+  "nameEn": "Shuaibah power & solar complex",
+  "nameAr": "مجمع الشعيبة للطاقة",
+  "country": "SAU",
+  "memberIds": [
+   "gppd-WRI1030705",
+   "sau-shuaibah-2-pv",
+   "gppd-WRI1030704",
+   "sau-shuaibah-1-pv"
+  ],
+  "totalMw": 10645
+ },
+ {
+  "id": "riyadh-pp",
+  "nameEn": "Riyadh power plants (PP3–PP14)",
+  "nameAr": "محطات الرياض (PP3–PP14)",
+  "country": "SAU",
+  "memberIds": [
+   "gppd-WRI1030690",
+   "gppd-WRI1030682",
+   "gppd-WRI1030689",
+   "gppd-WRI1030684",
+   "sau-riyadh-pp13",
+   "sau-riyadh-pp14",
+   "gppd-WRI1030683",
+   "gppd-WRI1030688",
+   "gppd-WRI1030687",
+   "gppd-WRI1030686",
+   "gppd-WRI1030685"
+  ],
+  "totalMw": 18591
+ },
+ {
+  "id": "maan-solar",
+  "nameEn": "Ma'an Development Area Solar Park",
+  "nameAr": "مجمع معان للطاقة الشمسية",
+  "country": "JOR",
+  "memberIds": [
+   "gppd-WKS0064056",
+   "gppd-WKS0067808",
+   "gppd-WKS0065451",
+   "gppd-WKS0068494",
+   "gppd-WKS0064057",
+   "gppd-WKS0066020",
+   "gppd-WKS0068492",
+   "gppd-WKS0065452",
+   "gppd-WKS0064125"
+  ],
+  "totalMw": 163
+ }
+]

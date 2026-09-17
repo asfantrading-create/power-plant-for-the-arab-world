@@ -1,0 +1,59 @@
+# electron-builder configuration — Windows NSIS installer + GitHub Releases auto-update feed.
+# The installer is published with a FIXED file name so the customer download link never changes:
+#   https://github.com/asfantrading-create/power-plant-for-the-arab-world/releases/latest/download/ArabPowerTwin-Setup.exe
+appId: com.asfantrading.arabpowertwin
+productName: Arab Power Twin
+copyright: Copyright © 2026 Asfan Trading
+executableName: ArabPowerTwin
+directories:
+  output: release
+  buildResources: build
+asar: true
+compression: maximum
+files:
+  - "src/main/**/*"
+  - "src/renderer/index.html"
+  - "src/renderer/styles/**/*"
+  - "src/renderer/assets/**/*"
+  - "src/renderer/dist/**/*"
+  - "data/*.json"
+  - "build/icon.png"
+  - "package.json"
+  - "!**/*.map"
+  - "!**/node_modules/**/{CHANGELOG.md,README.md,README,readme.md,readme}"
+  - "!**/node_modules/**/{test,__tests__,tests,powered-test,example,examples}"
+extraMetadata:
+  main: src/main/main.js
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: build/icon.ico
+  artifactName: "ArabPowerTwin-Setup.${ext}"
+  requestedExecutionLevel: asInvoker
+  verifyUpdateCodeSignature: false
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: Arab Power Twin
+  runAfterFinish: true
+  deleteAppDataOnUninstall: false
+  differentialPackage: true
+  multiLanguageInstaller: true
+  installerLanguages:
+    - ar_SA
+    - en_US
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  license: build/license.txt
+  artifactName: "ArabPowerTwin-Setup.${ext}"
+publish:
+  provider: github
+  owner: asfantrading-create
+  repo: power-plant-for-the-arab-world
+  releaseType: release

@@ -1,0 +1,2096 @@
+{
+ "_comment": "Corrections applied to WRI GPPD rows, keyed by 'ISO3|original name'. Fields: name, nameAr, technology, fuel, complex, hero, capacityMw, commissioningYear, exclude, excludeFromTotals, notesEn, notesAr.",
+ "ARE|Shuweihat S1": {
+  "name": "Shuweihat Power Complex (S1, S2 & S3)",
+  "nameAr": "مجمع الشويهات للطاقة (S1 وS2 وS3)",
+  "technology": "ccgt",
+  "complex": "shuweihat",
+  "notesEn": "GPPD aggregates the three IWPPs (S1 1,500 MW 2004, S2 1,510 MW 2011, S3 1,600 MW 2014) at this site.",
+  "notesAr": "تجمع قاعدة WRI محطات الموقع الثلاث (S1 بقدرة 1,500 ميغاواط 2004، S2 بقدرة 1,510 ميغاواط 2011، S3 بقدرة 1,600 ميغاواط 2014)."
+ },
+ "ARE|APC UAN": {
+  "name": "Umm Al Nar (Arabian Power Company)",
+  "nameAr": "أم النار (شركة الطاقة العربية)",
+  "technology": "ccgt"
+ },
+ "ARE|TAPCO": {
+  "name": "Taweelah B (TAPCO)",
+  "nameAr": "الطويلة B (تابكو)",
+  "technology": "ccgt",
+  "complex": "taweelah"
+ },
+ "ARE|FAPCO (Fuj F2)": {
+  "name": "Fujairah F2 (FAPCO)",
+  "nameAr": "الفجيرة F2 (فابكو)",
+  "technology": "ccgt",
+  "complex": "fujairah"
+ },
+ "ARE|Jebel Ali \"M\"": {
+  "name": "Jebel Ali M Station",
+  "nameAr": "محطة جبل علي M",
+  "technology": "ccgt",
+  "complex": "jebel-ali",
+  "hero": "ccgt"
+ },
+ "ARE|New Mirfah (MIPCO)": {
+  "name": "Mirfa IWPP (MIPCO)",
+  "nameAr": "المرفأ المستقلة (ميبكو)",
+  "technology": "ccgt"
+ },
+ "ARE|Taweelah A1": {
+  "nameAr": "الطويلة A1",
+  "technology": "ccgt",
+  "complex": "taweelah"
+ },
+ "ARE|Taweelah A2": {
+  "nameAr": "الطويلة A2",
+  "technology": "ccgt",
+  "complex": "taweelah"
+ },
+ "ARE|Jebel Ali \"L\" - Ph ll": {
+  "name": "Jebel Ali L Station – Phase II",
+  "nameAr": "جبل علي L – المرحلة الثانية",
+  "technology": "ccgt",
+  "complex": "jebel-ali"
+ },
+ "ARE|Jebel Ali \"L\" - Ph I": {
+  "name": "Jebel Ali L Station – Phase I",
+  "nameAr": "جبل علي L – المرحلة الأولى",
+  "technology": "ccgt",
+  "complex": "jebel-ali"
+ },
+ "ARE|Wasit Power Station (WPS)": {
+  "nameAr": "محطة الواسط (الشارقة)",
+  "technology": "ccgt"
+ },
+ "ARE|Jebel Ali \"D\"": {
+  "name": "Jebel Ali D Station",
+  "nameAr": "جبل علي D",
+  "technology": "ocgt",
+  "complex": "jebel-ali"
+ },
+ "ARE|Jebel Ali \"K\"": {
+  "name": "Jebel Ali K Station",
+  "nameAr": "جبل علي K",
+  "technology": "ccgt",
+  "complex": "jebel-ali"
+ },
+ "ARE|Jebel Ali \"G\"": {
+  "name": "Jebel Ali G Station",
+  "nameAr": "جبل علي G",
+  "technology": "ocgt",
+  "complex": "jebel-ali"
+ },
+ "ARE|Jebel Ali \"E\"": {
+  "name": "Jebel Ali E Station",
+  "nameAr": "جبل علي E",
+  "technology": "ocgt",
+  "complex": "jebel-ali"
+ },
+ "ARE|Layyah Power Station (LPS)": {
+  "nameAr": "محطة اللية (الشارقة)",
+  "technology": "ccgt"
+ },
+ "ARE|ESWPC (Fuj F1)": {
+  "name": "Fujairah F1 (Emirates Sembcorp)",
+  "nameAr": "الفجيرة F1 (الإمارات سيمبكورب)",
+  "technology": "ccgt",
+  "complex": "fujairah"
+ },
+ "ARE|Aweer \"H\" - Ph lll": {
+  "name": "Al Aweer H Station – Phase III",
+  "nameAr": "العوير H – المرحلة الثالثة",
+  "technology": "ocgt"
+ },
+ "ARE|Aweer \"H\" - Ph l": {
+  "name": "Al Aweer H Station – Phase I",
+  "nameAr": "العوير H – المرحلة الأولى",
+  "technology": "ocgt"
+ },
+ "ARE|Al Mirfa Power Company": {
+  "nameAr": "شركة المرفأ للطاقة",
+  "technology": "ocgt"
+ },
+ "ARE|Hamriyah Power Station (HPS)": {
+  "nameAr": "محطة الحمرية (الشارقة)",
+  "technology": "ocgt"
+ },
+ "ARE|MBRSP} IIIB": {
+  "name": "MBR Solar Park – Phase III-B (PV)",
+  "nameAr": "مجمع محمد بن راشد – المرحلة الثالثة ب",
+  "complex": "mbr-solar-park",
+  "commissioningYear": 2020
+ },
+ "ARE|MBRSP} II": {
+  "name": "MBR Solar Park – Phase II (PV)",
+  "nameAr": "مجمع محمد بن راشد – المرحلة الثانية",
+  "complex": "mbr-solar-park",
+  "commissioningYear": 2017
+ },
+ "ARE|MBRSP} IIIA": {
+  "name": "MBR Solar Park – Phase III-A (PV)",
+  "nameAr": "مجمع محمد بن راشد – المرحلة الثالثة أ",
+  "complex": "mbr-solar-park",
+  "commissioningYear": 2018
+ },
+ "ARE|Sheikh Mohammed Bin Rashid Al Maktoum Solar Park Phase 1": {
+  "name": "MBR Solar Park – Phase I (PV)",
+  "nameAr": "مجمع محمد بن راشد – المرحلة الأولى",
+  "complex": "mbr-solar-park"
+ },
+ "ARE|zawra": {
+  "name": "Al Zawra Power Station (Ajman)",
+  "nameAr": "محطة الزوراء (عجمان)",
+  "technology": "ocgt"
+ },
+ "ARE|Khorfakkan Station (KHPS)": {
+  "nameAr": "محطة خورفكان",
+  "technology": "ocgt"
+ },
+ "ARE|Ajman": {
+  "name": "Ajman Power Station",
+  "nameAr": "محطة عجمان",
+  "technology": "ocgt"
+ },
+ "ARE|Shams": {
+  "name": "Shams 1 Concentrated Solar Plant",
+  "nameAr": "شمس 1 للطاقة الشمسية المركزة",
+  "technology": "csp_trough",
+  "hero": "csp-trough",
+  "notesEn": "258,000 parabolic mirrors over 2.5 km² at Madinat Zayed; the first CSP plant in the Middle East (2013).",
+  "notesAr": "258 ألف مرآة مكافئة على مساحة 2.5 كم² في مدينة زايد؛ أول محطة طاقة شمسية مركزة في الشرق الأوسط (2013)."
+ },
+ "ARE|Masdar City PV plant": {
+  "nameAr": "محطة مدينة مصدر الكهروضوئية"
+ },
+ "BHR|Alba Power Station": {
+  "nameAr": "محطة ألبا (ألمنيوم البحرين)",
+  "technology": "ccgt"
+ },
+ "BHR|Al Dur Power and Water": {
+  "name": "Al Dur 1 IWPP",
+  "nameAr": "محطة الدور 1 المستقلة للماء والكهرباء",
+  "technology": "ccgt"
+ },
+ "BHR|Sitra Power an Water Station": {
+  "name": "Sitra Power and Water Station",
+  "nameAr": "محطة سترة للكهرباء والماء",
+  "technology": "ccgt"
+ },
+ "BHR|Hidd Power and Water station 1": {
+  "name": "Hidd Power and Water Station",
+  "nameAr": "محطة الحد للكهرباء والماء",
+  "technology": "ccgt"
+ },
+ "BHR|Al Ezzel Power Station": {
+  "nameAr": "محطة العزل",
+  "technology": "ccgt"
+ },
+ "BHR|Rifa'a Power Station": {
+  "name": "Riffa Power Station",
+  "nameAr": "محطة الرفاع",
+  "technology": "ocgt"
+ },
+ "BHR|Hawar Power ad Water Station": {
+  "name": "Hawar Islands Power and Water Station",
+  "nameAr": "محطة جزر حوار",
+  "technology": "diesel"
+ },
+ "BHR|Awali": {
+  "name": "Awali Solar PV",
+  "nameAr": "العوالي (شمسية)"
+ },
+ "DJI|Boulaos": {
+  "name": "Boulaos Power Station",
+  "nameAr": "محطة بولاوس (جيبوتي)",
+  "technology": "diesel"
+ },
+ "DZA|Hadjret Ennous": {
+  "nameAr": "حجرة النص",
+  "technology": "ccgt"
+ },
+ "DZA|Koudiet Eddraouch": {
+  "nameAr": "كدية الدراوش",
+  "technology": "ccgt"
+ },
+ "DZA|Terga": {
+  "nameAr": "تارقة",
+  "technology": "ccgt"
+ },
+ "DZA|Msila 1": {
+  "name": "M'Sila",
+  "nameAr": "المسيلة",
+  "technology": "ocgt"
+ },
+ "DZA|Marsat": {
+  "name": "Marsat El Hadjadj (steam)",
+  "nameAr": "مرسى الحجاج (البخارية)",
+  "technology": "steam_oil"
+ },
+ "DZA|SKS IPP SNC Lavalin": {
+  "name": "Skikda (SKS) IPP",
+  "nameAr": "سكيكدة (المحطة المستقلة)",
+  "technology": "ccgt"
+ },
+ "DZA|Ras Djinet": {
+  "name": "Ras Djinet (steam)",
+  "nameAr": "رأس جنات (البخارية)",
+  "technology": "steam_oil"
+ },
+ "DZA|Hassi Messoud": {
+  "name": "Hassi Messaoud",
+  "nameAr": "حاسي مسعود",
+  "technology": "ocgt"
+ },
+ "DZA|Tilghemt 2": {
+  "nameAr": "تيلغمت 2",
+  "technology": "ocgt"
+ },
+ "DZA|Jijel": {
+  "name": "Jijel (steam)",
+  "nameAr": "جيجل (البخارية)",
+  "technology": "steam_oil"
+ },
+ "DZA|Arbaa": {
+  "name": "Larbaa",
+  "nameAr": "الأربعاء",
+  "technology": "ocgt"
+ },
+ "DZA|Ain Djasser": {
+  "nameAr": "عين جاسر",
+  "technology": "ocgt"
+ },
+ "DZA|Hassi Messoud Ouest": {
+  "name": "Hassi Messaoud West",
+  "nameAr": "حاسي مسعود غرب",
+  "technology": "ocgt"
+ },
+ "DZA|SKB IPP": {
+  "name": "Berrouaghia (SKB) IPP",
+  "nameAr": "برواقية (المحطة المستقلة)",
+  "technology": "ccgt"
+ },
+ "DZA|Relizane": {
+  "nameAr": "غليزان",
+  "technology": "ocgt"
+ },
+ "DZA|Boufarik 2": {
+  "nameAr": "بوفاريك 2",
+  "technology": "ocgt"
+ },
+ "DZA|Boutelilis": {
+  "nameAr": "بوتليليس",
+  "technology": "ocgt"
+ },
+ "DZA|Hamma 2": {
+  "nameAr": "الحامة 2",
+  "technology": "ocgt"
+ },
+ "DZA|Labreg": {
+  "nameAr": "لبرق",
+  "technology": "ocgt"
+ },
+ "DZA|Kahrama IPP": {
+  "name": "Kahrama IPP (Arzew)",
+  "nameAr": "كهرما (أرزيو)",
+  "technology": "ccgt"
+ },
+ "DZA|Tiaret": {
+  "nameAr": "تيارت",
+  "technology": "ocgt"
+ },
+ "DZA|F'Krina": {
+  "name": "F'Kirina",
+  "nameAr": "فكيرينة",
+  "technology": "ocgt"
+ },
+ "DZA|Skikda": {
+  "name": "Skikda (steam)",
+  "nameAr": "سكيكدة (البخارية)",
+  "technology": "steam_oil"
+ },
+ "DZA|Hassi Messoud Nord 2": {
+  "name": "Hassi Messaoud North 2",
+  "nameAr": "حاسي مسعود شمال 2",
+  "technology": "ocgt"
+ },
+ "DZA|Tilghemt 1": {
+  "nameAr": "تيلغمت 1",
+  "technology": "ocgt"
+ },
+ "DZA|Marsat TG": {
+  "name": "Marsat El Hadjadj (gas turbines)",
+  "nameAr": "مرسى الحجاج (غازية)",
+  "technology": "ocgt"
+ },
+ "DZA|SPP1 Thermal": {
+  "name": "Hassi R'Mel ISCC (SPP1) – gas section",
+  "nameAr": "حاسي الرمل المتكاملة (القسم الغازي)",
+  "technology": "ccgt"
+ },
+ "DZA|Hassi R'mel ISCC": {
+  "name": "Hassi R'Mel ISCC – solar field",
+  "nameAr": "حاسي الرمل المتكاملة – الحقل الشمسي",
+  "technology": "csp_trough",
+  "commissioningYear": 2011
+ },
+ "DZA|Hauts Plateaux Centre": {
+  "nameAr": "الهضاب العليا وسط (شمسية)"
+ },
+ "DZA|Hauts Plateaux Est": {
+  "nameAr": "الهضاب العليا شرق (شمسية)"
+ },
+ "DZA|Boufarik 1": {
+  "nameAr": "بوفاريك 1",
+  "technology": "ocgt"
+ },
+ "DZA|Ravin Blanc": {
+  "name": "Ravin Blanc (Oran)",
+  "nameAr": "رافان بلان (وهران)",
+  "technology": "ocgt"
+ },
+ "DZA|Hassi Messaoud Mobile": {
+  "nameAr": "حاسي مسعود (متنقلة)",
+  "technology": "ocgt"
+ },
+ "DZA|Annaba": {
+  "nameAr": "عنابة",
+  "technology": "ocgt"
+ },
+ "DZA|El Kheneg": {
+  "nameAr": "الخنق (شمسية)"
+ },
+ "DZA|Ighil Emda": {
+  "name": "Ighil Emda Dam",
+  "nameAr": "سد إغيل إمدا"
+ },
+ "DZA|Adrar": {
+  "nameAr": "أدرار (شمسية)"
+ },
+ "DZA|Tamanrasset": {
+  "nameAr": "تمنراست (شمسية)"
+ },
+ "DZA|In Salah": {
+  "nameAr": "عين صالح (شمسية)"
+ },
+ "DZA|Reggane": {
+  "nameAr": "رقان (شمسية)"
+ },
+ "DZA|Timimoun": {
+  "nameAr": "تيميمون (شمسية)"
+ },
+ "DZA|Tindouf": {
+  "nameAr": "تندوف (شمسية)"
+ },
+ "DZA|Naâma": {
+  "nameAr": "النعامة (شمسية)"
+ },
+ "EGY|Kuriemat 2": {
+  "name": "Kureimat Power Complex (1, 2 & 3)",
+  "nameAr": "مجمع الكريمات",
+  "technology": "ccgt"
+ },
+ "EGY|North Giza": {
+  "nameAr": "شمال الجيزة",
+  "technology": "ccgt"
+ },
+ "EGY|Nubaria": {
+  "nameAr": "النوبارية",
+  "technology": "ccgt"
+ },
+ "EGY|Abu Kir": {
+  "name": "Abu Qir",
+  "nameAr": "أبو قير",
+  "technology": "steam_oil"
+ },
+ "EGY|High Dam": {
+  "name": "Aswan High Dam",
+  "nameAr": "السد العالي",
+  "technology": "hydro_dam",
+  "hero": "aswan-high-dam",
+  "complex": "aswan",
+  "notesEn": "12 × 175 MW Francis turbines; dam 111 m high and 3,830 m long impounding Lake Nasser (132 km³). Commissioned 1967–1970.",
+  "notesAr": "12 توربين فرانسيس بقدرة 175 ميغاواط لكل منها؛ ارتفاع السد 111 م وطوله 3,830 م ويحجز بحيرة ناصر (132 كم³). تم التشغيل بين 1967 و1970."
+ },
+ "EGY|Sidi Krir": {
+  "nameAr": "سيدي كرير",
+  "technology": "ccgt"
+ },
+ "EGY|Cairo North": {
+  "nameAr": "شمال القاهرة",
+  "technology": "ccgt"
+ },
+ "EGY|Talkha": {
+  "nameAr": "طلخا",
+  "technology": "ccgt"
+ },
+ "EGY|Cairo West": {
+  "nameAr": "غرب القاهرة",
+  "technology": "steam_oil"
+ },
+ "EGY|Shoubra El-Kheima": {
+  "name": "Shoubra El Kheima",
+  "nameAr": "شبرا الخيمة",
+  "technology": "steam_oil"
+ },
+ "EGY|Damietta": {
+  "nameAr": "دمياط",
+  "technology": "ccgt"
+ },
+ "EGY|New Gas Shabab": {
+  "name": "Shabab (new gas turbines)",
+  "nameAr": "الشباب الجديدة (غازية)",
+  "technology": "ocgt"
+ },
+ "EGY|Ataka": {
+  "name": "Ataqa",
+  "nameAr": "عتاقة",
+  "technology": "steam_oil"
+ },
+ "EGY|El-Atf": {
+  "name": "El Atf",
+  "nameAr": "العطف",
+  "technology": "ccgt"
+ },
+ "EGY|Cairo South": {
+  "nameAr": "جنوب القاهرة",
+  "technology": "ccgt"
+ },
+ "EGY|El-Tebeen": {
+  "name": "El Tebbin",
+  "nameAr": "التبين",
+  "technology": "steam_oil"
+ },
+ "EGY|PortSaid East": {
+  "name": "Port Said East",
+  "nameAr": "شرق بورسعيد",
+  "technology": "steam_oil"
+ },
+ "EGY|Suez Gulf": {
+  "nameAr": "خليج السويس",
+  "technology": "steam_oil"
+ },
+ "EGY|Oyoun Mousa": {
+  "nameAr": "عيون موسى",
+  "technology": "steam_oil"
+ },
+ "EGY|Abu Sultan": {
+  "nameAr": "أبو سلطان",
+  "technology": "steam_oil"
+ },
+ "EGY|October 6th": {
+  "name": "6th of October",
+  "nameAr": "6 أكتوبر",
+  "technology": "ocgt"
+ },
+ "EGY|Walidia": {
+  "nameAr": "الوليدية",
+  "technology": "steam_oil"
+ },
+ "EGY|Aswan Dam II": {
+  "name": "Aswan Dam II (Aswan Low Dam, second powerhouse)",
+  "nameAr": "خزان أسوان 2",
+  "technology": "hydro_dam",
+  "complex": "aswan"
+ },
+ "EGY|Zafarana": {
+  "name": "Zafarana Wind Farm",
+  "nameAr": "مزرعة رياح الزعفرانة",
+  "complex": "gulf-of-suez-wind",
+  "hero": "wind-farm"
+ },
+ "EGY|Banha": {
+  "nameAr": "بنها",
+  "technology": "ccgt"
+ },
+ "EGY|Damietta West": {
+  "nameAr": "غرب دمياط",
+  "technology": "ocgt"
+ },
+ "EGY|New Gas Damietta": {
+  "name": "Damietta (new gas turbines)",
+  "nameAr": "دمياط الجديدة (غازية)",
+  "technology": "ocgt"
+ },
+ "EGY|Damanhour": {
+  "nameAr": "دمنهور",
+  "technology": "ccgt"
+ },
+ "EGY|Kafr El-Dawar": {
+  "name": "Kafr El Dawar",
+  "nameAr": "كفر الدوار",
+  "technology": "steam_oil"
+ },
+ "EGY|Mahmoudia": {
+  "nameAr": "المحمودية",
+  "technology": "ocgt"
+ },
+ "EGY|El-Seiuf": {
+  "name": "El Seiuf",
+  "nameAr": "السيوف",
+  "technology": "ocgt"
+ },
+ "EGY|Sharm El-Sheikh": {
+  "name": "Sharm El Sheikh (gas turbines)",
+  "nameAr": "شرم الشيخ (غازية)",
+  "technology": "ocgt"
+ },
+ "EGY|Hurghada": {
+  "nameAr": "الغردقة",
+  "technology": "ocgt"
+ },
+ "EGY|Kuriemat Solar/Thermal": {
+  "name": "Kureimat ISCC – gas section",
+  "nameAr": "الكريمات المتكاملة (القسم الغازي)",
+  "technology": "ccgt"
+ },
+ "EGY|Kuraymat ISCC": {
+  "name": "Kureimat ISCC – solar field",
+  "nameAr": "الكريمات المتكاملة – الحقل الشمسي",
+  "technology": "csp_trough",
+  "commissioningYear": 2011
+ },
+ "EGY|Shabab": {
+  "nameAr": "الشباب",
+  "technology": "ocgt"
+ },
+ "EGY|Wadi Hof": {
+  "nameAr": "وادي حوف",
+  "technology": "ocgt"
+ },
+ "EGY|Assiut": {
+  "name": "Assiut Thermal",
+  "nameAr": "أسيوط الحرارية",
+  "technology": "steam_oil"
+ },
+ "EGY|Esna": {
+  "name": "Esna Barrage Hydropower",
+  "nameAr": "قناطر إسنا (كهرومائية)",
+  "technology": "hydro_ror"
+ },
+ "EGY|Arish": {
+  "name": "El Arish",
+  "nameAr": "العريش",
+  "technology": "ocgt"
+ },
+ "EGY|Naga Hamadi": {
+  "name": "Naga Hammadi Barrage Hydropower",
+  "nameAr": "قناطر نجع حمادي (كهرومائية)",
+  "technology": "hydro_ror"
+ },
+ "EGY|Matrouh": {
+  "nameAr": "مطروح",
+  "technology": "ocgt"
+ },
+ "EGY|Port Said": {
+  "nameAr": "بورسعيد",
+  "technology": "ocgt"
+ },
+ "EGY|Karmouz": {
+  "nameAr": "كرموز",
+  "technology": "ocgt"
+ },
+ "EGY|Toshka": {
+  "nameAr": "توشكى (شمسية)"
+ },
+ "EGY|Siwa": {
+  "nameAr": "سيوة (شمسية)"
+ },
+ "EGY|Marsa Alam A": {
+  "nameAr": "مرسى علم (شمسية)"
+ },
+ "EGY|Sharm el Sheikh": {
+  "name": "Sharm El Sheikh Solar PV",
+  "nameAr": "شرم الشيخ (شمسية)"
+ },
+ "EGY|Shalateen A": {
+  "nameAr": "شلاتين (شمسية)"
+ },
+ "IRQ|Al-Shemal": {
+  "name": "Al Shemal (Mosul) Thermal Power Plant",
+  "nameAr": "محطة الشمال (الموصل) الحرارية",
+  "technology": "steam_oil"
+ },
+ "IRQ|Al-Anbar": {
+  "name": "Al Anbar",
+  "nameAr": "الأنبار",
+  "technology": "ocgt"
+ },
+ "IRQ|Erbil": {
+  "name": "Erbil Gas Power Plant",
+  "nameAr": "أربيل",
+  "technology": "ccgt"
+ },
+ "IRQ|Al-Mussaib": {
+  "name": "Al Musayyib Thermal",
+  "nameAr": "المسيب الحرارية",
+  "technology": "steam_oil"
+ },
+ "IRQ|Shatt Al-Basra": {
+  "name": "Shatt Al Basra",
+  "nameAr": "شط البصرة",
+  "technology": "ccgt"
+ },
+ "IRQ|Mosul Dam": {
+  "nameAr": "سد الموصل",
+  "technology": "hydro_dam"
+ },
+ "IRQ|Duhok": {
+  "name": "Dohuk Gas Power Plant",
+  "nameAr": "دهوك",
+  "technology": "ccgt"
+ },
+ "IRQ|Al-Hartha": {
+  "name": "Al Hartha Thermal",
+  "nameAr": "الهارثة الحرارية",
+  "technology": "steam_oil"
+ },
+ "IRQ|Al-Mansurya": {
+  "name": "Al Mansuriya",
+  "nameAr": "المنصورية",
+  "technology": "ocgt"
+ },
+ "IRQ|Haditha Dam": {
+  "nameAr": "سد حديثة",
+  "technology": "hydro_dam"
+ },
+ "IRQ|South Baghdad 1": {
+  "name": "South Baghdad",
+  "nameAr": "جنوب بغداد",
+  "technology": "ccgt"
+ },
+ "IRQ|Doura": {
+  "name": "Doura Thermal",
+  "nameAr": "الدورة الحرارية",
+  "technology": "steam_oil"
+ },
+ "IRQ|Al-Najybia": {
+  "name": "Al Najibiya",
+  "nameAr": "النجيبية",
+  "technology": "ocgt"
+ },
+ "IRQ|Al-Quds": {
+  "name": "Al Quds",
+  "nameAr": "القدس",
+  "technology": "ocgt"
+ },
+ "IRQ|Dokan Dam": {
+  "name": "Dukan Dam",
+  "nameAr": "سد دوكان",
+  "technology": "hydro_dam"
+ },
+ "IRQ|DIBIS": {
+  "name": "Dibis",
+  "nameAr": "الدبس",
+  "technology": "ocgt"
+ },
+ "IRQ|Sadr": {
+  "name": "Al Sadr",
+  "nameAr": "الصدر",
+  "technology": "ocgt"
+ },
+ "IRQ|Taji 1": {
+  "name": "Taji",
+  "nameAr": "التاجي",
+  "technology": "ocgt"
+ },
+ "IRQ|Khor Al Zubayr": {
+  "nameAr": "خور الزبير",
+  "technology": "ocgt"
+ },
+ "IRQ|Al-Najaf": {
+  "name": "Al Najaf",
+  "nameAr": "النجف",
+  "technology": "ocgt"
+ },
+ "IRQ|Darbandikhan Dam": {
+  "nameAr": "سد دربندخان",
+  "technology": "hydro_dam"
+ },
+ "IRQ|Mulla Abdulla (New)": {
+  "nameAr": "ملا عبدالله (الجديدة)",
+  "technology": "ocgt"
+ },
+ "IRQ|Samarra Barrage": {
+  "nameAr": "سدة سامراء",
+  "technology": "hydro_ror"
+ },
+ "IRQ|Mosul Dam Regulator": {
+  "nameAr": "منظم سد الموصل",
+  "technology": "hydro_ror"
+ },
+ "IRQ|Hemrin Dam": {
+  "nameAr": "سد حمرين",
+  "technology": "hydro_dam"
+ },
+ "IRQ|Adhaim Dam": {
+  "nameAr": "سد العظيم",
+  "technology": "hydro_dam"
+ },
+ "JOR|Samra CCGT Power Plant Jordan": {
+  "name": "Samra Combined-Cycle Power Plant",
+  "nameAr": "محطة السمرا للدورة المركبة",
+  "technology": "ccgt"
+ },
+ "JOR|Aqaba Thermal Power Plant Jordan": {
+  "name": "Aqaba Thermal Power Plant",
+  "nameAr": "محطة العقبة الحرارية",
+  "technology": "steam_oil"
+ },
+ "JOR|Amman East (AES Jordan) CCGT Power Plant Jordan": {
+  "name": "Amman East (AES Jordan) CCGT",
+  "nameAr": "شرق عمّان (AES)",
+  "technology": "ccgt"
+ },
+ "JOR|IPP3 ICE Power Plant Jordan": {
+  "name": "IPP3 Al Manakher Engine Plant",
+  "nameAr": "محطة IPP3 (المناخر) بالمحركات",
+  "technology": "diesel",
+  "notesEn": "World's largest tri-fuel reciprocating-engine plant (38 Wärtsilä 50DF engines) when built in 2014.",
+  "notesAr": "أكبر محطة محركات ترددية ثلاثية الوقود في العالم (38 محرك فارتسيلا 50DF) عند إنشائها في 2014."
+ },
+ "JOR|Hussein Thermal Power Plant Jordan": {
+  "name": "Hussein Thermal Power Plant (Zarqa)",
+  "nameAr": "محطة الحسين الحرارية (الزرقاء)",
+  "technology": "steam_oil"
+ },
+ "JOR|Al Qatrana CCGT Power Plant Jordan": {
+  "name": "Al Qatrana Combined-Cycle Power Plant",
+  "nameAr": "القطرانة",
+  "technology": "ccgt"
+ },
+ "JOR|Rehab CCGT Power Plant Jordan": {
+  "name": "Rehab Combined-Cycle Power Plant",
+  "nameAr": "الرحاب",
+  "technology": "ccgt"
+ },
+ "JOR|Risha OCGT Power Plant Jordan": {
+  "name": "Risha Gas Turbine Plant",
+  "nameAr": "الريشة",
+  "technology": "ocgt"
+ },
+ "JOR|Quweira": {
+  "name": "Quweira Solar PV",
+  "nameAr": "القويرة (شمسية)"
+ },
+ "JOR|Zaatari": {
+  "name": "Zaatari Refugee Camp Solar PV",
+  "nameAr": "مخيم الزعتري (شمسية)"
+ },
+ "JOR|JUST": {
+  "name": "Jordan University of Science & Technology PV",
+  "nameAr": "جامعة العلوم والتكنولوجيا الأردنية (شمسية)"
+ },
+ "JOR|Jordanian Royal Court": {
+  "nameAr": "الديوان الملكي (شمسية)"
+ },
+ "KWT|Az Zour South CCGT": {
+  "name": "Az Zour South Power & Desalination",
+  "nameAr": "الزور الجنوبية",
+  "technology": "steam_oil",
+  "complex": "az-zour",
+  "notesEn": "Kuwait's largest station: steam units plus gas turbines and MSF desalination on the southern coast.",
+  "notesAr": "أكبر محطة في الكويت: وحدات بخارية وتوربينات غازية وتحلية بالتبخير الومضي على الساحل الجنوبي."
+ },
+ "KWT|Sabiya": {
+  "name": "Subiya Power & Desalination",
+  "nameAr": "الصبية",
+  "technology": "ccgt"
+ },
+ "KWT|Doha West": {
+  "nameAr": "الدوحة الغربية",
+  "technology": "steam_oil"
+ },
+ "KWT|Doha East": {
+  "nameAr": "الدوحة الشرقية",
+  "technology": "steam_oil"
+ },
+ "KWT|Az Zour North": {
+  "name": "Az Zour North Phase 1 IWPP",
+  "nameAr": "الزور الشمالية – المرحلة الأولى",
+  "technology": "ccgt",
+  "complex": "az-zour",
+  "capacityMw": 1539,
+  "commissioningYear": 2016,
+  "notesEn": "Kuwait's first IWPP (ENGIE, Sumitomo, A.H. Al Sagar): 1,539 MW CCGT and 486,000 m³/day desalination.",
+  "notesAr": "أول محطة مستقلة للماء والكهرباء في الكويت (إنجي، سوميتومو، الصقر): دورة مركبة بقدرة 1,539 ميغاواط وتحلية 486,000 م³/يوم."
+ },
+ "KWT|Shuiba North": {
+  "name": "Shuaiba North",
+  "nameAr": "الشعيبة الشمالية",
+  "technology": "ccgt"
+ },
+ "KWT|Shuiba SPSS": {
+  "name": "Shuaiba South",
+  "nameAr": "الشعيبة الجنوبية",
+  "technology": "steam_oil"
+ },
+ "KWT|Shuwaikh": {
+  "nameAr": "الشويخ",
+  "technology": "ocgt"
+ },
+ "KWT|Umm Gudair": {
+  "name": "Umm Gudair Solar PV",
+  "nameAr": "أم قدير (شمسية)"
+ },
+ "LBN|Zouk 1": {
+  "name": "Zouk Thermal Power Plant",
+  "nameAr": "معمل الذوق الحراري",
+  "technology": "steam_oil"
+ },
+ "LBN|Deir Ammar": {
+  "nameAr": "دير عمار",
+  "technology": "ccgt"
+ },
+ "LBN|Zahrani": {
+  "nameAr": "الزهراني",
+  "technology": "ccgt"
+ },
+ "LBN|Jieh 1": {
+  "name": "Jieh Thermal Power Plant",
+  "nameAr": "معمل الجية الحراري",
+  "technology": "steam_oil"
+ },
+ "LBN|Hreishi": {
+  "name": "Hreisheh",
+  "nameAr": "الحريشة",
+  "technology": "ocgt"
+ },
+ "LBN|Baalback": {
+  "name": "Baalbek",
+  "nameAr": "بعلبك",
+  "technology": "ocgt"
+ },
+ "LBN|Sour": {
+  "name": "Tyre (Sour)",
+  "nameAr": "صور",
+  "technology": "ocgt"
+ },
+ "LBY|Az Zawiyah": {
+  "name": "Az Zawiya Combined-Cycle",
+  "nameAr": "الزاوية (الدورة المركبة)",
+  "technology": "ccgt"
+ },
+ "LBY|North Benghazi Station 1": {
+  "name": "North Benghazi",
+  "nameAr": "شمال بنغازي",
+  "technology": "ccgt"
+ },
+ "LBY|Al Khums": {
+  "nameAr": "الخمس",
+  "technology": "ccgt"
+ },
+ "LBY|Western Mountain Station- Ruwais": {
+  "name": "Western Mountain (Ruwais)",
+  "nameAr": "الجبل الغربي (الرويس)",
+  "technology": "ocgt"
+ },
+ "LBY|Misrata": {
+  "nameAr": "مصراتة",
+  "technology": "ocgt"
+ },
+ "LBY|Double Corner Power Station 1": {
+  "name": "Zawiya gas turbines (Double Corner)",
+  "nameAr": "الزاوية (الغازية)",
+  "technology": "ocgt"
+ },
+ "LBY|Gulf of Sirte": {
+  "nameAr": "خليج سرت",
+  "technology": "ocgt"
+ },
+ "LBY|Zuenita": {
+  "name": "Zueitina",
+  "nameAr": "الزويتينة",
+  "technology": "ocgt"
+ },
+ "LBY|West Tripoli": {
+  "name": "West Tripoli (steam)",
+  "nameAr": "غرب طرابلس (البخارية)",
+  "technology": "steam_oil"
+ },
+ "LBY|South Tripoli": {
+  "nameAr": "جنوب طرابلس",
+  "technology": "ocgt"
+ },
+ "LBY|Derna Steam Station": {
+  "nameAr": "درنة البخارية",
+  "technology": "steam_oil"
+ },
+ "LBY|Tobruk Steam Station": {
+  "nameAr": "طبرق البخارية",
+  "technology": "steam_oil"
+ },
+ "MAR|Centrale Thermique de Jorf Lasfar (JLEC)": {
+  "name": "Jorf Lasfar Coal Power Plant (JLEC)",
+  "nameAr": "محطة الجرف الأصفر بالفحم",
+  "technology": "coal_steam",
+  "hero": "coal-steam",
+  "notesEn": "Six units (2 × 330 + 2 × 348 + 2 × 350 MW); the largest coal plant in Africa, supplying ~35% of Morocco's electricity.",
+  "notesAr": "ست وحدات (2 × 330 + 2 × 348 + 2 × 350 ميغاواط)؛ أكبر محطة فحم في أفريقيا تزوّد نحو 35٪ من كهرباء المغرب."
+ },
+ "MAR|Al Wahda Thermal Power station": {
+  "name": "Al Wahda gas turbine plant (Kenitra)",
+  "nameAr": "الوحدة (غازية)",
+  "technology": "ocgt"
+ },
+ "MAR|Jerada power station": {
+  "name": "Jerada Coal Power Station",
+  "nameAr": "محطة جرادة بالفحم",
+  "technology": "coal_steam"
+ },
+ "MAR|Ain Beni Mathar Centrale Thermosolaire (CCGT)": {
+  "name": "Ain Beni Mathar ISCC – gas section",
+  "nameAr": "عين بني مطهر المتكاملة (القسم الغازي)",
+  "technology": "ccgt"
+ },
+ "MAR|Aïn Beni Mathar ISCC": {
+  "name": "Ain Beni Mathar ISCC – solar field",
+  "nameAr": "عين بني مطهر – الحقل الشمسي",
+  "technology": "csp_trough",
+  "commissioningYear": 2010
+ },
+ "MAR|STEP UR1 *": {
+  "name": "Afourer Pumped-Storage Plant (STEP)",
+  "nameAr": "أفورار للتخزين بالضخ",
+  "technology": "hydro_dam"
+ },
+ "MAR|Centrale a cycle combine de Tahaddart": {
+  "name": "Tahaddart Combined-Cycle",
+  "nameAr": "تهدارت (الدورة المركبة)",
+  "technology": "ccgt"
+ },
+ "MAR|Parc Eolien Tarfaya": {
+  "name": "Tarfaya Wind Farm",
+  "nameAr": "مزرعة رياح طرفاية",
+  "hero": "wind-farm",
+  "notesEn": "131 Siemens 2.3 MW turbines; the largest wind farm in Africa when commissioned in 2014.",
+  "notesAr": "131 توربين سيمنس بقدرة 2.3 ميغاواط؛ أكبر مزرعة رياح في أفريقيا عند تشغيلها في 2014."
+ },
+ "MAR|Central Termique de Kenitra": {
+  "name": "Kenitra Thermal Power Plant",
+  "nameAr": "القنيطرة الحرارية",
+  "technology": "steam_oil"
+ },
+ "MAR|Mohammedia power station": {
+  "name": "Mohammedia Coal Power Station",
+  "nameAr": "المحمدية (فحم)",
+  "technology": "coal_steam"
+ },
+ "MAR|Al wahda": {
+  "name": "Al Wahda Dam Hydropower",
+  "nameAr": "سد الوحدة",
+  "technology": "hydro_dam"
+ },
+ "MAR|Allal Al Fassi": {
+  "name": "Allal Al Fassi Dam",
+  "nameAr": "سد علال الفاسي",
+  "technology": "hydro_dam"
+ },
+ "MAR|Parc Eolien Akhfenir": {
+  "name": "Akhfenir Wind Farm",
+  "nameAr": "مزرعة رياح أخفنير"
+ },
+ "MAR|Centrale Solaire Noor Ouarzazate 2": {
+  "name": "Noor Ouarzazate II (parabolic trough)",
+  "nameAr": "نور ورزازات 2 (مرايا مكافئة)",
+  "technology": "csp_trough",
+  "complex": "noor-ouarzazate",
+  "notesEn": "200 MW parabolic trough with 7 hours of molten-salt storage (2018).",
+  "notesAr": "200 ميغاواط مرايا مكافئة مع تخزين 7 ساعات بالملح المصهور (2018)."
+ },
+ "MAR|Centrale Solaire Noor Ouarzazate 1": {
+  "name": "Noor Ouarzazate I (parabolic trough)",
+  "nameAr": "نور ورزازات 1 (مرايا مكافئة)",
+  "technology": "csp_trough",
+  "complex": "noor-ouarzazate",
+  "hero": "noor-ouarzazate",
+  "notesEn": "160 MW parabolic trough with 3 hours of storage; first phase of the 580 MW Noor Ouarzazate complex, one of the largest CSP sites in the world (2016).",
+  "notesAr": "160 ميغاواط مرايا مكافئة مع تخزين 3 ساعات؛ المرحلة الأولى من مجمع نور ورزازات بقدرة 580 ميغاواط، أحد أكبر مواقع الطاقة الشمسية المركزة في العالم (2016)."
+ },
+ "MAR|Centrale Solaire Noor Ouarzazate 3": {
+  "name": "Noor Ouarzazate III (solar tower)",
+  "nameAr": "نور ورزازات 3 (برج شمسي)",
+  "technology": "csp_tower",
+  "complex": "noor-ouarzazate",
+  "commissioningYear": 2018,
+  "notesEn": "150 MW molten-salt tower (243 m) with 7,400 heliostats and 7 hours of storage.",
+  "notesAr": "برج بالملح المصهور بقدرة 150 ميغاواط (243 م) مع 7,400 هليوستات وتخزين 7 ساعات."
+ },
+ "MAR|Centrale Turbine a' Gaz de Tit-Me (Casablanca)": {
+  "name": "Tit Mellil gas turbines (Casablanca)",
+  "nameAr": "تيط مليل (غازية)",
+  "technology": "ocgt"
+ },
+ "MAR|Midelt": {
+  "name": "Midelt Wind Farm",
+  "nameAr": "مزرعة رياح ميدلت"
+ },
+ "MAR|Parc Eolien de Tanger": {
+  "name": "Tangier Wind Farm",
+  "nameAr": "مزرعة رياح طنجة"
+ },
+ "MAR|Centrale Turbine a` Gaz de Tetouan": {
+  "name": "Tetouan gas turbines",
+  "nameAr": "تطوان (غازية)",
+  "technology": "ocgt"
+ },
+ "MAR|BINE EL OUIDANE": {
+  "name": "Bin El Ouidane Dam",
+  "nameAr": "سد بين الويدان",
+  "technology": "hydro_dam"
+ },
+ "MAR|ALMASSIRA": {
+  "name": "Al Massira Dam",
+  "nameAr": "سد المسيرة",
+  "technology": "hydro_dam"
+ },
+ "MAR|Parc Eolien Khalladi": {
+  "name": "Khalladi Wind Farm",
+  "nameAr": "مزرعة رياح خلادي"
+ },
+ "MAR|Centrale Diesel de Tantan": {
+  "name": "Tan-Tan diesel plant",
+  "nameAr": "طانطان (ديزل)",
+  "technology": "diesel"
+ },
+ "MAR|A. EL HANSALI": {
+  "name": "Ahmed El Hansali Dam",
+  "nameAr": "سد أحمد الحنصالي",
+  "technology": "hydro_dam"
+ },
+ "MAR|AFOURER": {
+  "name": "Afourer Hydropower",
+  "nameAr": "أفورار (كهرومائية)",
+  "technology": "hydro_dam"
+ },
+ "MAR|HASSAN 1ER": {
+  "name": "Hassan I Dam",
+  "nameAr": "سد الحسن الأول",
+  "technology": "hydro_dam"
+ },
+ "MAR|Parc Eolien AMOUGDOUL": {
+  "name": "Amogdoul Wind Farm (Essaouira)",
+  "nameAr": "مزرعة رياح أمكدول (الصويرة)"
+ },
+ "MAR|Al Koudia Al Baida (Abdelkhalek Torres)": {
+  "name": "Koudia Al Baida Wind Farm",
+  "nameAr": "مزرعة رياح الكدية البيضاء"
+ },
+ "MAR|Compagnie Eolienne de Detroit (CED)": {
+  "name": "Compagnie Eolienne du Détroit wind farm",
+  "nameAr": "مزرعة رياح شركة المضيق"
+ },
+ "MAR|Parc Eolien Foum El Oued": {
+  "name": "Foum El Oued Wind Farm",
+  "nameAr": "مزرعة رياح فم الواد"
+ },
+ "MAR|Parc Eolien Haouma": {
+  "name": "Haouma Wind Farm",
+  "nameAr": "مزرعة رياح حومة"
+ },
+ "MAR|IDRISS 1er": {
+  "name": "Idriss I Dam",
+  "nameAr": "سد إدريس الأول",
+  "technology": "hydro_dam"
+ },
+ "MAR|Oued El Makhazine": {
+  "name": "Oued El Makhazine Dam",
+  "nameAr": "سد واد المخازن",
+  "technology": "hydro_dam"
+ },
+ "MAR|IMFOUT": {
+  "name": "Imfout",
+  "nameAr": "إمفوت"
+ },
+ "MAR|Parc Eolien Lafarge Tetouan": {
+  "name": "Lafarge Tetouan Wind Farm",
+  "nameAr": "مزرعة رياح لافارج تطوان"
+ },
+ "MAR|Dakhla IC Power Plant Western Sahara": {
+  "name": "Dakhla diesel plant",
+  "nameAr": "الداخلة (ديزل)",
+  "technology": "diesel"
+ },
+ "MAR|MOHAMED V": {
+  "name": "Mohammed V Dam",
+  "nameAr": "سد محمد الخامس"
+ },
+ "MAR|Elborj": {
+  "name": "El Borj",
+  "nameAr": "البرج"
+ },
+ "MAR|Sidi Said Maachou": {
+  "nameAr": "سيدي سعيد معاشو"
+ },
+ "MAR|DAOURAT": {
+  "name": "Daourat",
+  "nameAr": "داورات"
+ },
+ "MAR|MANSOUR ED DAHBI": {
+  "name": "Mansour Eddahbi Dam",
+  "nameAr": "سد المنصور الذهبي"
+ },
+ "MAR|LALLA TAKERKOUST": {
+  "name": "Lalla Takerkoust",
+  "nameAr": "لالة تكركوست"
+ },
+ "MAR|EL KANSERA": {
+  "name": "El Kansera",
+  "nameAr": "القنصرة"
+ },
+ "MAR|Ait-Baha": {
+  "name": "Ait Baha Solar (Airlight)",
+  "nameAr": "آيت باها (شمسية)"
+ },
+ "MRT|Nouadhibou": {
+  "name": "Nouadhibou dual-fuel plant",
+  "nameAr": "نواذيبو",
+  "technology": "diesel"
+ },
+ "MRT|Guelbs El Rhein": {
+  "name": "Guelb El Rhein (SNIM) plant",
+  "nameAr": "قلب الرين (سنيم)",
+  "technology": "diesel"
+ },
+ "MRT|Nouakchott (Thermal)": {
+  "name": "Nouakchott thermal plant",
+  "nameAr": "نواكشوط (الحرارية)",
+  "technology": "diesel"
+ },
+ "MRT|Nouakchott (Solar)": {
+  "name": "Nouakchott Sheikh Zayed Solar",
+  "nameAr": "نواكشوط – الشيخ زايد (شمسية)"
+ },
+ "MRT|Nouakchott (Wind)": {
+  "name": "Nouakchott Wind Farm",
+  "nameAr": "مزرعة رياح نواكشوط"
+ },
+ "MRT|Zouerate": {
+  "name": "Zouerate diesel plant",
+  "nameAr": "الزويرات (ديزل)",
+  "technology": "diesel"
+ },
+ "MRT|Zouerate (Solar)": {
+  "nameAr": "الزويرات (شمسية)"
+ },
+ "OMN|Miraah CSP": {
+  "name": "Miraah solar steam plant (enhanced oil recovery – no electricity)",
+  "nameAr": "مرآة – بخار شمسي لاستخلاص النفط (بدون كهرباء)",
+  "technology": "csp_trough",
+  "excludeFromTotals": true,
+  "notesEn": "GlassPoint/PDO glasshouse trough facility producing steam for oil recovery at Amal; thermal MW, not electrical – excluded from capacity totals.",
+  "notesAr": "منشأة مرايا مكافئة داخل بيوت زجاجية (غلاس بوينت/تنمية نفط عُمان) تنتج بخاراً لاستخلاص النفط في أمل؛ القدرة حرارية لا كهربائية – مستبعدة من الإجماليات."
+ },
+ "OMN|Miraah CSP1": {
+  "name": "Miraah solar steam plant – phase 1 (no electricity)",
+  "nameAr": "مرآة – المرحلة الأولى (بدون كهرباء)",
+  "technology": "csp_trough",
+  "excludeFromTotals": true
+ },
+ "OMN|Sohar Alumnium": {
+  "name": "Sohar Aluminium captive power plant",
+  "nameAr": "محطة صحار للألمنيوم",
+  "technology": "ccgt"
+ },
+ "OMN|SMN Barka": {
+  "name": "Barka 2 IWPP (SMN Power)",
+  "nameAr": "بركاء 2",
+  "technology": "ccgt"
+ },
+ "OMN|Rusail": {
+  "nameAr": "الرسيل",
+  "technology": "ocgt"
+ },
+ "OMN|Sohar": {
+  "name": "Sohar 1 IWPP",
+  "nameAr": "صحار 1",
+  "technology": "ccgt"
+ },
+ "OMN|AL GHUBRAH": {
+  "name": "Al Ghubrah Power & Desalination",
+  "nameAr": "الغبرة",
+  "technology": "ocgt"
+ },
+ "OMN|ACWA Barka": {
+  "name": "Barka 1 IWPP (ACWA)",
+  "nameAr": "بركاء 1",
+  "technology": "ccgt"
+ },
+ "OMN|Wadi Jizzi": {
+  "nameAr": "وادي الجزي",
+  "technology": "ocgt"
+ },
+ "OMN|Al Kamil": {
+  "nameAr": "الكامل",
+  "technology": "ocgt"
+ },
+ "OMN|Manah": {
+  "name": "Manah Power Plant (UPC)",
+  "nameAr": "منح",
+  "technology": "ocgt"
+ },
+ "OMN|Mina Al Fahal": {
+  "nameAr": "ميناء الفحل (شمسية)"
+ },
+ "PSE|Jericho": {
+  "name": "Noor Jericho Solar PV",
+  "nameAr": "نور أريحا (شمسية)"
+ },
+ "QAT|Ras Laffan C (Ras Qartas) CCGT Power Plant Qatar": {
+  "name": "Ras Laffan C (Ras Girtas) IWPP",
+  "nameAr": "رأس لفان C (رأس قرطاس)",
+  "technology": "ccgt",
+  "complex": "ras-laffan"
+ },
+ "QAT|Mesaieed CCGT Power Plant Qatar": {
+  "name": "Mesaieed Power (MPower) CCGT",
+  "nameAr": "مسيعيد (الدورة المركبة)",
+  "technology": "ccgt"
+ },
+ "QAT|Qatalum CCGT Power Plant Qatar": {
+  "name": "Qatalum captive power plant",
+  "nameAr": "قطالوم (محطة الألمنيوم)",
+  "technology": "ccgt"
+ },
+ "QAT|Ras Laffan B CCGT Power Plant Qatar": {
+  "name": "Ras Laffan B IWPP",
+  "nameAr": "رأس لفان B",
+  "technology": "ccgt",
+  "complex": "ras-laffan"
+ },
+ "QAT|Ras Laffan A Cogen GT Power Plant Qatar": {
+  "name": "Ras Laffan A IWPP",
+  "nameAr": "رأس لفان A",
+  "technology": "ccgt",
+  "complex": "ras-laffan"
+ },
+ "QAT|Ras Abu Fontas A OCGT Cogen Power Plant Qatar": {
+  "name": "Ras Abu Fontas A",
+  "nameAr": "رأس أبو فنطاس A",
+  "technology": "ocgt",
+  "complex": "ras-abu-fontas"
+ },
+ "QAT|Ras Abu Fontas B OCGT Cogen Power Plant Qatar": {
+  "name": "Ras Abu Fontas B",
+  "nameAr": "رأس أبو فنطاس B",
+  "technology": "ccgt",
+  "complex": "ras-abu-fontas"
+ },
+ "QAT|Ras Abu Fontas B-2 OCGT Cogen Power Plant Qatar": {
+  "name": "Ras Abu Fontas B2",
+  "nameAr": "رأس أبو فنطاس B2",
+  "technology": "ccgt",
+  "complex": "ras-abu-fontas"
+ },
+ "QAT|Ras Abu Fontas B-1 OCGT Power Plant Qatar": {
+  "name": "Ras Abu Fontas B1",
+  "nameAr": "رأس أبو فنطاس B1",
+  "technology": "ocgt",
+  "complex": "ras-abu-fontas"
+ },
+ "QAT|Al Wajbha GT Power Plant Qatar": {
+  "name": "Al Wajbah gas turbines",
+  "nameAr": "الوجبة",
+  "technology": "ocgt"
+ },
+ "QAT|Al Saliyah GT Power Plant Qatar": {
+  "name": "Al Sailiya gas turbines",
+  "nameAr": "السيلية",
+  "technology": "ocgt"
+ },
+ "QAT|Doha South Super GT Power Plant Qatar": {
+  "name": "Doha South gas turbines",
+  "nameAr": "الدوحة الجنوبية",
+  "technology": "ocgt"
+ },
+ "SAU|SHAIBA (SEC)": {
+  "name": "Shuaibah Power Plant (SEC)",
+  "nameAr": "محطة الشعيبة (السعودية للكهرباء)",
+  "technology": "steam_oil",
+  "complex": "shuaibah",
+  "hero": "steam-plant",
+  "notesEn": "One of the largest oil-fired steam stations in the world (14 × ~400 MW units) south of Jeddah.",
+  "notesAr": "من أكبر المحطات البخارية التي تعمل بالوقود السائل في العالم (14 وحدة بقدرة نحو 400 ميغاواط) جنوب جدة."
+ },
+ "SAU|RABIGH": {
+  "name": "Rabigh Power Plant (SEC)",
+  "nameAr": "محطة رابغ",
+  "technology": "steam_oil"
+ },
+ "SAU|GHAZLAN": {
+  "name": "Ghazlan Power Plant",
+  "nameAr": "محطة غزلان",
+  "technology": "steam_oil"
+ },
+ "SAU|Hajr for Electricity Production Co. Station": {
+  "name": "Qurayyah IPP (Hajr)",
+  "nameAr": "محطة القرية المستقلة (هجر)",
+  "technology": "ccgt",
+  "notesEn": "Largest CCGT in the world when commissioned (3,927 MW).",
+  "notesAr": "أكبر محطة دورة مركبة في العالم عند تشغيلها (3,927 ميغاواط)."
+ },
+ "SAU|QURAYYAH- CC": {
+  "name": "Qurayyah Combined-Cycle (SEC)",
+  "nameAr": "القرية – الدورة المركبة",
+  "technology": "ccgt"
+ },
+ "SAU|Riyadh 9": {
+  "name": "Riyadh PP9",
+  "nameAr": "محطة الرياض 9",
+  "technology": "ocgt",
+  "complex": "riyadh-pp"
+ },
+ "SAU|Riyadh 10": {
+  "name": "Riyadh PP10",
+  "nameAr": "محطة الرياض 10",
+  "technology": "ocgt",
+  "complex": "riyadh-pp",
+  "notesEn": "40 GE Frame 7 gas turbines burning crude oil – the world's largest simple-cycle plant.",
+  "notesAr": "40 توربيناً غازياً GE Frame 7 تحرق النفط الخام – أكبر محطة دورة بسيطة في العالم."
+ },
+ "SAU|MARAFIQ IWPP (1)": {
+  "name": "Marafiq Jubail IWPP",
+  "nameAr": "مرافق الجبيل المستقلة",
+  "technology": "ccgt"
+ },
+ "SAU|JEDDAH SOUTH": {
+  "name": "Jeddah South Thermal",
+  "nameAr": "جنوب جدة الحرارية",
+  "technology": "steam_oil"
+ },
+ "SAU|RABIGH-2": {
+  "name": "Rabigh 2 (SEC)",
+  "nameAr": "رابغ 2",
+  "technology": "steam_oil"
+ },
+ "SAU|QURAYYAH -STEAM": {
+  "name": "Qurayyah Steam",
+  "nameAr": "القرية – البخارية",
+  "technology": "steam_oil"
+ },
+ "SAU|Riyadh 8": {
+  "name": "Riyadh PP8",
+  "nameAr": "محطة الرياض 8",
+  "technology": "ccgt",
+  "complex": "riyadh-pp"
+ },
+ "SAU|Riyadh 12": {
+  "name": "Riyadh PP12",
+  "nameAr": "محطة الرياض 12",
+  "technology": "ccgt",
+  "complex": "riyadh-pp"
+ },
+ "SAU|JEDDAH NO.3": {
+  "name": "Jeddah 3",
+  "nameAr": "جدة 3",
+  "technology": "ocgt"
+ },
+ "SAU|Riyadh 11": {
+  "name": "Riyadh PP11 (Dhuruma IPP)",
+  "nameAr": "محطة الرياض 11 (ضرما)",
+  "technology": "ccgt",
+  "complex": "riyadh-pp"
+ },
+ "SAU|QASSIM CENTRAL": {
+  "name": "Qassim Central",
+  "nameAr": "القصيم المركزية",
+  "technology": "ocgt"
+ },
+ "SAU|JUBAIL (SWCC)": {
+  "name": "Jubail (SWCC)",
+  "nameAr": "الجبيل (التحلية)",
+  "technology": "steam_oil"
+ },
+ "SAU|JAZAN": {
+  "name": "Jazan (SEC)",
+  "nameAr": "جازان",
+  "technology": "ocgt"
+ },
+ "SAU|RAS Al Khair": {
+  "name": "Ras Al Khair (SWCC)",
+  "nameAr": "رأس الخير (التحلية)",
+  "technology": "ccgt"
+ },
+ "SAU|Wasit Gas Plant": {
+  "name": "Wasit gas plant cogeneration",
+  "nameAr": "معمل غاز واسط (توليد مشترك)",
+  "technology": "ccgt"
+ },
+ "SAU|RABEC P/P": {
+  "name": "Rabigh IPP (RABEC)",
+  "nameAr": "رابغ المستقلة (رابك)",
+  "technology": "steam_oil"
+ },
+ "SAU|Riyadh 7": {
+  "name": "Riyadh PP7",
+  "nameAr": "محطة الرياض 7",
+  "technology": "ccgt",
+  "complex": "riyadh-pp"
+ },
+ "SAU|FARAS": {
+  "name": "Faras",
+  "nameAr": "فرس",
+  "technology": "ocgt"
+ },
+ "SAU|SHAIBA": {
+  "name": "Shuaibah IWPP",
+  "nameAr": "الشعيبة المستقلة",
+  "technology": "steam_oil",
+  "complex": "shuaibah"
+ },
+ "SAU|Alkhobar": {
+  "name": "Al Khobar (SWCC)",
+  "nameAr": "الخبر (التحلية)",
+  "technology": "steam_oil"
+ },
+ "SAU|SHEDGUM": {
+  "name": "Shedgum",
+  "nameAr": "شدقم",
+  "technology": "ocgt"
+ },
+ "SAU|SHUQAIQ IWPP": {
+  "name": "Shuqaiq IWPP",
+  "nameAr": "الشقيق المستقلة",
+  "technology": "steam_oil"
+ },
+ "SAU|TABUK-2": {
+  "name": "Tabuk 2",
+  "nameAr": "تبوك 2",
+  "technology": "ocgt"
+ },
+ "SAU|JEDDAH (SWCC)": {
+  "name": "Jeddah (SWCC)",
+  "nameAr": "جدة (التحلية)",
+  "technology": "steam_oil"
+ },
+ "SAU|SHUAIBA (SWCC)": {
+  "name": "Shuqaiq (SWCC)",
+  "nameAr": "الشقيق (التحلية)",
+  "technology": "steam_oil"
+ },
+ "SAU|YANBU PLANT": {
+  "name": "Yanbu (Marafiq)",
+  "nameAr": "ينبع (مرافق)",
+  "technology": "steam_oil"
+ },
+ "SAU|RABIGH IWSPP": {
+  "name": "Rabigh IWSPP",
+  "nameAr": "رابغ المستقلة للماء والبخار والكهرباء",
+  "technology": "steam_oil"
+ },
+ "SAU|YANBU PLANT 2": {
+  "name": "Yanbu 2 (Marafiq)",
+  "nameAr": "ينبع 2 (مرافق)",
+  "technology": "steam_oil"
+ },
+ "SAU|MAKKAH": {
+  "name": "Makkah",
+  "nameAr": "مكة المكرمة",
+  "technology": "ocgt"
+ },
+ "SAU|HAIL2": {
+  "name": "Hail 2",
+  "nameAr": "حائل 2",
+  "technology": "ocgt"
+ },
+ "SAU|TIHAMA": {
+  "name": "Tihama",
+  "nameAr": "تهامة",
+  "technology": "ocgt"
+ },
+ "SAU|ASIR": {
+  "name": "Asir",
+  "nameAr": "عسير",
+  "technology": "ocgt"
+ },
+ "SAU|Riyadh 5": {
+  "name": "Riyadh PP5",
+  "nameAr": "محطة الرياض 5",
+  "technology": "ocgt",
+  "complex": "riyadh-pp"
+ },
+ "SAU|AL-QURAYYAT": {
+  "name": "Al Qurayyat",
+  "nameAr": "القريات",
+  "technology": "ocgt"
+ },
+ "SAU|YANBU (SWCC)": {
+  "name": "Yanbu (SWCC)",
+  "nameAr": "ينبع (التحلية)",
+  "technology": "steam_oil"
+ },
+ "SAU|JUAYMAH CO-GENERATION GAS PLANT": {
+  "name": "Ju'aymah cogeneration plant",
+  "nameAr": "الجعيمة – توليد مشترك",
+  "technology": "ccgt"
+ },
+ "SAU|SHEDGUM CO-GENERATION GAS PLANT": {
+  "name": "Shedgum cogeneration plant",
+  "nameAr": "شدقم – توليد مشترك",
+  "technology": "ccgt"
+ },
+ "SAU|UTHMANIYAH CO-GENERATION GAS PLANT": {
+  "name": "Uthmaniyah cogeneration plant",
+  "nameAr": "العثمانية – توليد مشترك",
+  "technology": "ccgt"
+ },
+ "SAU|NAJRAN": {
+  "name": "Najran",
+  "nameAr": "نجران",
+  "technology": "ocgt"
+ },
+ "SAU|Khursaniyah": {
+  "name": "Khursaniyah (Aramco)",
+  "nameAr": "الخرسانية (أرامكو)",
+  "technology": "ccgt"
+ },
+ "SAU|ARAR": {
+  "name": "Arar",
+  "nameAr": "عرعر",
+  "technology": "ocgt"
+ },
+ "SAU|DAMMAM": {
+  "name": "Dammam",
+  "nameAr": "الدمام",
+  "technology": "ocgt"
+ },
+ "SAU|Manifa CO-GENERATION PLANT": {
+  "name": "Manifa cogeneration plant",
+  "nameAr": "المنيفة – توليد مشترك",
+  "technology": "ccgt"
+ },
+ "SAU|BISHA": {
+  "name": "Bisha",
+  "nameAr": "بيشة",
+  "technology": "ocgt"
+ },
+ "SAU|AL-JOUF": {
+  "name": "Al Jouf",
+  "nameAr": "الجوف",
+  "technology": "ocgt"
+ },
+ "SAU|Riyadh 4": {
+  "name": "Riyadh PP4",
+  "nameAr": "محطة الرياض 4",
+  "technology": "ocgt",
+  "complex": "riyadh-pp"
+ },
+ "SAU|UTHMANIYAH": {
+  "name": "Uthmaniyah",
+  "nameAr": "العثمانية",
+  "technology": "ocgt"
+ },
+ "SAU|RAFHA": {
+  "name": "Rafha",
+  "nameAr": "رفحاء",
+  "technology": "ocgt"
+ },
+ "SAU|BERI GP": {
+  "name": "Berri gas plant cogeneration",
+  "nameAr": "بري (معمل الغاز)",
+  "technology": "ccgt"
+ },
+ "SAU|MADINAH - 2": {
+  "name": "Madinah 2",
+  "nameAr": "المدينة المنورة 2",
+  "technology": "ocgt"
+ },
+ "SAU|AL WAJH": {
+  "name": "Al Wajh",
+  "nameAr": "الوجه",
+  "technology": "ocgt"
+ },
+ "SAU|SHAROURA": {
+  "name": "Sharurah",
+  "nameAr": "شرورة",
+  "technology": "ocgt"
+ },
+ "SAU|JUBAIL COGEN (JEC)": {
+  "name": "Jubail cogeneration (JEC)",
+  "nameAr": "الجبيل للتوليد المشترك",
+  "technology": "ccgt"
+ },
+ "SAU|BERI (SEC)": {
+  "name": "Berri (SEC)",
+  "nameAr": "بري (السعودية للكهرباء)",
+  "technology": "ocgt"
+ },
+ "SAU|Hofuf": {
+  "name": "Hofuf (Saudi Cement)",
+  "nameAr": "الهفوف (أسمنت)",
+  "technology": "ocgt"
+ },
+ "SAU|DUBA": {
+  "name": "Duba",
+  "nameAr": "ضباء",
+  "technology": "ocgt"
+ },
+ "SAU|ABQ PP": {
+  "name": "Abqaiq Power Plant (Aramco)",
+  "nameAr": "بقيق (أرامكو)",
+  "technology": "ocgt"
+ },
+ "SAU|JEDDAH NO.2": {
+  "name": "Jeddah 2",
+  "nameAr": "جدة 2",
+  "technology": "ocgt"
+ },
+ "SAU|RAS TANURA CO-GENERATION PLANT": {
+  "name": "Ras Tanura cogeneration plant",
+  "nameAr": "رأس تنورة – توليد مشترك",
+  "technology": "ccgt"
+ },
+ "SAU|QATIF G-1": {
+  "name": "Qatif (Aramco)",
+  "nameAr": "القطيف (أرامكو)",
+  "technology": "ocgt"
+ },
+ "SAU|QAISUMAH": {
+  "name": "Qaisumah",
+  "nameAr": "القيصومة",
+  "technology": "ocgt"
+ },
+ "SAU|TAIF": {
+  "name": "Taif",
+  "nameAr": "الطائف",
+  "technology": "ocgt"
+ },
+ "SAU|JUAYMAH": {
+  "name": "Ju'aymah",
+  "nameAr": "الجعيمة",
+  "technology": "ocgt"
+ },
+ "SAU|BURAIDAH": {
+  "name": "Buraidah",
+  "nameAr": "بريدة",
+  "technology": "ocgt"
+ },
+ "SAU|TABARJAL": {
+  "name": "Tabarjal",
+  "nameAr": "طبرجل",
+  "technology": "ocgt"
+ },
+ "SAU|TABUK-1": {
+  "name": "Tabuk 1",
+  "nameAr": "تبوك 1",
+  "technology": "ocgt"
+ },
+ "SAU|LAYLA": {
+  "name": "Layla",
+  "nameAr": "ليلى",
+  "technology": "ocgt"
+ },
+ "SAU|YANBU (ARAM)": {
+  "name": "Yanbu (Aramco)",
+  "nameAr": "ينبع (أرامكو)",
+  "technology": "ocgt"
+ },
+ "SAU|ALBAHA": {
+  "name": "Al Baha",
+  "nameAr": "الباحة",
+  "technology": "ocgt"
+ },
+ "SAU|SAFANIYAH": {
+  "name": "Safaniyah",
+  "nameAr": "السفانية",
+  "technology": "ocgt"
+ },
+ "SAU|Riyadh 3": {
+  "name": "Riyadh PP3",
+  "nameAr": "محطة الرياض 3",
+  "technology": "ocgt",
+  "complex": "riyadh-pp"
+ },
+ "SAU|RIYADH REF": {
+  "name": "Riyadh Refinery cogeneration",
+  "nameAr": "مصفاة الرياض",
+  "technology": "ocgt"
+ },
+ "SAU|MADINAH - 1": {
+  "name": "Madinah 1",
+  "nameAr": "المدينة المنورة 1",
+  "technology": "ocgt"
+ },
+ "SAU|Ain Dar": {
+  "name": "Ain Dar (Saudi Cement)",
+  "nameAr": "عين دار (أسمنت)",
+  "technology": "ocgt"
+ },
+ "SAU|YANBU (SEC)": {
+  "name": "Yanbu (SEC)",
+  "nameAr": "ينبع (السعودية للكهرباء)",
+  "technology": "ocgt"
+ },
+ "SAU|Waad Al Shamal ISCC": {
+  "name": "Waad Al Shamal ISCC – solar field",
+  "nameAr": "وعد الشمال – الحقل الشمسي",
+  "technology": "csp_trough",
+  "commissioningYear": 2018
+ },
+ "SAU|HAIL1": {
+  "name": "Hail 1",
+  "nameAr": "حائل 1",
+  "technology": "ocgt"
+ },
+ "SAU|Duba 1 ISCC": {
+  "name": "Duba 1 ISCC – solar field",
+  "nameAr": "ضباء 1 – الحقل الشمسي",
+  "technology": "csp_trough",
+  "commissioningYear": 2020
+ },
+ "SAU|Al Khafji": {
+  "name": "Al Khafji solar desalination PV",
+  "nameAr": "الخفجي (شمسية)"
+ },
+ "SAU|TABUK-3": {
+  "name": "Tabuk 3",
+  "nameAr": "تبوك 3",
+  "technology": "ocgt"
+ },
+ "SAU|TABUK-4": {
+  "name": "Tabuk 4",
+  "nameAr": "تبوك 4",
+  "technology": "ocgt"
+ },
+ "SAU|Power Station (Paper Factory)": {
+  "name": "Obeikan Paper captive plant",
+  "nameAr": "محطة مصنع الورق (العبيكان)",
+  "technology": "diesel"
+ },
+ "SAU|Dhahran": {
+  "name": "Dhahran Aramco PV",
+  "nameAr": "الظهران (أرامكو، شمسية)"
+ },
+ "SAU|Layla": {
+  "name": "Layla Solar PV",
+  "nameAr": "ليلى (شمسية)"
+ },
+ "SAU|Kapsarc": {
+  "name": "KAPSARC PV",
+  "nameAr": "كابسارك (شمسية)"
+ },
+ "SDN|Merowe": {
+  "name": "Merowe Dam",
+  "nameAr": "سد مروي",
+  "technology": "hydro_dam",
+  "commissioningYear": 2009,
+  "notesEn": "10 × 125 MW Francis units on the Nile's fourth cataract; the largest hydropower plant in Sudan (2009).",
+  "notesAr": "10 وحدات فرانسيس بقدرة 125 ميغاواط على الشلال الرابع للنيل؛ أكبر محطة كهرومائية في السودان (2009)."
+ },
+ "SDN|Khartoum North": {
+  "name": "Khartoum North Thermal",
+  "nameAr": "الخرطوم بحري (الحرارية)",
+  "technology": "steam_oil"
+ },
+ "SDN|El Jaili": {
+  "name": "Garri Power Complex (Al Jaili)",
+  "nameAr": "مجمع قري للطاقة (الجيلي)",
+  "technology": "ccgt",
+  "capacityMw": 590,
+  "notesEn": "GPPD lists 319 MW; the full complex north of Khartoum comprises Garri 1 & 2 (2 × 210 MW combined-cycle blocks) and Garri 4 (110 MW).",
+  "notesAr": "تدرج قاعدة WRI قدرة 319 ميغاواط؛ يضم المجمع الكامل شمال الخرطوم قري 1 و2 (وحدتا دورة مركبة بقدرة 210 ميغاواط) وقري 4 (110 ميغاواط)."
+ },
+ "SDN|Kilo-X Dit": {
+  "name": "Kilo X (Dit) diesel plant",
+  "nameAr": "كيلو 10 (ديزل)",
+  "technology": "diesel"
+ },
+ "SDN|Roseires": {
+  "name": "Roseires Dam",
+  "nameAr": "سد الروصيرص",
+  "technology": "hydro_dam"
+ },
+ "SDN|White Nile State": {
+  "name": "White Nile Sugar cogeneration",
+  "nameAr": "سكر النيل الأبيض (كتلة حيوية)"
+ },
+ "SDN|Kenana": {
+  "name": "Kenana Sugar cogeneration",
+  "nameAr": "كنانة للسكر"
+ },
+ "SDN|Port Sudan": {
+  "nameAr": "بورتسودان",
+  "technology": "diesel"
+ },
+ "SDN|Kilo-X Nec": {
+  "name": "Kilo X (NEC) diesel plant",
+  "nameAr": "كيلو 10 (الشركة الوطنية)",
+  "technology": "diesel"
+ },
+ "SDN|Melut Sugar Factory": {
+  "exclude": true,
+  "reason": "Site is in South Sudan (Upper Nile), not an Arab League member"
+ },
+ "SDN|Kuku": {
+  "exclude": true,
+  "reason": "Site is in Juba, South Sudan"
+ },
+ "SDN|Nyala": {
+  "nameAr": "نيالا",
+  "technology": "diesel"
+ },
+ "SDN|Jebel Aulia Dam": {
+  "name": "Jebel Aulia Dam Hydropower",
+  "nameAr": "سد جبل أولياء",
+  "technology": "hydro_ror"
+ },
+ "SDN|Atbara": {
+  "nameAr": "عطبرة",
+  "technology": "diesel"
+ },
+ "SDN|Sennar": {
+  "name": "Sennar Dam",
+  "nameAr": "سد سنار",
+  "technology": "hydro_ror"
+ },
+ "SDN|El Obeid": {
+  "nameAr": "الأبيض",
+  "technology": "diesel"
+ },
+ "SDN|Rahad": {
+  "nameAr": "الرهد",
+  "technology": "diesel"
+ },
+ "SDN|Khasm El Girba": {
+  "name": "Khashm El Girba Dam",
+  "nameAr": "سد خشم القربة",
+  "technology": "hydro_ror"
+ },
+ "SYR|Aleppo Thermal Power Plant Syria": {
+  "name": "Aleppo Thermal Power Plant",
+  "nameAr": "محطة حلب الحرارية",
+  "technology": "steam_oil"
+ },
+ "SYR|Taqba (Al-Thawra) Hydroelectric Power Project Syria": {
+  "name": "Tabqa (Al Thawra) Dam",
+  "nameAr": "سد الطبقة (الثورة)",
+  "technology": "hydro_dam"
+ },
+ "SYR|Dier Ali CCGT Power Plant Syria": {
+  "name": "Deir Ali Combined-Cycle",
+  "nameAr": "دير علي",
+  "technology": "ccgt"
+ },
+ "SYR|Jandar CCGT Power Plant Syria": {
+  "name": "Jandar Combined-Cycle",
+  "nameAr": "جندر",
+  "technology": "ccgt"
+ },
+ "SYR|Banias Thermal Power Plant Syria": {
+  "name": "Banias Thermal Power Plant",
+  "nameAr": "بانياس الحرارية",
+  "technology": "steam_oil"
+ },
+ "SYR|Al-Zara Thermal Power Plant Syria": {
+  "name": "Al Zara Thermal Power Plant",
+  "nameAr": "الزارة الحرارية",
+  "technology": "steam_oil"
+ },
+ "SYR|Mehardeh Thermal Power Plant Syria": {
+  "name": "Mhardeh Thermal Power Plant",
+  "nameAr": "محردة الحرارية",
+  "technology": "steam_oil"
+ },
+ "SYR|Teshreen (Tishrin) Hydroelectric Power Project Syria": {
+  "name": "Tishrin Dam",
+  "nameAr": "سد تشرين",
+  "technology": "hydro_dam"
+ },
+ "SYR|Zayzoun (Zayzun) CCGT Power Plant Syria": {
+  "name": "Zayzoun Combined-Cycle",
+  "nameAr": "زيزون",
+  "technology": "ccgt"
+ },
+ "SYR|Teshreen (Tishrin) Thermal Power Project Syria": {
+  "name": "Tishreen Thermal (Damascus)",
+  "nameAr": "تشرين الحرارية (دمشق)",
+  "technology": "steam_oil"
+ },
+ "SYR|Al Nasryeh (Nasserieh) OCGT Power Plant Syria": {
+  "name": "Nasiriyah gas turbines",
+  "nameAr": "الناصرية",
+  "technology": "ocgt"
+ },
+ "SYR|Teshreen (Tishrin) OCGT Power Project Syria": {
+  "name": "Tishreen gas turbines",
+  "nameAr": "تشرين (غازية)",
+  "technology": "ocgt"
+ },
+ "SYR|Swedieh ( Suwaidiyah) OCGT Power Plant Syria": {
+  "name": "Suwaidiyah gas turbines",
+  "nameAr": "السويدية",
+  "technology": "ocgt"
+ },
+ "SYR|Al Tayem OCGT Power Plant Syria": {
+  "name": "Al Tayem gas turbines",
+  "nameAr": "التيم",
+  "technology": "ocgt"
+ },
+ "SYR|Baath Hydroelectric Power Project Syria": {
+  "name": "Al Baath Dam",
+  "nameAr": "سد البعث",
+  "technology": "hydro_dam"
+ },
+ "SYR|Homs Refinery Cogen Power Plant Syria": {
+  "name": "Homs Refinery cogeneration",
+  "nameAr": "مصفاة حمص",
+  "technology": "steam_oil"
+ },
+ "SYR|Banias (Baniyas) Refinery Thermal Power Plant": {
+  "name": "Banias Refinery thermal plant",
+  "nameAr": "مصفاة بانياس",
+  "technology": "steam_oil"
+ },
+ "SYR|Aleppo OCGT Power Plant Syria": {
+  "name": "Aleppo gas turbines",
+  "nameAr": "حلب (غازية)",
+  "technology": "ocgt"
+ },
+ "TUN|Rades A1": {
+  "name": "Radès A (steam)",
+  "nameAr": "رادس A (البخارية)",
+  "technology": "steam_oil"
+ },
+ "TUN|Bir Mcherga 1": {
+  "name": "Bir M'Cherga",
+  "nameAr": "بئر مشارقة",
+  "technology": "ocgt"
+ },
+ "TUN|IPP Rades 2": {
+  "name": "Radès II IPP (Carthage Power)",
+  "nameAr": "رادس 2 (المستقلة)",
+  "technology": "ccgt"
+ },
+ "TUN|Sousse C": {
+  "nameAr": "سوسة C",
+  "technology": "ccgt"
+ },
+ "TUN|Sousse D": {
+  "nameAr": "سوسة D",
+  "technology": "ccgt"
+ },
+ "TUN|Ghannouch": {
+  "name": "Ghannouch Combined-Cycle",
+  "nameAr": "غنوش (الدورة المركبة)",
+  "technology": "ccgt"
+ },
+ "TUN|Thyna 1": {
+  "name": "Thyna",
+  "nameAr": "طينة",
+  "technology": "ocgt"
+ },
+ "TUN|Sousse B": {
+  "nameAr": "سوسة B",
+  "technology": "ccgt"
+ },
+ "TUN|Sousse A": {
+  "nameAr": "سوسة A",
+  "technology": "steam_oil"
+ },
+ "TUN|Feriana 1": {
+  "name": "Feriana",
+  "nameAr": "فريانة",
+  "technology": "ocgt"
+ },
+ "TUN|Bouchemma 1": {
+  "name": "Bouchemma",
+  "nameAr": "بوشمة",
+  "technology": "ocgt"
+ },
+ "TUN|Goulette": {
+  "name": "La Goulette",
+  "nameAr": "حلق الوادي",
+  "technology": "ocgt"
+ },
+ "TUN|Metline": {
+  "name": "Metline–Kchabta Wind Farm",
+  "nameAr": "مطلين (رياح)"
+ },
+ "TUN|Sidi Daoued": {
+  "name": "Sidi Daoud Wind Farm",
+  "nameAr": "سيدي داود (رياح)"
+ },
+ "TUN|Kasserine": {
+  "nameAr": "القصرين",
+  "technology": "ocgt"
+ },
+ "TUN|Tunis - Sud 1": {
+  "name": "Tunis South",
+  "nameAr": "تونس الجنوبية",
+  "technology": "ocgt"
+ },
+ "TUN|Korba 1": {
+  "name": "Korba",
+  "nameAr": "قربة",
+  "technology": "ocgt"
+ },
+ "TUN|Menzel Bourguiba": {
+  "nameAr": "منزل بورقيبة",
+  "technology": "ocgt"
+ },
+ "TUN|Sfax": {
+  "nameAr": "صفاقس",
+  "technology": "ocgt"
+ },
+ "TUN|Zarzis": {
+  "nameAr": "جرجيس",
+  "technology": "ocgt"
+ },
+ "TUN|Sidi Salem": {
+  "name": "Sidi Salem Dam",
+  "nameAr": "سد سيدي سالم",
+  "technology": "hydro_dam"
+ },
+ "TUN|Nebeur": {
+  "name": "Nebeur (Mellègue) Dam",
+  "nameAr": "سد نبر",
+  "technology": "hydro_ror"
+ },
+ "TUN|Aroussia": {
+  "nameAr": "العروسية"
+ },
+ "TUN|Bouherthma": {
+  "nameAr": "بوهرتمة"
+ },
+ "TUN|Fernana": {
+  "nameAr": "فرنانة"
+ },
+ "TUN|Kasseb": {
+  "nameAr": "كساب"
+ },
+ "YEM|Marib": {
+  "name": "Marib Gas Turbine Plant",
+  "nameAr": "محطة مأرب الغازية",
+  "technology": "ocgt"
+ },
+ "YEM|Al Mukha": {
+  "name": "Mokha Thermal Power Plant",
+  "nameAr": "المخا الحرارية",
+  "technology": "steam_oil"
+ },
+ "YEM|Ras Kanatib": {
+  "name": "Ras Katenib Thermal (Hodeidah)",
+  "nameAr": "رأس كتنيب (الحديدة)",
+  "technology": "steam_oil"
+ },
+ "YEM|Al Mansoura": {
+  "name": "Al Mansoura (Aden)",
+  "nameAr": "المنصورة (عدن)",
+  "technology": "diesel"
+ },
+ "YEM|Al Hiswa": {
+  "name": "Al Hiswa Thermal (Aden)",
+  "nameAr": "الحسوة (عدن)",
+  "technology": "steam_oil"
+ },
+ "YEM|Dhaban": {
+  "name": "Dhahban (Sanaa)",
+  "nameAr": "ذهبان (صنعاء)",
+  "technology": "diesel"
+ },
+ "YEM|Khormaksar": {
+  "name": "Khormaksar (Aden)",
+  "nameAr": "خور مكسر (عدن)",
+  "technology": "ocgt"
+ }
+}
