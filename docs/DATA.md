@@ -25,9 +25,12 @@
 2. `npm run build:data` ثم `npm test`.
 3. انشر إصداراً جديداً — تصل البيانات الجديدة للعملاء عبر التحديث التلقائي.
 
+## جغرافيا الموقع للتوأم الرقمي
+يُحسب لكل محطة عند بناء البيانات حقلان إضافيان من الإحداثيات وخريطة المنطقة: `coastal` (هل البحر على بعد ≤ 12 كم) و`seaBearing` (اتجاه البحر بالدرجات من الشمال) و`seaKm`. يستخدمها المشهد ثلاثي الأبعاد لوضع البحر ومآخذ التبريد في الاتجاه الصحيح، بينما تأخذ المحطات الداخلية أبراج تبريد أو مكثفات هوائية.
+
 ## إخلاء مسؤولية
 البيانات لأغراض تعليمية؛ القدرات والتواريخ والملكية تتغير، وبعض المحطات الحديثة قُدّرت إحداثياتها. نرحّب بالتصحيحات عبر Issues.
 
 ---
 ## English
-`plants.json` is built from the WRI GPPD v1.3.0 Arab subset (487 rows, CC BY 4.0) plus 135 curated records (post-2019 plants, Somalia, Comoros) and an overrides file (Arabic names, precise technology classification, complexes, exclusions). Each record carries `dataQuality`, `status`, `source`, and `sourceUrl`. Update the source files, run `npm run build:data`, test, and ship a release.
+`plants.json` is built from the WRI GPPD v1.3.0 Arab subset (487 rows, CC BY 4.0) plus 135 curated records (post-2019 plants, Somalia, Comoros) and an overrides file (Arabic names, precise technology classification, complexes, exclusions). Each record carries `dataQuality`, `status`, `source`, and `sourceUrl`. Update the source files, run `npm run build:data`, test, and ship a release. The build also derives `coastal`, `seaBearing` and `seaKm` per plant from the regional map (sea within 12 km and its bearing) for the 3D site.

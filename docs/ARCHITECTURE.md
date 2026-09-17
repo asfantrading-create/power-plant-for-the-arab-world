@@ -19,7 +19,13 @@ src/renderer/            UI (vanilla ES modules bundled by esbuild into dist/bun
   js/pages/*             one module per screen (dashboard, plants, plant, twin, exams, results, admin-*)
   js/twin/engine.js      simulation engine (thermal/PV/CSP/wind/hydro/nuclear)
   js/twin/solar.js       NOAA solar position, clear-sky irradiance
-  js/twin/scenes.js      three.js procedural scenes and hero layouts
+  js/twin/scenes.js      composeScene(): technology layout + site (fence, roads, admin, transmission line) baked into few meshes; TwinScene: renderer, sky, lights, terrain, sea, day/night
+  js/twin/lib/textures.js   procedural canvas textures (sand, cladding, facades, PV cells, water normals…)
+  js/twin/lib/materials.js  shared PBR materials (metre-based tiling), night-window emissive, anti-tiling ground shader
+  js/twin/lib/primitives.js box/cyl/tube helpers, instancing, static-geometry baking, labels, plumes
+  js/twin/lib/components.js parametric plant components (stack, cooling towers, boiler, GT package, HRSG, tanks, transformer, switchyard, pylons, nuclear unit, wind turbine, dam, barrage…)
+  js/twin/lib/builders.js   per-technology layouts scaled by capacity/units (steam, CCGT, OCGT, diesel, nuclear, PV, CSP trough/tower, wind, hydro dam/run-of-river)
+  js/twin/lib/env.js        physical sky (three.js Sky), sun/hemisphere lighting with shadows, terrain relief by biome, sea plane
   js/lib/map.js          offline SVG map (Natural Earth) with pan/zoom
   js/lib/charts.js       Chart.js wrappers; js/lib/report.js printable reports
 data/                    plants, countries, complexes, technologies, questions, map (+ sources/)

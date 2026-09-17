@@ -22,12 +22,12 @@ export function createMap(container, { map, plants, onSelect, onCountry, highlig
   clear(container); container.append(svg, tooltip, controls, legend);
   let scale = 1, tx = 0, ty = 0, selectedCountry = highlightCountry || null;
   function applyTransform() { g.setAttribute('transform', `translate(${tx},${ty}) scale(${scale})`); for (const c of pointsG.children) { const r = Number(c.dataset.r); c.setAttribute('r', r / Math.sqrt(scale)); c.setAttribute('stroke-width', 1 / scale); } }
-  function fill(iso, arab) { if (!arab) return 'var(--map-context, #14232f)'; if (selectedCountry && iso === selectedCountry) return '#1f6f7a'; return '#1b3a4b'; }
+  function fill(iso, arab) { if (!arab) return 'var(--map-context, #14232f)'; if (selectedCountry && iso === selectedCountry) return 'var(--map-land-selected, #1f6f7a)'; return 'var(--map-land, #1b3a4b)'; }
   function drawCountries() {
     clear(countriesG);
     for (const f of map.features) {
       const d = f.geometry.coordinates.map(poly => poly.map(ring => 'M' + ring.map(([x, y]) => project(x, y).map(v => v.toFixed(1)).join(',')).join('L') + 'Z').join('')).join('');
-      const p = el('path', { d, fill: fill(f.properties.iso, f.properties.arab), stroke: f.properties.arab ? '#3b6f8a' : '#1f3040', 'stroke-width': .6 });
+      const p = el('path', { d, fill: fill(f.properties.iso, f.properties.arab), stroke: f.properties.arab ? 'var(--map-stroke, #3b6f8a)' : 'var(--map-context-stroke, #1f3040)', 'stroke-width': .6 });
       p.dataset.iso = f.properties.iso;
       if (f.properties.arab) { p.style.cursor = 'pointer'; p.addEventListener('click', () => { if (onCountry) onCountry(f.properties.iso); }); }
       countriesG.append(p);
@@ -39,7 +39,7 @@ export function createMap(container, { map, plants, onSelect, onCountry, highlig
     for (const p of sorted) {
       const [x, y] = project(p.lon, p.lat);
       const r = Math.max(2.2, Math.min(14, Math.sqrt(p.capacityMw) / 5));
-      const c = el('circle', { cx: x.toFixed(1), cy: y.toFixed(1), r, fill: FUEL_COLORS[p.fuel] || '#fff', 'fill-opacity': p.status === 'operational' ? .85 : .45, stroke: p.status === 'operational' ? '#04121a' : '#fff', 'stroke-width': 1, 'stroke-dasharray': p.status === 'operational' ? '' : '1.5,1' });
+      const c = el('circle', { cx: x.toFixed(1), cy: y.toFixed(1), r, fill: FUEL_COLORS[p.fuel] || '#fff', 'fill-opacity': p.status === 'operational' ? .85 : .45, stroke: p.status === 'operational' ? 'var(--map-point-stroke, #04121a)' : '#fff', 'stroke-width': 1, 'stroke-dasharray': p.status === 'operational' ? '' : '1.5,1' });
       c.dataset.r = r; c.dataset.id = p.id; c.style.cursor = 'pointer';
       c.addEventListener('mouseenter', e => showTip(e, p)); c.addEventListener('mousemove', e => moveTip(e)); c.addEventListener('mouseleave', hideTip);
       c.addEventListener('click', e => { e.stopPropagation(); if (onSelect) onSelect(p); });
