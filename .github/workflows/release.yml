@@ -45,6 +45,25 @@ jobs:
       # Publishes to THIS repository by default. To keep the code private and publish to a separate PUBLIC
       # releases repository, set repository variable RELEASE_REPO (and optionally RELEASE_OWNER) and the secret
       # GH_RELEASE_TOKEN (a token with "Contents: read & write" on that releases repository).
+      # GitHub refuses a published release whose tag does not exist in the target repository, so the tag and the
+      # release are created there first; electron-builder then uploads the installer, blockmap and latest.yml.
+      - name: Create tag and release in the separate releases repository
+        if: ${{ vars.RELEASE_REPO != '' }}
+        shell: bash
+        run: |
+          OWNER="${RELEASE_OWNER:-$GITHUB_REPOSITORY_OWNER}"
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then TAG="$GITHUB_REF_NAME"; else TAG="v$(node -p "require('./package.json').version")"; fi
+          DEFAULT_BRANCH=$(gh api "repos/$OWNER/$RELEASE_REPO" --jq .default_branch)
+          if gh release view "$TAG" --repo "$OWNER/$RELEASE_REPO" >/dev/null 2>&1; then
+            echo "Release $TAG already exists in $OWNER/$RELEASE_REPO; assets will be added to it."
+          else
+            gh release create "$TAG" --repo "$OWNER/$RELEASE_REPO" --target "$DEFAULT_BRANCH" --title "$TAG" --notes "Arab Power Twin $TAG"
+            echo "Created release $TAG in $OWNER/$RELEASE_REPO"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+          RELEASE_REPO: ${{ vars.RELEASE_REPO }}
+          RELEASE_OWNER: ${{ vars.RELEASE_OWNER }}
       - name: Build and publish installer
         shell: bash
         run: |
@@ -58,6 +77,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
           RELEASE_REPO: ${{ vars.RELEASE_REPO }}
           RELEASE_OWNER: ${{ vars.RELEASE_OWNER }}
+          EP_GH_IGNORE_TIME: "true"
       - name: Upload installer as workflow artifact (manual runs)
         uses: actions/upload-artifact@v4
         with:
