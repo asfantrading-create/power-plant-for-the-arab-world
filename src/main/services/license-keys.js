@@ -9,6 +9,6 @@
  *   when the app is not packaged (`electron .`), so developers can test activation. Never used in production builds.
  */
 module.exports = {
-  PRODUCTION_PUBLIC_KEY_PEM: null,
+  PRODUCTION_PUBLIC_KEY_PEM: "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAZ4uCEf8ldyazbRI1lQ2ni2bTUqkyqmSPeHBqHrcERtw=\n-----END PUBLIC KEY-----\n",
   DEV_PUBLIC_KEY_PEM: "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAIew36+U0YCqK05Mbf/TgAHX1NBqnW9mq8iuLuY7idnc=\n-----END PUBLIC KEY-----\n",
 };
