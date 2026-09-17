@@ -1,0 +1,69 @@
+# Builds the Windows installer and publishes it to GitHub Releases.
+# Trigger: push a tag like v1.2.0 (after bumping "version" in package.json), or run manually.
+# Published assets: ArabPowerTwin-Setup.exe (fixed name -> permanent download link),
+#                   ArabPowerTwin-Setup.exe.blockmap and latest.yml (auto-update feed read by installed copies).
+name: Release Windows installer
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build renderer bundle
+        run: npm run build:renderer
+      - name: Lint and test (includes jsdom end-to-end smoke test of the bundle)
+        run: |
+          npm run lint
+          npm test
+      - name: Verify tag matches package.json version
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION)"; exit 1; fi
+      - name: Release preconditions (license public key, data files)
+        run: node scripts/check-release.mjs
+        env:
+          ALLOW_DEV_KEY_RELEASE: ${{ vars.ALLOW_DEV_KEY_RELEASE }}
+      # Publishes to THIS repository by default. To keep the code private and publish to a separate PUBLIC
+      # releases repository, set repository variable RELEASE_REPO (and optionally RELEASE_OWNER) and the secret
+      # GH_RELEASE_TOKEN (a token with "Contents: read & write" on that releases repository).
+      - name: Build and publish installer
+        shell: bash
+        run: |
+          EXTRA=""
+          if [ -n "$RELEASE_REPO" ]; then
+            EXTRA="-c.publish.owner=${RELEASE_OWNER:-${GITHUB_REPOSITORY_OWNER}} -c.publish.repo=${RELEASE_REPO}"
+            echo "Publishing to ${RELEASE_OWNER:-${GITHUB_REPOSITORY_OWNER}}/${RELEASE_REPO}"
+          fi
+          npx electron-builder --win --x64 --publish always $EXTRA
+        env:
+          GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          RELEASE_REPO: ${{ vars.RELEASE_REPO }}
+          RELEASE_OWNER: ${{ vars.RELEASE_OWNER }}
+      - name: Upload installer as workflow artifact (manual runs)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ArabPowerTwin-Setup
+          path: |
+            release/*.exe
+            release/*.blockmap
+            release/latest.yml
+          if-no-files-found: error

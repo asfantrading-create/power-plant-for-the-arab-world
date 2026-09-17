@@ -1,0 +1,14 @@
+node_modules/
+release/
+dist/
+src/renderer/dist/
+*.log
+.DS_Store
+Thumbs.db
+# vendor private signing keys must never be committed
+keys/
+*.private.pem
+*.private.key
+tools/license-cli/keys/
+# local scratch
+.tmp/

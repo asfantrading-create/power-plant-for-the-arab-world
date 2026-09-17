@@ -1,1 +1,78 @@
-# power-plant-for-the-arab-world
+<div dir="rtl">
+
+# التوأم الرقمي لمحطات الطاقة في الوطن العربي — Arab Power Twin
+
+برنامج تعليمي لأنظمة ويندوز (ملف `.exe` واحد) يقدّم **محاكاة رقمية (Digital Twin)** لمحطات طاقة حقيقية في **22 دولة عربية**، مع بيانات حقيقية لأكثر من **620 محطة** (غاز، بخار، نووي، شمسي كهروضوئي، شمسي مركّز، رياح، كهرومائي، ديزل، فحم، نفايات)، ونماذج ثلاثية الأبعاد، وبنك أسئلة واختبارات لتقييم الطلاب، ونظام مستخدمين بصلاحيات (مشرف عام / مدرّس / طالب)، وترخيص تجاري (مدى الحياة أو محدد المدة)، وتحديثات تلقائية.
+
+## المزايا الرئيسية
+
+| المجال | ما يقدمه البرنامج |
+|---|---|
+| **قاعدة بيانات المحطات** | 620 محطة حقيقية من قاعدة WRI العالمية (CC BY 4.0) + إضافات منسّقة حتى 2026 (براكة، الضبعة، بني سويف/البرلس/العاصمة، الظفرة، مجمع محمد بن راشد، نور ورزازات، بنبان، سدير، الشعيبة، دومة الجندل، جازان، العطارات…) مع الإحداثيات والقدرة والتقنية وسنة التشغيل والمالك والمصدر |
+| **الخريطة والمستكشف** | خريطة تفاعلية دون اتصال بالإنترنت، تصفية حسب الدولة/التقنية/القدرة، صفحة تفصيلية لكل محطة مع شرح التقنية |
+| **التوأم الرقمي** | محاكاة فيزيائية مبسّطة لكل تقنية (موقع الشمس الفعلي من الإحداثيات والوقت، منحنى قدرة توربينات الرياح، معادلة الطاقة الكهرومائية، الكفاءة والوقود وانبعاثات CO₂، الإقلاع والفصل، تردد الشبكة) + مشهد ثلاثي الأبعاد لكل تقنية ونماذج مخصصة للمحطات المميزة (براكة، السد العالي، نور ورزازات، مجمع محمد بن راشد…) + سيناريوهات تدريبية (فصل مفاجئ، موجة حر، عاصفة غبار…) |
+| **التقييم** | بنك أسئلة ثنائي اللغة (120+ سؤالاً في 10 موضوعات) + أسئلة مولّدة تلقائياً من بيانات المحطات الحقيقية، اختبارات رسمية يعدّها المدرّس (مدة، درجة نجاح، عدد محاولات، مجموعات) واختبارات تدريبية ذاتية |
+| **الإدارة** | المشرف العام (مثل أستاذ المقرر) يضيف الطلاب (يدوياً أو من CSV) والمجموعات، ويرى نتائج كل طالب وإحصاءات الصف وجلسات المحاكاة، ويصدّر النتائج كملفات CSV/JSON/PDF على الجهاز |
+| **الترخيص** | مفاتيح موقّعة رقمياً (Ed25519) يصدرها البائع: مدى الحياة أو بتاريخ انتهاء، مع إمكانية ربطها بجهاز معيّن، والتحقق يتم دون إنترنت |
+| **التحديثات** | يتحقق البرنامج تلقائياً من إصدارات GitHub؛ عند وجود إصدار أحدث يظهر إشعار ويُثبَّت بنقرة واحدة |
+| **اللغة** | عربي (افتراضي، RTL) وإنجليزي، مظهر داكن/فاتح |
+
+## رابط التحميل الثابت للعملاء
+
+بعد أول إصدار (انظر أدناه) يكون رابط التحميل الدائم:
+
+`https://github.com/asfantrading-create/power-plant-for-the-arab-world/releases/latest/download/ArabPowerTwin-Setup.exe`
+
+الرابط لا يتغير مع الإصدارات الجديدة لأن اسم ملف المثبّت ثابت.
+
+## خطوات البائع (مرة واحدة قبل أول إصدار)
+
+1. استنسخ المستودع على جهازك وثبّت Node.js 22 ثم `npm install`.
+2. ولّد مفاتيح الترخيص: `npm run license -- keygen` — يُنشئ المفتاح الخاص في `tools/license-cli/keys/vendor-private.pem` (**لا يُرفع إلى git، احتفظ بنسخة احتياطية**) ويضمّن المفتاح العام في `src/main/services/license-keys.js`.
+3. ارفع التغيير: `git add src/main/services/license-keys.js && git commit -m "Add production license key" && git push`.
+4. أصدر النسخة: عدّل `"version"` في `package.json` ثم:
+   `git tag v1.0.0 && git push origin v1.0.0`
+   سيبني GitHub Actions المثبّت على ويندوز وينشره في صفحة Releases مع ملف `latest.yml` الذي تعتمد عليه التحديثات التلقائية. (يجب أن يكون المستودع **عاماً** أو تستخدم خادم تحديثات خاصاً — انظر `docs/RELEASES.md`).
+
+## إصدار ترخيص لعميل
+
+```bash
+# مدى الحياة
+npm run license -- issue --name "د. أحمد" --org "جامعة الملك سعود" --email a@ksu.edu.sa --seats 40 --out ksu.lic
+# محدد المدة (ينتهي 30-09-2027)
+npm run license -- issue --org "شركة كهرباء X" --type term --expires 2027-09-30 --seats 10 --out x.lic
+# مرتبط بجهاز واحد (يظهر معرّف الجهاز في شاشة التفعيل عند العميل)
+npm run license -- issue --org "معهد Y" --machine APT-1A2B-3C4D-5E6F-7A8B --out y.lic
+```
+يرسل العميل مفتاحه (نص يبدأ بـ `APT1.`) في شاشة التفعيل، ثم يُنشئ حساب المشرف العام، ثم يضيف الطلاب.
+
+## التطوير المحلي
+
+```bash
+npm install
+npm start              # يبني الواجهة ويشغّل Electron (تُقبل مفاتيح التطوير في هذا الوضع)
+npm test               # اختبارات الوحدات
+npm run dist:win       # بناء المثبّت محلياً على ويندوز
+```
+مفتاح تطوير جاهز للتجربة: `tools/license-cli/dev-keys/dev-license.lic` (لا يعمل في النسخة المثبّتة).
+
+المزيد: [docs/RELEASE-CHECKLIST.md](docs/RELEASE-CHECKLIST.md) (خطوات البائع كاملة) · [docs/INSTALL.md](docs/INSTALL.md) · [docs/ADMIN-GUIDE.md](docs/ADMIN-GUIDE.md) · [docs/LICENSING.md](docs/LICENSING.md) · [docs/RELEASES.md](docs/RELEASES.md) · [docs/DATA.md](docs/DATA.md) · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+
+</div>
+
+---
+
+# Arab Power Twin (English)
+
+An educational Windows desktop application (single `.exe` installer) that provides a **digital twin** of real power plants across the **22 Arab League countries**: a database of **620+ real plants** (WRI Global Power Plant Database + curated 2019–2026 additions), an offline interactive map, plant information pages, a physics-based simulation with 3D scenes per technology and bespoke models for landmark plants, a bilingual question bank with auto-generated questions from real data, formal and practice exams, role-based accounts (super admin / instructor / student), per-student results with CSV/JSON/PDF export, signed offline licensing (lifetime or term, optional machine lock) and automatic updates from GitHub Releases.
+
+**Permanent customer download link** (after the first release):
+`https://github.com/asfantrading-create/power-plant-for-the-arab-world/releases/latest/download/ArabPowerTwin-Setup.exe`
+
+**Vendor one-time setup:** `npm install` → `npm run license -- keygen` → commit `src/main/services/license-keys.js` → bump `version` in `package.json` → `git tag vX.Y.Z && git push origin vX.Y.Z`. GitHub Actions builds the Windows installer and publishes it together with `latest.yml` (the auto-update feed).
+
+**Issue a license:** `npm run license -- issue --org "University X" [--type term --expires 2027-09-30] [--seats 40] [--machine APT-....] --out x.lic`.
+
+**Develop:** `npm start` (dev license keys accepted), `npm test`, `npm run dist:win` (on Windows).
+
+See the `docs/` folder for installation, administration, licensing, release/update and data-source guides. Data: WRI GPPD v1.3.0 (CC BY 4.0), Natural Earth (public domain), Cairo font (OFL). This is an educational product; simulations are simplified models, not live plant data.

@@ -1,0 +1,162 @@
+{
+  "ccgt": {
+    "nameEn": "Combined-cycle gas turbine (CCGT)", "nameAr": "توربينات غازية بدورة مركبة",
+    "fuel": "Gas", "category": "thermal", "dispatchable": true,
+    "efficiency": 0.57, "heatRateKjPerKwh": 6300, "minLoad": 0.4, "rampRatePctPerMin": 5, "startupMinutes": 120,
+    "co2KgPerMwh": 370, "waterUse": "medium", "typicalCapacityFactor": 0.55,
+    "descriptionEn": "A gas turbine burns natural gas to drive a generator; its hot exhaust (~600 °C) raises steam in a heat-recovery steam generator (HRSG) that drives a second, steam turbine. Combining both cycles pushes efficiency from ~38% (open cycle) to 55–63%. CCGT is the backbone of most Arab grids because of abundant natural gas.",
+    "descriptionAr": "يحرق التوربين الغازي الغاز الطبيعي ليدير مولّداً، ثم تُستخدم غازات العادم الساخنة (~600°م) لتوليد بخار في مولّد بخار باسترجاع الحرارة (HRSG) يدير توربيناً بخارياً ثانياً. الجمع بين الدورتين يرفع الكفاءة من نحو 38٪ (دورة مفتوحة) إلى 55–63٪. تُعد المحطات المركبة العمود الفقري لمعظم الشبكات العربية بفضل وفرة الغاز الطبيعي.",
+    "components": ["gas turbine", "HRSG", "steam turbine", "condenser", "cooling system", "generator step-up transformer"],
+    "componentsAr": ["توربين غازي", "مولد بخار باسترجاع الحرارة", "توربين بخاري", "مكثف", "نظام تبريد", "محول رفع"]
+  },
+  "ocgt": {
+    "nameEn": "Open-cycle gas turbine (OCGT)", "nameAr": "توربينات غازية بدورة مفتوحة",
+    "fuel": "Gas", "category": "thermal", "dispatchable": true,
+    "efficiency": 0.36, "heatRateKjPerKwh": 10000, "minLoad": 0.3, "rampRatePctPerMin": 15, "startupMinutes": 15,
+    "co2KgPerMwh": 560, "waterUse": "low", "typicalCapacityFactor": 0.25,
+    "descriptionEn": "Air is compressed, mixed with fuel and burned; the hot gas expands through a turbine that drives the generator. Fast to start (10–30 min) and cheap to build, but only 30–40% efficient, so open-cycle units mostly cover peak demand (summer air-conditioning peaks in the Gulf).",
+    "descriptionAr": "يُضغط الهواء ويُخلط بالوقود ويُحرق، ثم يتمدد الغاز الساخن عبر توربين يدير المولّد. سريعة التشغيل (10–30 دقيقة) ورخيصة الإنشاء، لكن كفاءتها 30–40٪ فقط، لذلك تُستخدم غالباً لتغطية أحمال الذروة (ذروة التكييف الصيفية في الخليج).",
+    "components": ["compressor", "combustor", "turbine", "generator", "exhaust stack"],
+    "componentsAr": ["ضاغط", "غرفة احتراق", "توربين", "مولّد", "مدخنة عادم"]
+  },
+  "steam_oil": {
+    "nameEn": "Oil/gas-fired steam plant", "nameAr": "محطة بخارية تعمل بالوقود السائل/الغاز",
+    "fuel": "Oil", "category": "thermal", "dispatchable": true,
+    "efficiency": 0.38, "heatRateKjPerKwh": 9500, "minLoad": 0.35, "rampRatePctPerMin": 2, "startupMinutes": 360,
+    "co2KgPerMwh": 700, "waterUse": "high", "typicalCapacityFactor": 0.5,
+    "descriptionEn": "A boiler burns heavy fuel oil, crude or gas to produce high-pressure superheated steam (typically 160–250 bar, 540 °C) that expands through a multi-stage steam turbine (Rankine cycle). Slow to start but robust; widely used in Saudi Arabia, Kuwait and Iraq, often coupled with seawater desalination (cogeneration).",
+    "descriptionAr": "يحرق المرجل زيت الوقود الثقيل أو الخام أو الغاز لإنتاج بخار محمّص عالي الضغط (عادة 160–250 بار، 540°م) يتمدد عبر توربين بخاري متعدد المراحل (دورة رانكن). بطيئة الإقلاع لكنها متينة؛ منتشرة في السعودية والكويت والعراق وغالباً ما تقترن بتحلية مياه البحر (توليد مشترك).",
+    "components": ["boiler", "superheater", "HP/IP/LP steam turbine", "condenser", "feedwater pumps", "cooling water intake"],
+    "componentsAr": ["مرجل", "محمّص", "توربين بخاري عالي/متوسط/منخفض الضغط", "مكثف", "مضخات مياه التغذية", "مأخذ مياه التبريد"]
+  },
+  "coal_steam": {
+    "nameEn": "Coal-fired steam plant", "nameAr": "محطة بخارية تعمل بالفحم",
+    "fuel": "Coal", "category": "thermal", "dispatchable": true,
+    "efficiency": 0.40, "heatRateKjPerKwh": 9000, "minLoad": 0.4, "rampRatePctPerMin": 2, "startupMinutes": 480,
+    "co2KgPerMwh": 850, "waterUse": "high", "typicalCapacityFactor": 0.65,
+    "descriptionEn": "Pulverised coal is burned in a boiler to raise steam for a Rankine-cycle turbine. Modern ultra-supercritical units (Safi, Morocco) reach ~44% efficiency. Coal is rare in the Arab world (Morocco, some UAE industrial use) because of gas abundance and CO2 concerns.",
+    "descriptionAr": "يُحرق الفحم المطحون في مرجل لتوليد بخار لتوربين بدورة رانكن. تصل الوحدات فوق الحرجة الحديثة (آسفي، المغرب) إلى كفاءة ~44٪. الفحم نادر في الوطن العربي (المغرب أساساً) بسبب وفرة الغاز والمخاوف من انبعاثات الكربون.",
+    "components": ["coal yard", "pulverisers", "boiler", "steam turbine", "flue-gas desulphurisation", "cooling tower / seawater"],
+    "componentsAr": ["ساحة الفحم", "طواحين", "مرجل", "توربين بخاري", "وحدة إزالة الكبريت", "برج تبريد / مياه بحر"]
+  },
+  "diesel": {
+    "nameEn": "Diesel / HFO reciprocating engines", "nameAr": "محركات ديزل / زيت وقود ثقيل",
+    "fuel": "Oil", "category": "thermal", "dispatchable": true,
+    "efficiency": 0.42, "heatRateKjPerKwh": 8600, "minLoad": 0.2, "rampRatePctPerMin": 20, "startupMinutes": 5,
+    "co2KgPerMwh": 650, "waterUse": "low", "typicalCapacityFactor": 0.4,
+    "descriptionEn": "Banks of large medium-speed engines (5–20 MW each) drive generators. Very flexible and modular, so they serve islands and isolated grids (Comoros, Djibouti, Somalia, Yemen, remote Saudi towns) and fast peaking duty.",
+    "descriptionAr": "مجموعات من المحركات الكبيرة متوسطة السرعة (5–20 ميغاواط لكل محرك) تدير مولّدات. مرنة جداً ونمطية، لذلك تخدم الجزر والشبكات المعزولة (جزر القمر، جيبوتي، الصومال، اليمن، المدن السعودية النائية) وأحمال الذروة.",
+    "components": ["engines", "fuel treatment", "radiators", "generators", "switchgear"],
+    "componentsAr": ["محركات", "معالجة الوقود", "مبرّدات", "مولّدات", "لوحات توزيع"]
+  },
+  "pv": {
+    "nameEn": "Solar photovoltaic (PV)", "nameAr": "طاقة شمسية كهروضوئية",
+    "fuel": "Solar", "category": "renewable", "dispatchable": false,
+    "efficiency": 0.21, "minLoad": 0, "rampRatePctPerMin": 100, "startupMinutes": 0,
+    "co2KgPerMwh": 0, "waterUse": "very low", "typicalCapacityFactor": 0.24,
+    "descriptionEn": "Semiconductor cells convert sunlight directly into DC electricity; inverters convert it to grid AC. Output follows the sun (zero at night) and drops ~0.35%/°C above 25 °C, so dust and heat management matter in the region. The Arab world hosts some of the largest and cheapest PV plants on Earth (Al Dhafra 2 GW, Benban 1.5 GW, MBR Solar Park).",
+    "descriptionAr": "تحوّل خلايا شبه موصلة ضوء الشمس مباشرة إلى تيار مستمر، ثم تحوّله العواكس إلى تيار متردد للشبكة. يتبع الإنتاج مسار الشمس (صفر ليلاً) وينخفض نحو 0.35٪ لكل درجة مئوية فوق 25°م، لذا يهم التحكم بالغبار والحرارة في المنطقة. يستضيف الوطن العربي بعضاً من أكبر محطات الطاقة الكهروضوئية وأرخصها في العالم (الظفرة 2 غيغاواط، بنبان 1.5 غيغاواط، مجمع محمد بن راشد).",
+    "components": ["PV modules", "trackers/mounting", "string inverters / central inverters", "MV transformers", "substation"],
+    "componentsAr": ["ألواح كهروضوئية", "متتبعات / هياكل تثبيت", "عواكس", "محولات جهد متوسط", "محطة تحويل"]
+  },
+  "csp_trough": {
+    "nameEn": "Concentrated solar power – parabolic trough", "nameAr": "طاقة شمسية مركزة – مرايا مكافئة",
+    "fuel": "Solar", "category": "renewable", "dispatchable": true,
+    "efficiency": 0.16, "minLoad": 0.2, "rampRatePctPerMin": 5, "startupMinutes": 45,
+    "co2KgPerMwh": 0, "waterUse": "medium", "typicalCapacityFactor": 0.35,
+    "descriptionEn": "Curved mirrors focus direct sunlight on a receiver tube carrying heat-transfer fluid (~390 °C). The heat raises steam for a turbine and can be stored in molten salt tanks (3–7 hours) so the plant keeps generating after sunset. Noor Ouarzazate I & II (Morocco), Shams 1 (UAE) and Noor Energy 1 (Dubai) use this design.",
+    "descriptionAr": "تركّز مرايا منحنية أشعة الشمس المباشرة على أنبوب استقبال يحمل سائلاً ناقلاً للحرارة (~390°م). تُستخدم الحرارة لتوليد بخار لتوربين، ويمكن تخزينها في خزانات ملح مصهور (3–7 ساعات) لمواصلة التوليد بعد الغروب. تعتمد نور ورزازات 1 و2 (المغرب) وشمس 1 (الإمارات) ونور للطاقة 1 (دبي) هذا التصميم.",
+    "components": ["parabolic mirrors", "receiver tubes", "heat-transfer fluid loop", "molten-salt storage", "steam generator", "steam turbine", "air-cooled condenser"],
+    "componentsAr": ["مرايا مكافئة", "أنابيب استقبال", "دائرة سائل ناقل للحرارة", "تخزين بالملح المصهور", "مولد بخار", "توربين بخاري", "مكثف هوائي"]
+  },
+  "csp_tower": {
+    "nameEn": "Concentrated solar power – central tower", "nameAr": "طاقة شمسية مركزة – برج مركزي",
+    "fuel": "Solar", "category": "renewable", "dispatchable": true,
+    "efficiency": 0.18, "minLoad": 0.2, "rampRatePctPerMin": 5, "startupMinutes": 45,
+    "co2KgPerMwh": 0, "waterUse": "medium", "typicalCapacityFactor": 0.4,
+    "descriptionEn": "Thousands of sun-tracking mirrors (heliostats) concentrate light on a receiver atop a tower where molten salt is heated to ~565 °C. Salt is stored in hot tanks and used to raise steam on demand, giving up to 15 hours of dispatchable solar power. Noor Ouarzazate III (Morocco, 243 m tower) and the 262 m tower of Dubai's MBR Solar Park Phase IV are landmark examples.",
+    "descriptionAr": "آلاف المرايا المتتبعة للشمس (الهليوستات) تركّز الضوء على مستقبِل أعلى برج حيث يُسخَّن الملح المصهور إلى ~565°م. يُخزَّن الملح في خزانات ساخنة ويُستخدم لتوليد البخار عند الطلب، ما يوفر حتى 15 ساعة من الطاقة الشمسية القابلة للتحكم. نور ورزازات 3 (المغرب، برج 243 م) وبرج مجمع محمد بن راشد المرحلة الرابعة (262 م) أبرز الأمثلة.",
+    "components": ["heliostat field", "solar tower & receiver", "molten-salt hot/cold tanks", "steam generator", "steam turbine", "condenser"],
+    "componentsAr": ["حقل هليوستات", "برج شمسي ومستقبِل", "خزانات ملح ساخن/بارد", "مولد بخار", "توربين بخاري", "مكثف"]
+  },
+  "wind_onshore": {
+    "nameEn": "Onshore wind farm", "nameAr": "مزرعة رياح برية",
+    "fuel": "Wind", "category": "renewable", "dispatchable": false,
+    "efficiency": 0.45, "minLoad": 0, "rampRatePctPerMin": 100, "startupMinutes": 0,
+    "co2KgPerMwh": 0, "waterUse": "none", "typicalCapacityFactor": 0.38,
+    "descriptionEn": "Three-bladed turbines (2–6 MW each, 80–150 m hubs) convert wind kinetic energy into electricity; power grows with the cube of wind speed between cut-in (~3 m/s) and rated speed (~12 m/s) and turbines shut down above ~25 m/s. Egypt's Gulf of Suez, Morocco's Atlantic coast (Tarfaya, Aftissat), Jordan's Tafila and Saudi Dumat Al Jandal are world-class wind sites.",
+    "descriptionAr": "توربينات ثلاثية الشفرات (2–6 ميغاواط لكل توربين، صرح بارتفاع 80–150 م) تحوّل الطاقة الحركية للرياح إلى كهرباء؛ تزداد القدرة مع مكعب سرعة الرياح بين سرعة البدء (~3 م/ث) والسرعة المقننة (~12 م/ث)، وتتوقف التوربينات فوق ~25 م/ث. خليج السويس في مصر وساحل الأطلسي المغربي (طرفاية، أفتيسات) والطفيلة في الأردن ودومة الجندل في السعودية مواقع رياح عالمية المستوى.",
+    "components": ["rotor blades", "nacelle (gearbox/generator)", "tower", "pad-mount transformer", "collector substation"],
+    "componentsAr": ["شفرات الدوار", "الحاضنة (علبة تروس/مولّد)", "الصرح", "محول قاعدي", "محطة تجميع"]
+  },
+  "hydro_dam": {
+    "nameEn": "Hydroelectric dam (reservoir)", "nameAr": "سد كهرومائي بخزان",
+    "fuel": "Hydro", "category": "renewable", "dispatchable": true,
+    "efficiency": 0.9, "minLoad": 0.1, "rampRatePctPerMin": 50, "startupMinutes": 2,
+    "co2KgPerMwh": 0, "waterUse": "n/a", "typicalCapacityFactor": 0.4,
+    "descriptionEn": "Water stored behind a dam falls through penstocks to Francis or Kaplan turbines; power = ρ·g·Q·H·η, so output depends on head (H) and discharge (Q). Hydropower is fully dispatchable and provides frequency control. Major Arab plants: Aswan High Dam (Egypt, 2.1 GW), Merowe (Sudan, 1.25 GW), Mosul and Haditha (Iraq), Tabqa (Syria), Al Wahda and Bin El Ouidane (Morocco).",
+    "descriptionAr": "تنساب المياه المخزونة خلف السد عبر أنابيب الضغط إلى توربينات فرانسيس أو كابلان؛ القدرة = ρ·g·Q·H·η، فيعتمد الإنتاج على الارتفاع (H) والتصريف (Q). الطاقة الكهرومائية قابلة للتحكم بالكامل وتوفر ضبط التردد. أهم المحطات العربية: السد العالي (مصر، 2.1 غيغاواط)، مروي (السودان، 1.25 غيغاواط)، الموصل وحديثة (العراق)، الطبقة (سوريا)، الوحدة وبين الويدان (المغرب).",
+    "components": ["dam", "reservoir", "intake & penstocks", "turbines", "generators", "spillway", "tailrace"],
+    "componentsAr": ["السد", "الخزان", "المأخذ وأنابيب الضغط", "التوربينات", "المولدات", "المفيض", "قناة التصريف"]
+  },
+  "hydro_ror": {
+    "nameEn": "Run-of-river / barrage hydro", "nameAr": "محطة كهرومائية نهرية / قناطر",
+    "fuel": "Hydro", "category": "renewable", "dispatchable": false,
+    "efficiency": 0.88, "minLoad": 0.1, "rampRatePctPerMin": 50, "startupMinutes": 2,
+    "co2KgPerMwh": 0, "waterUse": "n/a", "typicalCapacityFactor": 0.5,
+    "descriptionEn": "Low-head plants on barrages and canals (Esna, Naga Hammadi, Assiut on the Nile; Samarra on the Tigris) use bulb or Kaplan turbines; output follows the river flow with little storage.",
+    "descriptionAr": "محطات منخفضة الارتفاع على القناطر والقنوات (إسنا ونجع حمادي وأسيوط على النيل؛ سامراء على دجلة) تستخدم توربينات كابلان أو أنبوبية؛ يتبع الإنتاج تدفق النهر مع تخزين ضئيل.",
+    "components": ["barrage", "bulb/Kaplan turbines", "generators", "gates"],
+    "componentsAr": ["قناطر", "توربينات أنبوبية/كابلان", "مولدات", "بوابات"]
+  },
+  "nuclear_pwr": {
+    "nameEn": "Nuclear – pressurised water reactor", "nameAr": "طاقة نووية – مفاعل ماء مضغوط",
+    "fuel": "Nuclear", "category": "thermal", "dispatchable": true,
+    "efficiency": 0.35, "heatRateKjPerKwh": 10300, "minLoad": 0.5, "rampRatePctPerMin": 1, "startupMinutes": 2880,
+    "co2KgPerMwh": 0, "waterUse": "high", "typicalCapacityFactor": 0.9,
+    "descriptionEn": "Uranium fission in the reactor core heats pressurised water (~155 bar, 325 °C) that generates steam in steam generators for a large turbine. Runs at base load for 18-month cycles. Barakah (UAE) has four APR-1400 units (5.6 GW, ~25% of UAE electricity); El Dabaa (Egypt) is building four VVER-1200 units.",
+    "descriptionAr": "انشطار اليورانيوم في قلب المفاعل يسخّن ماءً مضغوطاً (~155 بار، 325°م) يولّد بخاراً في مولدات البخار لتوربين ضخم. تعمل بحمل أساسي في دورات مدتها 18 شهراً. تضم براكة (الإمارات) أربع وحدات APR-1400 (5.6 غيغاواط، ~25٪ من كهرباء الإمارات)؛ وتبني الضبعة (مصر) أربع وحدات VVER-1200.",
+    "components": ["reactor pressure vessel", "steam generators", "pressuriser", "containment building", "turbine hall", "seawater cooling", "spent-fuel pool"],
+    "componentsAr": ["وعاء ضغط المفاعل", "مولدات البخار", "المضغِّط", "مبنى الاحتواء", "قاعة التوربين", "تبريد بمياه البحر", "حوض الوقود المستهلك"]
+  },
+  "biomass": {
+    "nameEn": "Biomass / bagasse cogeneration", "nameAr": "كتلة حيوية / توليد مشترك من مخلفات قصب السكر",
+    "fuel": "Biomass", "category": "renewable", "dispatchable": true,
+    "efficiency": 0.28, "heatRateKjPerKwh": 12800, "minLoad": 0.3, "rampRatePctPerMin": 3, "startupMinutes": 240,
+    "co2KgPerMwh": 0, "waterUse": "medium", "typicalCapacityFactor": 0.45,
+    "descriptionEn": "Sugar-cane bagasse or waste is burned in boilers to raise steam for turbines, usually inside sugar factories (Kenana and White Nile in Sudan).",
+    "descriptionAr": "تُحرق مخلفات قصب السكر أو النفايات في مراجل لتوليد بخار للتوربينات، غالباً داخل مصانع السكر (كنانة والنيل الأبيض في السودان).",
+    "components": ["fuel handling", "boiler", "steam turbine", "condenser"],
+    "componentsAr": ["مناولة الوقود", "مرجل", "توربين بخاري", "مكثف"]
+  },
+  "waste_to_energy": {
+    "nameEn": "Waste-to-energy", "nameAr": "تحويل النفايات إلى طاقة",
+    "fuel": "Waste", "category": "thermal", "dispatchable": true,
+    "efficiency": 0.25, "heatRateKjPerKwh": 14400, "minLoad": 0.5, "rampRatePctPerMin": 2, "startupMinutes": 240,
+    "co2KgPerMwh": 300, "waterUse": "medium", "typicalCapacityFactor": 0.85,
+    "descriptionEn": "Municipal solid waste is incinerated at >850 °C; flue-gas heat raises steam for a turbine while advanced scrubbers clean the exhaust. Dubai's Warsan plant (200 MW) and Sharjah's (30 MW) are the region's first large facilities.",
+    "descriptionAr": "تُحرق النفايات الصلبة البلدية عند أكثر من 850°م؛ تولّد حرارة غازات المداخن بخاراً لتوربين بينما تنقّي أنظمة الغسيل المتقدمة العادم. محطة ورسان في دبي (200 ميغاواط) والشارقة (30 ميغاواط) أولى المنشآت الكبيرة في المنطقة.",
+    "components": ["waste bunker", "incinerator grate", "boiler", "steam turbine", "flue-gas treatment"],
+    "componentsAr": ["مستودع النفايات", "شبكة الحرق", "مرجل", "توربين بخاري", "معالجة غازات المداخن"]
+  },
+  "igcc": {
+    "nameEn": "Integrated gasification combined cycle (IGCC)", "nameAr": "دورة مركبة بتغويز متكامل",
+    "fuel": "Oil", "category": "thermal", "dispatchable": true,
+    "efficiency": 0.42, "heatRateKjPerKwh": 8600, "minLoad": 0.5, "rampRatePctPerMin": 3, "startupMinutes": 600,
+    "co2KgPerMwh": 650, "waterUse": "high", "typicalCapacityFactor": 0.8,
+    "descriptionEn": "Heavy refinery residue (vacuum residue) is gasified into syngas, cleaned, and burned in gas turbines within a combined cycle. Jazan IGCC (Saudi Arabia, 3.8 GW) is the world's largest.",
+    "descriptionAr": "تُغوَّز بقايا التكرير الثقيلة إلى غاز تخليقي يُنقّى ويُحرق في توربينات غازية ضمن دورة مركبة. مجمع جازان (السعودية، 3.8 غيغاواط) هو الأكبر في العالم.",
+    "components": ["gasifiers", "air separation unit", "syngas cleanup", "gas turbines", "HRSG", "steam turbines"],
+    "componentsAr": ["مغوّزات", "وحدة فصل الهواء", "تنقية الغاز التخليقي", "توربينات غازية", "مولدات بخار", "توربينات بخارية"]
+  },
+  "oil_shale": {
+    "nameEn": "Oil-shale fired steam plant", "nameAr": "محطة بخارية تعمل بالصخر الزيتي",
+    "fuel": "Oil", "category": "thermal", "dispatchable": true,
+    "efficiency": 0.36, "heatRateKjPerKwh": 10000, "minLoad": 0.4, "rampRatePctPerMin": 2, "startupMinutes": 480,
+    "co2KgPerMwh": 950, "waterUse": "high", "typicalCapacityFactor": 0.75,
+    "descriptionEn": "Crushed oil shale is burned in circulating fluidised-bed boilers; Attarat (Jordan, 470 MW) is the only such plant in the Arab world and the first to use Jordan's huge shale reserves.",
+    "descriptionAr": "يُحرق الصخر الزيتي المطحون في مراجل ذات طبقة مميعة دوّارة؛ محطة العطارات (الأردن، 470 ميغاواط) هي الوحيدة من نوعها في الوطن العربي وأول من يستغل احتياطيات الأردن الضخمة من الصخر الزيتي.",
+    "components": ["mine", "crushers", "CFB boilers", "steam turbines", "air-cooled condensers"],
+    "componentsAr": ["منجم", "كسارات", "مراجل طبقة مميعة", "توربينات بخارية", "مكثفات هوائية"]
+  }
+}

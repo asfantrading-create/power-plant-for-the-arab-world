@@ -1,0 +1,17 @@
+﻿Arab Power Twin — End User License Agreement / اتفاقية ترخيص المستخدم النهائي
+
+العربية:
+هذا البرنامج ("التوأم الرقمي لمحطات الطاقة في الوطن العربي") مرخّص وليس مباعاً. باستخدامك للبرنامج فإنك توافق على ما يلي:
+1) يُمنح للجهة المرخَّص لها (جامعة، شركة، معهد أو فرد) حق استخدام البرنامج لأغراض تعليمية وتدريبية وفق مفتاح الترخيص الممنوح لها (مدى الحياة أو حتى تاريخ الانتهاء المحدد في المفتاح).
+2) لا يجوز نسخ مفتاح الترخيص أو مشاركته أو إعادة بيعه أو محاولة تجاوز آلية الترخيص أو الهندسة العكسية للبرنامج.
+3) بيانات محطات الطاقة مجمّعة من مصادر عامة (منها قاعدة بيانات WRI العالمية لمحطات الطاقة بترخيص CC BY 4.0) وهي لأغراض تعليمية فقط، وقد تختلف عن الواقع التشغيلي الحالي. المحاكاة نماذج مبسّطة ولا تصلح للتشغيل الفعلي.
+4) يقدَّم البرنامج "كما هو" دون أي ضمان صريح أو ضمني، ولا يتحمل المطوّر أي مسؤولية عن أضرار ناتجة عن استخدامه.
+5) قد يتصل البرنامج بالإنترنت للتحقق من توفر تحديثات جديدة فقط، ولا يرسل بيانات المستخدمين أو نتائج الاختبارات إلى أي جهة خارجية.
+
+English:
+This software ("Arab Power Twin") is licensed, not sold. By installing or using it you agree that:
+1) The licensee (a university, company, institute or individual) may use the software for educational and training purposes according to the license key issued to it (lifetime or until the expiry date embedded in the key).
+2) License keys may not be copied, shared or resold; circumventing the licensing mechanism or reverse engineering the software is prohibited.
+3) Power-plant data is compiled from public sources (including the WRI Global Power Plant Database, CC BY 4.0) for educational purposes only and may differ from current operating reality. The simulations are simplified models and must not be used for real plant operation.
+4) The software is provided "as is" without warranty of any kind; the developer is not liable for damages arising from its use.
+5) The software only connects to the internet to check for updates; no user data or exam results are transmitted to any third party.

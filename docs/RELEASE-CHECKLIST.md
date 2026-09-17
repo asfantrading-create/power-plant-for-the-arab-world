@@ -1,0 +1,79 @@
+# قائمة الإصدار خطوة بخطوة (من جهاز البائع) / Vendor release checklist
+
+> الرابط الثابت للعميل يعمل فقط بعد نشر أول إصدار **في مستودع عام**. ما دام لا يوجد إصدار منشور يظهر 404.
+
+## المرة الأولى فقط
+
+### 1) تجهيز الجهاز
+- ثبّت **Git** من https://git-scm.com/download/win و**Node.js 22 LTS** من https://nodejs.org (اختر النسخة LTS).
+- افتح PowerShell ونفّذ:
+```powershell
+git clone https://github.com/asfantrading-create/power-plant-for-the-arab-world.git
+cd power-plant-for-the-arab-world
+git checkout claude/magical-noether-t9t7zw     # أو main بعد الدمج
+npm install
+```
+
+### 2) توليد مفاتيح الترخيص (إلزامي – بدونها يرفض سير الإصدار البناء)
+```powershell
+npm run license -- keygen
+```
+- يُنشئ المفتاح الخاص في `tools\license-cli\keys\vendor-private.pem` (**لا يُرفع إلى GitHub أبداً؛ خذ نسخة احتياطية على قرص خارجي**).
+- يضمّن المفتاح العام في `src\main\services\license-keys.js`. ارفعه:
+```powershell
+git add src/main/services/license-keys.js
+git commit -m "Add production license public key"
+git push
+```
+
+### 3) اختيار مكان نشر الإصدارات (لأن المستودع الحالي خاص)
+**الخيار أ – الأبسط:** اجعل المستودع عاماً: Settings → Danger Zone → Change visibility → Public. (الكود سيكون مرئياً للجميع.)
+
+**الخيار ب – الموصى به تجارياً:** أبقِ الكود خاصاً وأنشئ مستودعاً عاماً للإصدارات فقط:
+1. على GitHub: New repository → الاسم مثلاً `arab-power-twin-releases` → **Public** → فعّل «Add a README file» (يجب أن يحتوي التزاماً واحداً على الأقل) → Create.
+2. أنشئ رمز وصول: Settings (حسابك) → Developer settings → Personal access tokens → Fine-grained tokens → Generate: Repository access = المستودع `arab-power-twin-releases` فقط، Permissions → Contents: **Read and write**. انسخ الرمز.
+3. في مستودع الكود: Settings → Secrets and variables → Actions:
+   - Secrets → New repository secret: الاسم `GH_RELEASE_TOKEN`، القيمة = الرمز.
+   - Variables → New repository variable: الاسم `RELEASE_REPO`، القيمة `arab-power-twin-releases`.
+4. يصبح رابط التحميل الثابت:
+   `https://github.com/asfantrading-create/arab-power-twin-releases/releases/latest/download/ArabPowerTwin-Setup.exe`
+
+### 4) دمج فرع العمل في main (مرة واحدة)
+على GitHub: Pull requests → New pull request → base: `main`، compare: `claude/magical-noether-t9t7zw` → Create → Merge. ثم محلياً: `git checkout main && git pull`.
+
+## عند كل إصدار (الأول والتالية)
+```powershell
+git checkout main
+git pull
+# ارفع رقم الإصدار في package.json (مثلاً 1.0.0 ثم 1.0.1 ...)
+npm version 1.0.0 --no-git-tag-version
+git commit -am "Release 1.0.0"
+git push
+git tag v1.0.0
+git push origin v1.0.0
+```
+- افتح تبويب **Actions** في المستودع وانتظر اكتمال «Release Windows installer» (10–15 دقيقة).
+- بعد الاكتمال تجد في صفحة Releases (في المستودع العام): `ArabPowerTwin-Setup.exe` و`latest.yml` و`.blockmap`. الآن يعمل الرابط الثابت.
+- كل نسخة مثبّتة عند العملاء ستكتشف الإصدار الجديد تلقائياً وتعرض «يتوفر تحديث جديد».
+
+## تسليم النظام لعميل
+1. أرسل له رابط التحميل الثابت.
+2. أصدر له ترخيصاً من جهازك:
+```powershell
+# مدى الحياة
+npm run license -- issue --name "د. أحمد" --org "جامعة X" --email a@x.edu --seats 40 --out "جامعة-X.lic"
+# محدد المدة (ينتهي في التاريخ المحدد)
+npm run license -- issue --org "شركة Y" --type term --expires 2027-09-30 --seats 10 --out "Y.lic"
+# مرتبط بجهاز واحد: اطلب من العميل «معرّف الجهاز» الظاهر في شاشة التفعيل (APT-XXXX-...) ثم:
+npm run license -- issue --org "معهد Z" --machine APT-1A2B-3C4D-5E6F-7A8B --out "Z.lic"
+```
+3. أرسل ملف `.lic` (أو النص الذي يبدأ بـ `APT1.`) للعميل. عند أول تشغيل: يلصق المفتاح → ينشئ حساب المشرف العام (المدرّس/المسؤول) → يضيف الطلاب من «الإدارة ← المستخدمون» (يدوياً أو CSV).
+4. لمعمل جامعة بعدة أجهزة: ثبّت البرنامج على كل جهاز وفعّله بنفس المفتاح، وفي «الإعدادات ← مجلد البيانات المشترك» اختر مجلداً على الشبكة نفسه على جميع الأجهزة.
+5. للتجديد: أصدر مفتاحاً جديداً ويدخله العميل من «الإدارة ← الترخيص».
+
+## اختبار المثبّت على جهازك قبل البيع
+بعد الخطوة 2 يمكنك بناء المثبّت محلياً على ويندوز دون نشر:
+```powershell
+npm run dist:win
+```
+المثبّت في `release\ArabPowerTwin-Setup.exe`. أصدر لنفسك ترخيصاً تجريبياً بالأمر `issue` وفعّل البرنامج به.
