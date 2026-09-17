@@ -53,6 +53,7 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 - افتح تبويب **Actions** في المستودع وانتظر اكتمال «Release Windows installer» (10–15 دقيقة).
+- بديل بدون أوامر: بعد الدمج في main افتح Actions ← «Release Windows installer» ← **Run workflow** ← Branch: main ← Run؛ يُنشر الإصدار برقم النسخة الموجود في `package.json`.
 - بعد الاكتمال تجد في صفحة Releases (في المستودع العام): `ArabPowerTwin-Setup.exe` و`latest.yml` و`.blockmap`. الآن يعمل الرابط الثابت.
 - كل نسخة مثبّتة عند العملاء ستكتشف الإصدار الجديد تلقائياً وتعرض «يتوفر تحديث جديد».
 
