@@ -186,6 +186,45 @@ for (const p of plants) {
 }
 plants.sort((a, b) => a.country.localeCompare(b.country) || b.capacityMw - a.capacityMw);
 
+// ---- Site geography for the 3D twin: is the plant on a coast, and in which direction is the sea? ----
+// Samples points around each plant (16 bearings at 4 / 8 / 12 km); a sample outside every land polygon of the
+// regional map (Arab countries and all their neighbours) is open sea.
+{
+  const map = JSON.parse(fs.readFileSync(path.join(OUT, 'arab-map.json'), 'utf8'));
+  const rings = [];
+  for (const ft of map.features) {
+    const polys = ft.geometry.type === 'Polygon' ? [ft.geometry.coordinates] : ft.geometry.coordinates;
+    for (const poly of polys) { const ring = poly[0]; let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity; for (const [x, y] of ring) { if (x < minX) minX = x; if (x > maxX) maxX = x; if (y < minY) minY = y; if (y > maxY) maxY = y; } rings.push({ ring, minX, minY, maxX, maxY }); }
+  }
+  const onLand = (lon, lat) => {
+    for (const r of rings) {
+      if (lon < r.minX || lon > r.maxX || lat < r.minY || lat > r.maxY) continue;
+      let inside = false; const ring = r.ring;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const [xi, yi] = ring[i], [xj, yj] = ring[j];
+        if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) inside = !inside;
+      }
+      if (inside) return true;
+    }
+    return false;
+  };
+  for (const p of plants) {
+    p.coastal = false; p.seaBearing = null; p.seaKm = null;
+    if (typeof p.lat !== 'number' || typeof p.lon !== 'number') continue;
+    const cosLat = Math.cos(p.lat * Math.PI / 180);
+    for (const km of [4, 8, 12]) {
+      let sx = 0, sy = 0, hits = 0;
+      for (let k = 0; k < 16; k++) {
+        const b = k * Math.PI / 8;
+        const lat = p.lat + (km / 111.32) * Math.cos(b), lon = p.lon + (km / (111.32 * cosLat)) * Math.sin(b);
+        if (!onLand(lon, lat)) { hits++; sx += Math.sin(b); sy += Math.cos(b); }
+      }
+      if (hits) { p.coastal = true; p.seaKm = km; p.seaBearing = Math.round(((Math.atan2(sx, sy) * 180 / Math.PI) + 360) % 360); break; }
+    }
+  }
+  console.log('coastal plants:', plants.filter(p => p.coastal).length, '/', plants.length);
+}
+
 // Country stats
 const countriesOut = countries.map(c => {
   const list = plants.filter(p => p.country === c.iso3);

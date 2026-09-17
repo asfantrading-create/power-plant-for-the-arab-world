@@ -16,7 +16,7 @@ function buildMainContext(workspace) {
   const store = new Store(workspace); const auth = new Auth(store); const exams = new Exams(store, bank, dataset);
   let licenseKey = null;
   const settings = { data: { language: 'ar', theme: 'dark', institutionName: 'Test University', workspaceDir: null, updateFeedUrl: null, autoCheckUpdates: true }, get(k) { return this.data[k]; }, set(k, v) { this.data[k] = v; return this.data; }, all() { return { ...this.data }; } };
-  const updater = { state: { status: 'disabled-dev', currentVersion: '1.0.0' }, check() { return this.state; }, download() { return this.state; }, install() { return this.state; } };
+  const updater = { state: { status: 'disabled-dev', currentVersion: '1.0.0' }, downloads: 0, installs: 0, check() { return this.state; }, download() { this.downloads++; return this.state; }, install() { this.installs++; return this.state; } };
   const licenseStatus = () => { if (!licenseKey) return { valid: false, reason: 'missing', license: null, daysLeft: null, features: null, machineId: 'APT-TEST', source: null, devKeysAccepted: true, productionKeyConfigured: true }; const r = license.verify(licenseKey, { publicKeyPems: [keys.publicKeyPem] }); return { ...r, features: r.valid ? license.featuresOf(r.license) : null, machineId: 'APT-TEST', source: 'memory', devKeysAccepted: true, productionKeyConfigured: true }; };
   exams.featuresProvider = () => { const s = licenseStatus(); return s.valid ? s.features : null; };
   const ctx = {
@@ -33,7 +33,7 @@ function buildMainContext(workspace) {
   try { delete require.cache[require.resolve('../src/main/ipc/index.js')]; delete require.cache[require.resolve('../src/main/services/exporter.js')]; require('../src/main/ipc/index.js').register(ctx); } finally { Module._load = orig; }
   const validKey = license.issue({ licensee: { name: 'Smoke Tester', org: 'Test University' }, type: 'lifetime', seats: 10 }, keys.privateKeyPem);
   const issue = input => license.issue(input, keys.privateKeyPem);
-  return { handlers, validKey, auth, store, exams, issue };
+  return { handlers, updater, validKey, auth, store, exams, issue };
 }
 
 

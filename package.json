@@ -1,7 +1,7 @@
 {
   "name": "arab-power-twin",
   "productName": "Arab Power Twin",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Educational digital-twin simulator of real power plants across the Arab world (التوأم الرقمي لمحطات الطاقة في الوطن العربي)",
   "main": "src/main/main.js",
   "author": {

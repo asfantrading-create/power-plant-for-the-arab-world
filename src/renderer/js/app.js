@@ -58,6 +58,7 @@ const NAV = [
 const root = document.getElementById('app');
 let currentCleanup = null;
 let shellEls = null;
+let bannerEl = null; // update banner: inside the shell, or floating on the activation/setup/login screens
 
 export function navigate(path) { location.hash = '#' + path; }
 export function parseHash() {
@@ -122,10 +123,10 @@ function langSwitch() {
 
 async function start() {
   if (currentCleanup) { try { currentCleanup(); } catch { /* ignore */ } currentCleanup = null; }
-  shellEls = null;
+  shellEls = null; bannerEl = null;
   clear(root);
   const lic = state.license;
-  const fullscreen = (content) => root.append(h('div', { class: 'fullscreen' }, h('div', { class: 'lang-switch' }, langSwitch()), content));
+  const fullscreen = (content) => { bannerEl = h('div', { class: 'update-banner floating hidden' }); root.append(h('div', { class: 'fullscreen' }, bannerEl, h('div', { class: 'lang-switch' }, langSwitch()), content)); renderUpdateBanner(); };
   if (!lic || !lic.valid) { fullscreen(pages.activation.render({ onActivated: async () => { await reloadBoot(); start(); } })); return; }
   if (state.boot.needsSetup) { fullscreen(pages.setup.render({ onDone: async () => { await reloadBoot(); start(); } })); return; }
   if (!state.user) { fullscreen(pages.login.render({ onLogin: async () => { await reloadBoot(); start(); } })); return; }
@@ -161,12 +162,13 @@ function renderShell() {
   const shell = h('div', { class: 'shell' }, sidebar, topbar, main);
   root.append(shell);
   shellEls = { nav, title: topbar.querySelector('.title'), content, banner };
+  bannerEl = banner;
   renderUpdateBanner();
 }
 
 export function renderUpdateBanner() {
-  if (!shellEls) return;
-  const u = state.updater; const b = shellEls.banner;
+  const b = bannerEl; if (!b || !b.isConnected) return;
+  const u = state.updater;
   clear(b);
   if (!u || !['available', 'downloading', 'downloaded'].includes(u.status) || b.dataset.dismissed === u.version + u.status) { b.classList.add('hidden'); return; }
   b.classList.remove('hidden');
@@ -210,7 +212,7 @@ async function boot() {
     onEvent('updater:event', s => {
       const prev = state.updater; setState({ updater: s });
       renderUpdateBanner();
-      if (s.status === 'available' && (!prev || prev.status !== 'available')) toast(t('updates.available', { v: s.version }), 'info', 6000);
+      if (s.status === 'available' && (!prev || prev.status !== 'available')) { const el = toast(`${t('updates.available', { v: s.version })} – ${t('updates.download')}`, 'info', 8000); el.style.cursor = 'pointer'; el.addEventListener('click', () => api('updater:download')); }
       if (s.status === 'downloaded') toast(t('updates.downloaded', { v: s.version }), 'success', 6000);
     });
     onEvent('workspace:changed', async () => { await reloadBoot(); setState({ user: null }); toast(t('admin.settings.workspaceChanged'), 'warning'); start(); });
