@@ -17,7 +17,7 @@ const ipc = require('./ipc');
 log.transports.file.level = 'info';
 log.info(`Arab Power Twin ${app.getVersion()} starting (${process.platform} ${process.arch}, packaged=${app.isPackaged})`);
 
-if (!app.requestSingleInstanceLock()) { app.quit(); }
+if (!app.requestSingleInstanceLock()) { app.quit(); process.exit(0); }
 app.setAppUserModelId('com.asfantrading.arabpowertwin');
 
 const APP_ROOT = app.getAppPath();
@@ -114,7 +114,7 @@ function createWindow() {
   win.on('close', () => { try { const b = win.getNormalBounds(); settings.set('windowBounds', { ...b, maximized: win.isMaximized() }); } catch { /* ignore */ } });
   win.on('closed', () => { win = null; });
   win.webContents.setWindowOpenHandler(({ url }) => { if (/^https?:\/\//i.test(url)) shell.openExternal(url); return { action: 'deny' }; });
-  win.webContents.on('will-navigate', e => e.preventDefault());
+  win.webContents.on('will-navigate', (e, url) => { if (url !== win.webContents.getURL()) e.preventDefault(); }); // allow reload only
   win.loadFile(path.join(APP_ROOT, 'src', 'renderer', 'index.html'));
 }
 
@@ -134,7 +134,7 @@ function buildMenu() {
 
 app.on('second-instance', () => { if (win) { if (win.isMinimized()) win.restore(); win.focus(); } });
 app.whenReady().then(() => {
-  session.defaultSession.setPermissionRequestHandler((_wc, _permission, callback) => callback(false));
+  session.defaultSession.setPermissionRequestHandler((_wc, permission, callback) => callback(['clipboard-sanitized-write', 'clipboard-read', 'fullscreen'].includes(permission)));
   ipc.register({
     log, settings, getWindow: () => win, store: () => store, auth: () => auth, exams: () => exams,
     dataset, map, bank, updater, bootstrap, licenseStatus, activateLicense, removeLicense, setWorkspaceDir,

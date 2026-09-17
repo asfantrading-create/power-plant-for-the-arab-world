@@ -8,7 +8,7 @@ export function h(tag, attrs, ...children) {
     if (k === 'class') el.className = v;
     else if (k === 'html') el.innerHTML = v;
     else if (k === 'text') el.textContent = v;
-    else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
+    else if (k === 'style' && typeof v === 'object') for (const [sk, sv] of Object.entries(v)) { if (sk.startsWith('--')) el.style.setProperty(sk, String(sv)); else el.style[sk] = sv; }
     else if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2).toLowerCase(), v);
     else if (k === 'dataset') Object.assign(el.dataset, v);
     else if (k in el && typeof v !== 'string' && k !== 'value') el[k] = v;
@@ -201,6 +201,10 @@ export function tabs(items, initial, onChange) {
   return h('div', null, bar, panel);
 }
 
-export function copyText(text) { return navigator.clipboard.writeText(text).then(() => toast(t('common.copied'), 'success', 1500)); }
+export function copyText(text) {
+  const fallback = () => { try { const ta = h('textarea', { style: { position: 'fixed', opacity: '0' } }, text); document.body.append(ta); ta.select(); document.execCommand('copy'); ta.remove(); toast(t('common.copied'), 'success', 1500); } catch { toast(text, 'info', 6000); } };
+  if (!navigator.clipboard) { fallback(); return Promise.resolve(); }
+  return navigator.clipboard.writeText(text).then(() => toast(t('common.copied'), 'success', 1500)).catch(fallback);
+}
 export function debounce(fn, ms = 250) { let tm; return (...a) => { clearTimeout(tm); tm = setTimeout(() => fn(...a), ms); }; }
 export function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]); }

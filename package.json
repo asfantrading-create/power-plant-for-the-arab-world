@@ -28,7 +28,9 @@
     "lint": "node scripts/check-syntax.mjs",
     "check:release": "node scripts/check-release.mjs",
     "pack": "npm run build:renderer && electron-builder --dir",
+    "predist:win": "node scripts/check-release.mjs",
     "dist:win": "npm run build:renderer && electron-builder --win --x64 --publish never",
+    "prerelease:win": "node scripts/check-release.mjs",
     "release:win": "npm run build:renderer && electron-builder --win --x64 --publish always",
     "license": "node tools/license-cli/index.mjs",
     "postinstall": "electron-builder install-app-deps"

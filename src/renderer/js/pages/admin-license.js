@@ -3,7 +3,7 @@ import { api } from '../api.js';
 import { state, setState } from '../state.js';
 import { h, icon, toast, confirmDialog, field, badge, copyText } from '../ui.js';
 import { licenseSummary } from './activation.js';
-import { reloadBoot } from '../app.js';
+import { reloadBoot, rerender } from '../app.js';
 
 export async function render(container, params, ctx) {
   ctx.setTitle(t('nav.license'));
@@ -16,7 +16,7 @@ export async function render(container, params, ctx) {
       h('div', { class: 'card' }, h('h3', null, t('license.licensee')), lic.license ? licenseSummary(lic) : h('div', { class: 'muted' }, t('license.reason.missing')), lic.reason && !lic.valid ? h('div', { class: 'alert error mt' }, t('license.reason.' + lic.reason)) : null, lic.daysLeft !== null && lic.daysLeft !== undefined ? h('div', { class: `alert ${lic.daysLeft <= 30 ? 'warn' : 'info'} mt` }, `${t('license.daysLeft')}: ${lic.daysLeft}`) : null,
         h('dl', { class: 'kv mt' }, h('dt', null, t('activation.machineId')), h('dd', null, h('span', { class: 'mono' }, lic.machineId), ' ', h('button', { class: 'btn sm ghost', onClick: () => copyText(lic.machineId) }, t('common.copy'))), h('dt', null, t('common.source')), h('dd', { class: 'mono small' }, lic.source || '—'))),
       h('div', { class: 'card' }, h('h3', null, t('license.replace')), field(t('activation.key'), ta), msg,
-        h('div', { class: 'flex wrap' }, h('button', { class: 'btn primary', onClick: async () => { try { const r = await api('license:activate', { key: ta.value }); if (r.valid) { toast(t('activation.success'), 'success'); await reloadBoot(); location.reload(); } else msg.replaceChildren(h('div', { class: 'alert error' }, t('license.reason.' + r.reason))); } catch (err) { msg.replaceChildren(h('div', { class: 'alert error' }, errorMessage(err.code))); } } }, icon('key'), t('activation.activate')),
+        h('div', { class: 'flex wrap' }, h('button', { class: 'btn primary', onClick: async () => { try { const r = await api('license:activate', { key: ta.value }); if (r.valid) { toast(t('activation.success'), 'success'); await reloadBoot(); rerender(); } else msg.replaceChildren(h('div', { class: 'alert error' }, t('license.reason.' + r.reason))); } catch (err) { msg.replaceChildren(h('div', { class: 'alert error' }, errorMessage(err.code))); } } }, icon('key'), t('activation.activate')),
           h('button', { class: 'btn', onClick: async () => { const f = await api('app:openFileText', { filters: [{ name: 'License', extensions: ['lic', 'txt', 'key'] }] }); if (f) ta.value = f.text.trim(); } }, icon('file'), t('activation.loadFile')),
-          lic.valid ? h('button', { class: 'btn danger', onClick: async () => { if (!(await confirmDialog(t('license.remove') + '?', { danger: true }))) return; await api('license:remove'); await reloadBoot(); location.reload(); } }, icon('x'), t('license.remove')) : null))));
+          lic.valid ? h('button', { class: 'btn danger', onClick: async () => { if (!(await confirmDialog(t('license.remove') + '?', { danger: true }))) return; await api('license:remove'); await reloadBoot(); rerender(); } }, icon('x'), t('license.remove')) : null))));
 }

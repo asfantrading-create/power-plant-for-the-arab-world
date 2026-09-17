@@ -64,7 +64,8 @@ function register(ctx) {
   // ---- license & setup ----
   handle('license:status', null, () => ctx.licenseStatus());
   handle('license:activate', null, ({ key }) => {
-    if (ctx.auth().hasSuperAdmin()) ctx.auth().require('superadmin');
+    // Replacing a VALID license needs a super admin; an invalid/expired license must be replaceable before login.
+    if (ctx.licenseStatus().valid && ctx.auth().hasSuperAdmin()) ctx.auth().require('superadmin');
     const res = ctx.activateLicense(key);
     if (res.valid) audit('license.activate', ctx.auth().current(), { id: res.license.id, licensee: res.license.licensee });
     return res;
@@ -98,7 +99,7 @@ function register(ctx) {
   handle('users:update', 'instructor', ({ id, patch }, user) => {
     const target = ctx.store().get('users', id);
     if (!target) throw new Error('not_found');
-    if (user.role !== 'superadmin' && (target.role !== 'student' || patch.role)) throw new Error('forbidden');
+    if (user.role !== 'superadmin' && (target.role !== 'student' || (patch.role && patch.role !== target.role))) throw new Error('forbidden');
     const u = ctx.auth().updateUser(id, patch);
     audit('users.update', user, { id, patch });
     return u;
@@ -137,7 +138,7 @@ function register(ctx) {
   // ---- data ----
   handle('data:dataset', null, () => ctx.dataset);
   handle('data:map', null, () => ctx.map);
-  handle('data:questionBankInfo', 'instructor', () => ({ topics: ctx.bank.topics, counts: ctx.bank.questions.reduce((a, q) => { a[q.topic] = (a[q.topic] || 0) + 1; return a; }, {}), total: ctx.bank.questions.length }));
+  handle('data:questionBankInfo', 'student', () => ({ topics: ctx.bank.topics, counts: ctx.bank.questions.reduce((a, q) => { a[q.topic] = (a[q.topic] || 0) + 1; return a; }, {}), total: ctx.bank.questions.length }));
 
   // ---- exams & attempts ----
   handle('exams:list', 'student', (_p, user) => ctx.exams().listForUser(user).map(e => ({ ...e, attemptsUsed: ctx.exams().attemptsOf(user.id, e.id).filter(a => a.submittedAt).length })));

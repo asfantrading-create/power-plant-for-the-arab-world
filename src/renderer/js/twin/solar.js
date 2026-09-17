@@ -22,7 +22,8 @@ export function sunPosition(date, lat, lon) {
   let ha = trueSolarTime / 4 - 180; if (ha < -180) ha += 360;
   const cosZen = Math.sin(lat * D2R) * Math.sin(decl * D2R) + Math.cos(lat * D2R) * Math.cos(decl * D2R) * Math.cos(ha * D2R);
   const zenith = Math.acos(Math.max(-1, Math.min(1, cosZen))) * R2D;
-  let az = Math.acos(Math.max(-1, Math.min(1, ((Math.sin(lat * D2R) * cosZen) - Math.sin(decl * D2R)) / (Math.cos(lat * D2R) * Math.sin(zenith * D2R))))) * R2D;
+  const denom = Math.cos(lat * D2R) * Math.sin(zenith * D2R);
+  let az = Math.abs(denom) < 1e-9 ? 180 : Math.acos(Math.max(-1, Math.min(1, ((Math.sin(lat * D2R) * cosZen) - Math.sin(decl * D2R)) / denom))) * R2D;
   az = ha > 0 ? (az + 180) % 360 : (540 - az) % 360;
   return { elevation: 90 - zenith, azimuth: az, declination: decl, zenith };
 }

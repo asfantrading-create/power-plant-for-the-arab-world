@@ -14,6 +14,7 @@ export async function render(container, params, ctx) {
   async function load() {
     [users, groups] = await Promise.all([api('users:list'), api('groups:list')]);
     groupSel.replaceChildren(h('option', { value: '' }, t('common.all') + ' – ' + t('admin.users.group')), ...groups.map(g => h('option', { value: g.id }, g.name)));
+    if (params.group && groups.some(g => g.id === params.group)) { groupSel.value = params.group; params.group = null; }
     draw();
   }
   const gname = id => (groups.find(g => g.id === id) || {}).name || '—';

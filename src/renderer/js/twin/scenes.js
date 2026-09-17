@@ -69,7 +69,7 @@ function buildCombinedCycle(spec) {
     b.add(box(30, 14, 22, MAT.blue, 0, 0, -32)); // steam turbine hall
     b.add(box(8, 5, 6, MAT.orange, -22, 0, -32), box(8, 5, 6, MAT.orange, 22, 0, -32)); // transformers
     const plume = makePlume(0xe6e6e6); plume.position.set(0, 48, -8); b.add(plume); plumes.push(plume);
-    b.add(Object.assign(makeLabel(spec.unitLabel(i)), { position: new THREE.Vector3(0, 60, -8) }));
+    const lb = makeLabel(spec.unitLabel(i)); lb.position.set(0, 60, -8); b.add(lb);
     g.add(b);
   }
   g.add(box(blocks * pitch + 40, 1, 20, MAT.water, 0, -.4, -60)); // cooling water channel / sea
@@ -97,7 +97,7 @@ function buildSteam(spec, coal = false) {
     g.add(box(40, 16, 26, MAT.blue, x, 0, -30)); // turbine hall
     g.add(box(10, 6, 8, MAT.orange, x, 0, -52)); // GSU transformer
     if (i % 2 === 0) { const s = cyl(3, 4, 120, MAT.white, x + pitch / 2 - (n === 1 ? pitch / 2 : 0), 0, 34); g.add(s); const p = makePlume(coal ? 0xbdbdbd : 0xdcdcdc, 50); p.position.set(s.position.x, 120, 34); g.add(p); plumes.push({ p, idx: i }); }
-    g.add(Object.assign(makeLabel(spec.unitLabel(i)), { position: new THREE.Vector3(x, 54, 10) }));
+    const lb = makeLabel(spec.unitLabel(i)); lb.position.set(x, 54, 10); g.add(lb);
   }
   if (coal) {
     for (let i = 0; i < 4; i++) g.add(cyl(0, 14, 12, MAT.coal, -90 + i * 34, 0, 70, 12));
@@ -116,7 +116,7 @@ function buildNuclear(spec) {
     g.add(box(30, 20, 40, MAT.white, x + 30, 0, 22)); // auxiliary building
     g.add(box(70, 22, 34, MAT.blue, x, 0, -40)); // turbine hall
     g.add(box(12, 7, 9, MAT.orange, x - 20, 0, -70), box(12, 7, 9, MAT.orange, x + 20, 0, -70));
-    g.add(Object.assign(makeLabel(spec.unitLabel(i)), { position: new THREE.Vector3(x, 80, 20) }));
+    const lb = makeLabel(spec.unitLabel(i)); lb.position.set(x, 80, 20); g.add(lb);
   }
   g.add(box(n * pitch + 80, 1, 60, MAT.water, 0, -.4, -120));
   g.add(box(n * pitch + 40, 5, 12, MAT.dark, 0, 0, -84)); // intake structure
@@ -228,7 +228,7 @@ function buildHydro(spec, hero) {
   for (let i = 0; i < n; i++) { const p = cyl(3.5, 3.5, 60, MAT.steel, (i - (n - 1) / 2) * 26, 0, 0, 12); p.rotation.x = Math.PI / 2 - .55; p.position.set((i - (n - 1) / 2) * 26, 28, 12); g.add(p); }
   const spill = new THREE.Mesh(new THREE.BoxGeometry(60, 2, 80), new THREE.MeshStandardMaterial({ color: 0xbfe4ff, transparent: true, opacity: .8 })); spill.position.set(damW / 2 - 40, 20, 40); spill.rotation.x = .35; g.add(spill);
   for (let i = 0; i < 4; i++) g.add(cyl(.5, .8, 34, MAT.steel, -damW / 2 + 30 + i * 40, 0, 90, 6));
-  g.add(Object.assign(makeLabel(spec.label), { position: new THREE.Vector3(0, damH + 30, 0) }));
+  const lb = makeLabel(spec.label); lb.position.set(0, damH + 30, 0); g.add(lb);
   return { group: g, cameraDistance: damW * 1.1 + 120, update: (st) => { water.position.y = damH * (.55 + .32 * st.reservoirLevel); spill.visible = st.reservoirLevel > .98; } };
 }
 function buildDiesel(spec) {

@@ -8,7 +8,7 @@ import { navigate } from '../app.js';
 export async function render(container, params, ctx) {
   const a = await api('attempts:get', { id: params.id });
   if (a.inProgress) { navigate(`/exam/${a.id}`); return; }
-  if (!state.cache.topics) { try { const info = await api('data:questionBankInfo'); state.cache.topics = info.topics; } catch { state.cache.topics = {}; } }
+  if (!state.cache.topics) { try { const info = await api('data:questionBankInfo'); state.cache.topics = info.topics; } catch { state.cache.topics = null; } }
   const title = isAr() && a.examTitleAr ? a.examTitleAr : (a.examTitle || a.examTitleAr);
   ctx.setTitle(`${t('exams.result')}: ${title}`);
   const exportBtn = async (kind) => {
