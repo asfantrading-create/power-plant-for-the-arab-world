@@ -58,7 +58,12 @@ function makeWindow(handlers) {
   };
   // Chart.js: no-op 2D context; three.js pages are not visited.
   const noop = new Proxy({}, { get: (_, p) => (p === 'measureText' ? () => ({ width: 10 }) : p === 'getImageData' ? () => ({ data: [] }) : p === 'createLinearGradient' ? () => ({ addColorStop() {} }) : typeof p === 'string' ? () => noop : undefined), set: () => true });
-  window.HTMLCanvasElement.prototype.getContext = function (type) { return type === '2d' ? noop : null; }; // no WebGL in jsdom
+  // Chart.js requires context.canvas === canvas; three.js gets null (no WebGL in jsdom) and the twin page degrades gracefully.
+  window.HTMLCanvasElement.prototype.getContext = function (type) {
+    if (type !== '2d') return null;
+    const canvas = this;
+    return new Proxy({}, { get: (_, p) => (p === 'canvas' ? canvas : p === 'measureText' ? () => ({ width: 10 }) : p === 'getImageData' ? () => ({ data: [] }) : p === 'createLinearGradient' ? () => ({ addColorStop() {} }) : typeof p === 'string' ? () => noop : undefined), set: () => true });
+  };
   window.ResizeObserver = class { observe() {} disconnect() {} unobserve() {} };
   window.scrollTo = () => {};
   window.matchMedia = window.matchMedia || (() => ({ matches: false, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} }));

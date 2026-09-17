@@ -38,7 +38,7 @@ export async function render(container, params, ctx) {
     h('div', null, h('b', null, L(p, 'name')), ' ', h('span', { class: 'muted small' }, `${c.flag} ${L(c, 'name')} · ${L(tk, 'name')} · ${fmt.mw(p.capacityMw)}`)),
     p.hero ? badge(t('twin.heroModel'), 'primary') : badge(t('twin.generic')),
     h('div', { class: 'grow' }), runBtn,
-    h('button', { class: 'btn', onClick: () => { sim.kpi = { energyMwh: 0, co2Tonnes: 0, fuelTonnes: 0, trips: 0, unavailableSec: 0, elapsedSec: 0 }; sim.history.length = 0; sim.state.events.length = 0; sim.state.alarms.length = 0; charts.forEach(ch => { ch.data.labels.length = 0; ch.data.datasets.forEach(d => { d.data.length = 0; }); ch.update('none'); }); } }, icon('reset'), t('twin.reset')),
+    h('button', { class: 'btn', onClick: () => { sim.kpi = { energyMwh: 0, co2Tonnes: 0, fuelTonnes: 0, trips: 0, unavailableSec: 0, elapsedSec: 0 }; sim.history.length = 0; sim.state.events.length = 0; sim.state.alarms.length = 0; charts.forEach(ch => { if (!ch || !ch.data) return; ch.data.labels.length = 0; ch.data.datasets.forEach(d => { d.data.length = 0; }); ch.update('none'); }); } }, icon('reset'), t('twin.reset')),
     h('span', { class: 'muted small' }, t('twin.speed')), speedSel, h('span', { class: 'muted small' }, t('twin.simTime')), simClock);
 
   // ---- side panel: gauges / controls / units / kpis / alarms ----
@@ -136,6 +136,7 @@ export async function render(container, params, ctx) {
     hud.append(h('span', { class: 'pill' }, `${fmt.mw(s.outputMw, 1)}`), h('span', { class: 'pill' }, `${s.frequencyHz.toFixed(2)} Hz`), h('span', { class: 'pill' }, `${t('twin.hourOfDay')} ${timeLabel(sim.simTime)} · ☀ ${s.sun ? s.sun.elevation.toFixed(0) : 0}°`), h('span', { class: 'pill' }, `${sim.env.ambientC}°C`), h('span', { class: 'pill' }, `${sim.units.filter(u => u.state === 'on').length}/${sim.units.length} ${t('twin.units_running')}`));
   }
   function pushHistory() {
+    if (!charts.every(ch => ch && ch.data)) return; // canvas context unavailable (e.g. GPU disabled): skip trend charts
     const hist = sim.history; if (!hist.length || hist[hist.length - 1].t === lastHist) return;
     const newPts = hist.filter(x => x.t > lastHist); lastHist = hist[hist.length - 1].t;
     for (const pt of newPts) { charts[0].data.labels.push(timeLabel(pt.t)); charts[0].data.datasets[0].data.push(Math.round(pt.out * 10) / 10); charts[0].data.datasets[1].data.push(Math.round(pt.demand)); charts[1].data.labels.push(timeLabel(pt.t)); charts[1].data.datasets[0].data.push(Math.round(pt[cond.key] * 10) / 10); charts[1].data.datasets[1].data.push(Math.round(pt.freq * 100) / 100); }
