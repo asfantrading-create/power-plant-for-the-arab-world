@@ -12,6 +12,8 @@ const crypto = require('node:crypto');
 
 const PREFIX = 'APT1';
 const PRODUCT = 'arab-power-twin';
+/** Application modules a license can include. */
+const MODULES = ['twin', 'exams'];
 
 const b64u = {
   encode: buf => Buffer.from(buf).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
@@ -48,9 +50,9 @@ function issue(payloadInput, privateKeyPem) {
     },
     issuedAt: payloadInput.issuedAt || new Date().toISOString().slice(0, 10),
     expiresAt: payloadInput.type === 'term' ? payloadInput.expiresAt : null,
-    seats: Number(payloadInput.seats) > 0 ? Number(payloadInput.seats) : 1,
-    machineId: payloadInput.machineId || null,
-    features: Array.isArray(payloadInput.features) && payloadInput.features.length ? payloadInput.features : ['all'],
+    seats: Number.isFinite(Number(payloadInput.seats)) && Number(payloadInput.seats) >= 0 ? Math.floor(Number(payloadInput.seats)) : 0, // 0 = unlimited accounts
+    machineId: payloadInput.machineId ? String(payloadInput.machineId).trim().toUpperCase() : null,
+    features: normalizeFeatures(payloadInput.features),
     notes: String(payloadInput.notes || ''),
   };
   if (!payload.licensee.name && !payload.licensee.org) throw new Error('licensee name or organisation is required');
@@ -102,10 +104,19 @@ function verify(key, opts) {
   return result;
 }
 
+/** Normalises the features block of a license: { modules: [...], technologies: [...]|null }. Legacy ['all'] => everything. */
+function normalizeFeatures(f) {
+  const modules = f && !Array.isArray(f) && Array.isArray(f.modules) && f.modules.length ? f.modules.filter(m => MODULES.includes(m)) : MODULES.slice();
+  const technologies = f && !Array.isArray(f) && Array.isArray(f.technologies) && f.technologies.length ? f.technologies.map(String) : null;
+  return { modules: modules.length ? modules : MODULES.slice(), technologies };
+}
+/** Effective features of a (verified) license payload. */
+function featuresOf(license) { return normalizeFeatures(license ? license.features : null); }
+
 /** Human-readable machine id shown on the activation screen (stable per PC). */
 function formatMachineId(raw) {
   const h = crypto.createHash('sha256').update(String(raw)).digest('hex').toUpperCase();
   return `APT-${h.slice(0, 4)}-${h.slice(4, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}`;
 }
 
-module.exports = { PREFIX, PRODUCT, generateKeyPair, issue, parse, verify, canonical, formatMachineId };
+module.exports = { PREFIX, PRODUCT, MODULES, generateKeyPair, issue, parse, verify, canonical, formatMachineId, normalizeFeatures, featuresOf };

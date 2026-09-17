@@ -1,6 +1,6 @@
 import { t, L, isAr, extend } from '../i18n.js';
 import { api } from '../api.js';
-import { state, plantById, countryByIso, tech } from '../state.js';
+import { state, plantById, countryByIso, tech, hasModule, techAllowed } from '../state.js';
 import { h, clear, icon, fmt, badge, fuelBadge, toast, selectEl, empty } from '../ui.js';
 import { lineChart, destroyChart } from '../lib/charts.js';
 import { PlantSimulation } from '../twin/engine.js';
@@ -17,6 +17,11 @@ const SPEEDS = [1, 10, 60, 300, 1800];
 export async function render(container, params, ctx) {
   const p = plantById(params.id);
   if (!p) { container.append(empty(t('errors.not_found'))); return; }
+  if (!hasModule('twin') || !techAllowed(p.technology)) {
+    ctx.setTitle(t('twin.title'));
+    container.append(h('div', { style: { padding: '24px' } }, h('div', { class: 'alert warn' }, hasModule('twin') ? t('license.lockedTech') : t('license.lockedModule')), h('button', { class: 'btn', onClick: () => navigate(`/plant/${p.id}`) }, icon('arrow'), t('common.back'))));
+    return;
+  }
   const tk = tech(p.technology); const c = countryByIso(p.country);
   ctx.setTitle(`${t('twin.title')}: ${L(p, 'name')}`);
   const sim = new PlantSimulation(p, tk, p.technology, { seed: Date.now() % 100000, ambientC: 30 });

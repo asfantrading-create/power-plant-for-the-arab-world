@@ -38,6 +38,9 @@ function register(ctx) {
       }
     });
   };
+  const features = () => { const s = ctx.licenseStatus(); return s.valid && s.features ? s.features : { modules: [], technologies: null }; };
+  const requireModule = m => { if (!features().modules.includes(m)) throw new Error('module_locked'); };
+  const seatsLeft = () => { const s = ctx.licenseStatus(); const seats = s.valid && s.license ? Number(s.license.seats) || 0 : 0; if (!seats) return Infinity; return seats - ctx.auth().users().filter(u => u.active !== false).length; };
   const audit = (action, by, details) => { try { ctx.store().put('audit', { id: Store.newId('a-'), action, by: by ? by.username : null, at: new Date().toISOString(), details: details || null }); } catch { /* ignore */ } };
   const win = () => ctx.getWindow();
 
@@ -92,6 +95,7 @@ function register(ctx) {
   handle('users:create', 'instructor', (p, user) => {
     if (p.role !== 'student') ctx.auth().require('superadmin');
     if (!ROLES.includes(p.role)) throw new Error('invalid_role');
+    if (seatsLeft() <= 0) throw new Error('seats_exceeded');
     const u = ctx.auth().createUser({ ...p, createdBy: user.id, mustChangePassword: p.role === 'student' });
     audit('users.create', user, { username: u.username, role: u.role });
     return u;
@@ -100,6 +104,7 @@ function register(ctx) {
     const target = ctx.store().get('users', id);
     if (!target) throw new Error('not_found');
     if (user.role !== 'superadmin' && (target.role !== 'student' || (patch.role && patch.role !== target.role))) throw new Error('forbidden');
+    if (patch.active === true && target.active === false && seatsLeft() <= 0) throw new Error('seats_exceeded');
     const u = ctx.auth().updateUser(id, patch);
     audit('users.update', user, { id, patch });
     return u;
@@ -115,7 +120,10 @@ function register(ctx) {
     return u;
   });
   handle('users:importCsv', 'instructor', ({ text }, user) => {
-    const rows = parseCsvText(text);
+    let rows = parseCsvText(text);
+    const left = seatsLeft();
+    const overflow = Number.isFinite(left) && rows.length > Math.max(0, left) ? rows.slice(Math.max(0, left)) : [];
+    if (overflow.length) rows = rows.slice(0, Math.max(0, left));
     const groups = ctx.store().list('groups');
     const resolver = name => {
       const n = String(name).trim(); if (!n) return null;
@@ -124,6 +132,7 @@ function register(ctx) {
       return g.id;
     };
     const res = ctx.auth().importStudents(rows, { createdBy: user.id, groupResolver: resolver });
+    for (const r of overflow) { res.skipped++; res.errors.push({ username: r.username, error: 'seats_exceeded' }); }
     audit('users.import', user, { created: res.created, skipped: res.skipped });
     return res;
   });
@@ -143,11 +152,11 @@ function register(ctx) {
   // ---- exams & attempts ----
   handle('exams:list', 'student', (_p, user) => ctx.exams().listForUser(user).map(e => ({ ...e, attemptsUsed: ctx.exams().attemptsOf(user.id, e.id).filter(a => a.submittedAt).length })));
   handle('exams:all', 'instructor', () => ctx.exams().list());
-  handle('exams:create', 'instructor', (p, user) => { const e = ctx.exams().create(p, user.id); audit('exams.create', user, { id: e.id, title: e.title }); return e; });
+  handle('exams:create', 'instructor', (p, user) => { requireModule('exams'); const e = ctx.exams().create(p, user.id); audit('exams.create', user, { id: e.id, title: e.title }); return e; });
   handle('exams:update', 'instructor', ({ id, patch }, user) => { const e = ctx.exams().update(id, patch); audit('exams.update', user, { id }); return e; });
   handle('exams:remove', 'instructor', ({ id }, user) => { audit('exams.remove', user, { id }); return ctx.exams().remove(id); });
-  handle('attempts:start', 'student', ({ examId }, user) => ctx.exams().start(examId, user));
-  handle('practice:start', 'student', (cfg, user) => ctx.exams().startPractice(cfg, user));
+  handle('attempts:start', 'student', ({ examId }, user) => { requireModule('exams'); return ctx.exams().start(examId, user); });
+  handle('practice:start', 'student', (cfg, user) => { requireModule('exams'); return ctx.exams().startPractice(cfg, user); });
   handle('attempts:save', 'student', ({ attemptId, answers }, user) => ctx.exams().save(attemptId, answers, user));
   handle('attempts:submit', 'student', ({ attemptId, answers }, user) => ctx.exams().submit(attemptId, answers, user));
   handle('attempts:mine', 'student', (_p, user) => ctx.exams().mine(user));
@@ -156,11 +165,16 @@ function register(ctx) {
   handle('attempts:stats', 'instructor', filter => ctx.exams().stats(filter));
 
   // ---- digital-twin practice sessions ----
-  handle('twin:logSession', 'student', (s, user) => ctx.store().put('sessions', {
+  handle('twin:logSession', 'student', (s, user) => {
+    requireModule('twin');
+    const plant = ctx.dataset.plants.find(x => x.id === s.plantId);
+    const allowed = features().technologies;
+    if (plant && allowed && !allowed.includes(plant.technology)) throw new Error('tech_locked');
+    return ctx.store().put('sessions', {
     id: Store.newId('s-'), userId: user.id, username: user.username, displayName: user.displayName, groupId: user.groupId || null,
     plantId: String(s.plantId || ''), plantName: String(s.plantName || '').slice(0, 200), startedAt: s.startedAt, endedAt: new Date().toISOString(),
     durationSec: Number(s.durationSec) || 0, kpis: s.kpis && typeof s.kpis === 'object' ? s.kpis : {}, events: Array.isArray(s.events) ? s.events.slice(-200) : [],
-  }));
+  }); });
   handle('twin:sessions', 'student', ({ userId } = {}, user) => {
     const all = ctx.store().list('sessions');
     const rows = user.role === 'student' ? all.filter(s => s.userId === user.id) : (userId ? all.filter(s => s.userId === userId) : all);

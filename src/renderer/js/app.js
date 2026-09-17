@@ -1,7 +1,7 @@
 // Application entry: boot sequence, routing and the main shell (sidebar + topbar).
 import { t, setLang, lang, L, isAr } from './i18n.js';
 import { api, onEvent } from './api.js';
-import { state, setState, isRole } from './state.js';
+import { state, setState, isRole, hasModule } from './state.js';
 import { h, clear, icon, toast, fmt, progress } from './ui.js';
 import * as pages from './pages/index.js';
 
@@ -12,19 +12,19 @@ const ROUTES = [
   { re: /^\/dashboard$/, page: 'dashboard' },
   { re: /^\/plants$/, page: 'plants' },
   { re: /^\/plant\/([^/]+)$/, page: 'plant', params: ['id'] },
-  { re: /^\/twin\/([^/]+)$/, page: 'twin', params: ['id'] },
-  { re: /^\/exams$/, page: 'exams' },
-  { re: /^\/exam\/([^/]+)$/, page: 'examRun', params: ['attemptId'] },
-  { re: /^\/practice$/, page: 'practice' },
-  { re: /^\/results$/, page: 'results' },
-  { re: /^\/result\/([^/]+)$/, page: 'result', params: ['id'] },
+  { re: /^\/twin\/([^/]+)$/, page: 'twin', params: ['id'], module: 'twin' },
+  { re: /^\/exams$/, page: 'exams', module: 'exams' },
+  { re: /^\/exam\/([^/]+)$/, page: 'examRun', params: ['attemptId'], module: 'exams' },
+  { re: /^\/practice$/, page: 'practice', module: 'exams' },
+  { re: /^\/results$/, page: 'results', module: 'exams' },
+  { re: /^\/result\/([^/]+)$/, page: 'result', params: ['id'], module: 'exams' },
   { re: /^\/profile$/, page: 'profile' },
   { re: /^\/about$/, page: 'about' },
   { re: /^\/admin\/users$/, page: 'adminUsers', role: 'instructor' },
   { re: /^\/admin\/groups$/, page: 'adminGroups', role: 'instructor' },
-  { re: /^\/admin\/exams$/, page: 'adminExams', role: 'instructor' },
-  { re: /^\/admin\/results$/, page: 'adminResults', role: 'instructor' },
-  { re: /^\/admin\/sessions$/, page: 'adminSessions', role: 'instructor' },
+  { re: /^\/admin\/exams$/, page: 'adminExams', role: 'instructor', module: 'exams' },
+  { re: /^\/admin\/results$/, page: 'adminResults', role: 'instructor', module: 'exams' },
+  { re: /^\/admin\/sessions$/, page: 'adminSessions', role: 'instructor', module: 'twin' },
   { re: /^\/admin\/license$/, page: 'adminLicense', role: 'superadmin' },
   { re: /^\/admin\/settings$/, page: 'adminSettings', role: 'superadmin' },
   { re: /^\/admin\/updates$/, page: 'adminUpdates', role: 'student' },
@@ -36,15 +36,15 @@ const NAV = [
   { section: 'nav.learn' },
   { path: '/dashboard', label: 'nav.dashboard', icon: 'dashboard' },
   { path: '/plants', label: 'nav.plants', icon: 'map' },
-  { path: '/exams', label: 'nav.exams', icon: 'exam' },
-  { path: '/practice', label: 'nav.practice', icon: 'practice' },
-  { path: '/results', label: 'nav.results', icon: 'results' },
+  { path: '/exams', label: 'nav.exams', icon: 'exam', module: 'exams' },
+  { path: '/practice', label: 'nav.practice', icon: 'practice', module: 'exams' },
+  { path: '/results', label: 'nav.results', icon: 'results', module: 'exams' },
   { section: 'nav.admin', role: 'instructor' },
   { path: '/admin/users', label: 'nav.users', icon: 'users', role: 'instructor' },
   { path: '/admin/groups', label: 'nav.groups', icon: 'group', role: 'instructor' },
-  { path: '/admin/exams', label: 'nav.examsAdmin', icon: 'exam', role: 'instructor' },
-  { path: '/admin/results', label: 'nav.resultsAdmin', icon: 'results', role: 'instructor' },
-  { path: '/admin/sessions', label: 'nav.sessions', icon: 'twin', role: 'instructor' },
+  { path: '/admin/exams', label: 'nav.examsAdmin', icon: 'exam', role: 'instructor', module: 'exams' },
+  { path: '/admin/results', label: 'nav.resultsAdmin', icon: 'results', role: 'instructor', module: 'exams' },
+  { path: '/admin/sessions', label: 'nav.sessions', icon: 'twin', role: 'instructor', module: 'twin' },
   { section: 'nav.system' },
   { path: '/admin/license', label: 'nav.license', icon: 'key', role: 'superadmin' },
   { path: '/admin/settings', label: 'nav.settings', icon: 'settings', role: 'superadmin' },
@@ -143,6 +143,7 @@ function renderShell() {
   const nav = sidebar.querySelector('nav');
   for (const item of NAV) {
     if (item.role && !isRole(item.role)) continue;
+    if (item.module && !hasModule(item.module)) continue;
     if (item.section) { nav.append(h('div', { class: 'section' }, t(item.section))); continue; }
     nav.append(h('a', { href: '#' + item.path, dataset: { path: item.path } }, icon(item.icon), t(item.label)));
   }
@@ -183,7 +184,7 @@ async function route() {
     const m = path.match(r.re);
     if (m) { match = r; (r.params || []).forEach((name, i) => { params[name] = decodeURIComponent(m[i + 1]); }); break; }
   }
-  if (!match || (match.role && !isRole(match.role))) { navigate('/dashboard'); return; }
+  if (!match || (match.role && !isRole(match.role)) || (match.module && !hasModule(match.module))) { navigate('/dashboard'); return; }
   if (state.user.mustChangePassword && match.page !== 'profile' && match.page !== 'about') { navigate('/profile?mustChange=1'); return; }
   if (currentCleanup) { try { currentCleanup(); } catch { /* ignore */ } currentCleanup = null; }
   state.route = { name: match.page, params };

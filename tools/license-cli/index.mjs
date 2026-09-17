@@ -6,8 +6,9 @@
  *       Generates the production Ed25519 key pair. Private key -> tools/license-cli/keys/vendor-private.pem (git-ignored,
  *       BACK IT UP!). Public key is written into src/main/services/license-keys.js so the next build accepts your licenses.
  *   npm run license -- issue --name "Prof. Ahmed" --org "King Saud University" --email a@ksu.edu.sa \
- *                          [--type lifetime|term] [--expires 2027-09-30] [--seats 40] [--machine APT-XXXX-XXXX-XXXX-XXXX] \
- *                          [--notes "..."] [--out license.lic] [--dev]
+ *                          [--type lifetime|term] [--expires 2027-09-30] [--seats 40 (0 = unlimited)] [--machine APT-XXXX-XXXX-XXXX-XXXX] \
+ *                          [--modules twin,exams] [--technologies pv,wind_onshore,...] [--notes "..."] [--out license.lic] [--dev]
+ *       (a browser-based alternative lives in tools/license-generator/index.html)
  *       Prints (and optionally writes) a license key for a customer.
  *   npm run license -- verify <key-or-file> [--machine APT-...] [--dev]
  *   npm run license -- dev-keygen      (development key pair, accepted only by unpackaged builds)
@@ -22,6 +23,7 @@ const require = createRequire(import.meta.url);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const lic = require(path.join(ROOT, 'src/main/services/license.js'));
 const KEYS_JS = path.join(ROOT, 'src/main/services/license-keys.js');
+const GENERATOR_HTML = path.join(ROOT, 'tools/license-generator/index.html');
 const PROD_DIR = path.join(ROOT, 'tools/license-cli/keys');
 const DEV_DIR = path.join(ROOT, 'tools/license-cli/dev-keys');
 const PROD_PRIV = path.join(PROD_DIR, 'vendor-private.pem');
@@ -47,6 +49,12 @@ function writeKeysJs({ prod, dev }) {
   const header = src.slice(0, src.indexOf('module.exports'));
   const body = `module.exports = {\n  PRODUCTION_PUBLIC_KEY_PEM: ${P ? JSON.stringify(P) : 'null'},\n  DEV_PUBLIC_KEY_PEM: ${D ? JSON.stringify(D) : 'null'},\n};\n`;
   fs.writeFileSync(KEYS_JS, header + body);
+  // keep the browser license generator's embedded verification key in sync with the production key
+  if (P && fs.existsSync(GENERATOR_HTML)) {
+    const html = fs.readFileSync(GENERATOR_HTML, 'utf8');
+    const stamped = html.replace(/const EMBEDDED_PUBLIC_KEY_PEM = [^;]*;/, `const EMBEDDED_PUBLIC_KEY_PEM = ${JSON.stringify(P)};`);
+    if (stamped !== html) fs.writeFileSync(GENERATOR_HTML, stamped);
+  }
 }
 
 function keygen(dir, file, label, force, isDev) {
@@ -74,8 +82,9 @@ switch (cmd) {
       licensee: { name: opts.name || '', org: opts.org || '', email: opts.email || '' },
       type: opts.type === 'term' || opts.expires ? 'term' : 'lifetime',
       expiresAt: opts.expires || null,
-      seats: opts.seats ? Number(opts.seats) : 1,
+      seats: opts.seats !== undefined ? Number(opts.seats) : 0,
       machineId: opts.machine || null,
+      features: { modules: opts.modules ? String(opts.modules).split(',').map(s => s.trim()).filter(Boolean) : undefined, technologies: opts.technologies ? String(opts.technologies).split(',').map(s => s.trim()).filter(Boolean) : undefined },
       notes: opts.notes || '',
     }, fs.readFileSync(privFile, 'utf8'));
     const { payload } = lic.parse(key);

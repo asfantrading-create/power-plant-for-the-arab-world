@@ -1,6 +1,6 @@
 import { t, L, LT, lang, errorMessage } from '../i18n.js';
 import { api } from '../api.js';
-import { state, plantById } from '../state.js';
+import { state, plantById, techAllowed } from '../state.js';
 import { h, icon, toast, field, selectEl } from '../ui.js';
 import { navigate } from '../app.js';
 
@@ -25,7 +25,7 @@ export async function render(container, params, ctx) {
       h('div', { class: 'card' }, h('h3', null, t('exams.topics')), chips(TOPICS, sel.topics, k => LT(TOPIC_LABELS[k])),
         h('div', { class: 'mt' }, field(t('exams.numQuestions'), count)), h('div', { class: 'ctl' }, h('label', { class: 'field' }, h('span', null, t('exams.generatedShare'), ' ', shareVal), share))),
       h('div', { class: 'card' }, h('h3', null, t('exams.scopeCountries')), chips(countries.map(c => c.iso3), sel.countries, iso => { const c = countries.find(x => x.iso3 === iso); return `${c.flag} ${L(c, 'name')}`; }),
-        h('h4', { class: 'mt' }, t('admin.exams.techScope')), chips(Object.keys(ds.technologies), sel.techs, k => L(ds.technologies[k], 'name')))),
+        h('h4', { class: 'mt' }, t('admin.exams.techScope')), chips(Object.keys(ds.technologies).filter(techAllowed), sel.techs, k => L(ds.technologies[k], 'name')))),
     h('div', { class: 'mt' }, h('button', { class: 'btn primary lg', onClick: async () => {
       try {
         const a = await api('practice:start', { topics: [...sel.topics], questionCount: Number(count.value), generatedShare: Number(share.value) / 100, plantScope: { countries: [...sel.countries], technologies: [...sel.techs] }, plantId: plant ? plant.id : null });

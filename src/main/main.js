@@ -53,6 +53,7 @@ function initWorkspace() {
   }
   auth = new Auth(store);
   exams = new Exams(store, bank, dataset);
+  exams.featuresProvider = () => { const s = licenseStatus(); return s.valid ? s.features : null; };
   return store.dir;
 }
 initWorkspace();
@@ -68,14 +69,14 @@ function readLicenseKey() {
 function publicKeys() { return [licenseKeys.PRODUCTION_PUBLIC_KEY_PEM, app.isPackaged ? null : licenseKeys.DEV_PUBLIC_KEY_PEM]; }
 function licenseStatus() {
   const found = readLicenseKey();
-  if (!found) return { valid: false, reason: 'missing', license: null, daysLeft: null, machineId, source: null, devKeysAccepted: !app.isPackaged, productionKeyConfigured: !!licenseKeys.PRODUCTION_PUBLIC_KEY_PEM };
+  if (!found) return { valid: false, reason: 'missing', license: null, daysLeft: null, features: null, machineId, source: null, devKeysAccepted: !app.isPackaged, productionKeyConfigured: !!licenseKeys.PRODUCTION_PUBLIC_KEY_PEM };
   const res = license.verify(found.key, { publicKeyPems: publicKeys(), machineId, clockTampered });
-  return { ...res, machineId, source: found.source, devKeysAccepted: !app.isPackaged, productionKeyConfigured: !!licenseKeys.PRODUCTION_PUBLIC_KEY_PEM };
+  return { ...res, features: res.valid ? license.featuresOf(res.license) : null, machineId, source: found.source, devKeysAccepted: !app.isPackaged, productionKeyConfigured: !!licenseKeys.PRODUCTION_PUBLIC_KEY_PEM };
 }
 function activateLicense(key) {
   const res = license.verify(String(key || ''), { publicKeyPems: publicKeys(), machineId, clockTampered });
   if (res.valid) { fs.mkdirSync(app.getPath('userData'), { recursive: true }); fs.writeFileSync(userLicenseFile(), String(key).trim() + '\n', 'utf8'); }
-  return { ...res, machineId };
+  return { ...res, features: res.valid ? license.featuresOf(res.license) : null, machineId };
 }
 function removeLicense() { try { fs.unlinkSync(userLicenseFile()); } catch { /* none */ } }
 

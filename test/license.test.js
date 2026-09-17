@@ -44,3 +44,14 @@ test('tampering with the payload invalidates the signature', () => {
   const forged = `${p}.${Buffer.from(JSON.stringify(payload)).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}.${sig}`;
   assert.equal(lic.verify(forged, { publicKeyPems: [publicKeyPem] }).reason, 'bad_signature');
 });
+
+test('license features normalise legacy and new forms; seats default to unlimited', () => {
+  assert.deepEqual(lic.featuresOf(null), { modules: ['twin', 'exams'], technologies: null });
+  assert.deepEqual(lic.featuresOf({ features: ['all'] }), { modules: ['twin', 'exams'], technologies: null });
+  assert.deepEqual(lic.featuresOf({ features: { modules: ['exams', 'bogus'], technologies: ['pv'] } }), { modules: ['exams'], technologies: ['pv'] });
+  assert.deepEqual(lic.featuresOf({ features: { modules: ['bogus'], technologies: [] } }), { modules: ['twin', 'exams'], technologies: null });
+  const key = lic.issue({ licensee: { org: 'Co' }, type: 'lifetime', machineId: 'apt-1234-abcd-ef01-2345' }, privateKeyPem);
+  const res = lic.verify(key, { publicKeyPems: [publicKeyPem] });
+  assert.equal(res.license.seats, 0); assert.equal(res.license.machineId, 'APT-1234-ABCD-EF01-2345');
+  assert.deepEqual(res.license.features, { modules: ['twin', 'exams'], technologies: null });
+});
