@@ -23,10 +23,12 @@ function makeWindow(handlers) {
   const errors = [];
   window.addEventListener('error', e => errors.push(e.error || e.message));
   window.__errors = errors;
+  const listeners = {};
   window.api = {
     invoke: async (channel, payload) => { const fn = handlers[channel]; if (!fn) return { ok: false, error: 'no_handler:' + channel }; return fn({}, payload); },
-    on: () => () => {},
+    on: (channel, cb) => { (listeners[channel] = listeners[channel] || []).push(cb); return () => { listeners[channel] = (listeners[channel] || []).filter(f => f !== cb); }; },
   };
+  window.__emit = (channel, payload) => (listeners[channel] || []).forEach(cb => cb(payload));
   // Chart.js: no-op 2D context; three.js pages are not visited.
   const noop = new Proxy({}, { get: (_, p) => (p === 'measureText' ? () => ({ width: 10 }) : p === 'getImageData' ? () => ({ data: [] }) : p === 'createLinearGradient' ? () => ({ addColorStop() {} }) : typeof p === 'string' ? () => noop : undefined), set: () => true });
   // Chart.js requires context.canvas === canvas; three.js gets null (no WebGL in jsdom) and the twin page degrades gracefully.
@@ -49,7 +51,7 @@ const text = window => window.document.body.textContent;
 test('renderer boots through activation, setup, login and renders every non-WebGL page without errors', { skip }, async () => {
   const ws = tmpDir();
   try {
-    const { handlers, validKey, auth, store } = buildMainContext(ws);
+    const { handlers, updater, validKey, auth, store } = buildMainContext(ws);
     const { window } = makeWindow(handlers);
     const doc = window.document;
     await settle(window, 400);
@@ -61,12 +63,34 @@ test('renderer boots through activation, setup, login and renders every non-WebG
     await settle(window, 400);
     // 2. setup screen
     assert.match(text(window), /الإعداد الأولي/, 'setup screen after activation');
+    // an update notice must be actionable before login: floating banner with a download button, clickable toast
+    window.__emit('updater:event', { status: 'available', version: '9.9.9' });
+    await settle(window, 100);
+    const floating = doc.querySelector('.update-banner.floating:not(.hidden)');
+    assert.ok(floating, 'floating update banner shown on the setup screen');
+    assert.match(floating.textContent, /9\.9\.9/);
+    const dl = [...floating.querySelectorAll('button')].find(b => /تنزيل التحديث/.test(b.textContent));
+    assert.ok(dl, 'download button in the floating banner');
+    dl.click(); await settle(window, 100);
+    assert.equal(updater.downloads, 1, 'download requested through IPC from the banner');
+    const toastEl = [...doc.querySelectorAll('#toasts .toast')].find(el => /9\.9\.9/.test(el.textContent));
+    assert.ok(toastEl, 'update toast shown'); toastEl.click(); await settle(window, 100);
+    assert.equal(updater.downloads, 2, 'download requested through IPC from the toast');
+    window.__emit('updater:event', { status: 'downloaded', version: '9.9.9' }); await settle(window, 100);
+    const inst = [...doc.querySelector('.update-banner.floating').querySelectorAll('button')].find(b => /إعادة التشغيل والتثبيت/.test(b.textContent));
+    assert.ok(inst, 'install button after download'); inst.click(); await settle(window, 100);
+    assert.equal(updater.installs, 1, 'install requested through IPC');
+    window.__emit('updater:event', { status: 'up-to-date' }); await settle(window, 50);
+    assert.ok(doc.querySelector('.update-banner.floating').classList.contains('hidden'), 'banner hidden again');
     const inputs = doc.querySelectorAll('.auth-card input');
     inputs[0].value = 'Test University'; inputs[1].value = 'prof'; inputs[2].value = 'Prof. Test'; inputs[3].value = 'pass1234'; inputs[4].value = 'pass1234';
     doc.querySelector('.auth-card button[type=submit]').click();
     await settle(window, 600);
     // 3. shell + dashboard
     assert.ok(doc.querySelector('.shell'), 'shell rendered: ' + text(window).slice(0, 200));
+    window.__emit('updater:event', { status: 'available', version: '9.9.9' }); await settle(window, 100);
+    assert.ok(doc.querySelector('.shell .update-banner:not(.hidden) button'), 'shell update banner with buttons after login');
+    window.__emit('updater:event', { status: 'up-to-date' }); await settle(window, 50);
     assert.match(text(window), /مرحباً Prof\. Test/);
     assert.ok(doc.querySelectorAll('.stat').length >= 4);
     // seed data through the real services: a group, a student, an exam, an attempt

@@ -178,6 +178,8 @@ table.table td.actions { white-space: nowrap; }
 .modal footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; }
 .update-banner { display: flex; align-items: center; gap: 12px; background: var(--accent-soft); border-bottom: 1px solid var(--accent); padding: 8px 20px; font-size: .9rem; }
 .update-banner .progress { flex: 1; max-width: 240px; }
+.update-banner.floating { position: fixed; top: 0; left: 0; right: 0; z-index: 6; justify-content: center; box-shadow: var(--shadow); }
+.update-banner.floating:not(.hidden) ~ .lang-switch { top: 58px; }
 .kbd { font-family: Consolas, monospace; background: var(--bg-3); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border-2); font-size: .85em; }
 code.block { display: block; white-space: pre-wrap; word-break: break-all; background: var(--bg); border: 1px solid var(--border); padding: 10px; border-radius: var(--radius-sm); direction: ltr; text-align: left; font-family: Consolas, monospace; font-size: .8rem; max-height: 160px; overflow: auto; }
 
