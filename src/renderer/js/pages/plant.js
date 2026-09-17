@@ -69,7 +69,8 @@ export async function render(container, params, ctx) {
   const mapWrap = h('div', { class: 'map-wrap', style: { height: '300px' } });
   const nearCard = h('div', { class: 'card' }, h('h3', null, t('plant.location')), mapWrap, h('h4', { class: 'mt' }, t('plant.nearby')),
     h('div', null, nearby.map(n => h('div', { class: 'flex between', style: { padding: '4px 0', borderBottom: '1px solid var(--border)' } }, h('a', { href: `#/plant/${n.p.id}` }, L(n.p, 'name')), h('span', { class: 'muted small num' }, `${fmt.num(n.d)} ${t('plant.km')} · ${fmt.mw(n.p.capacityMw)}`)))));
-  ensureMap().then(m => { const mp = createMap(mapWrap, { map: m, plants: [p, ...nearby.map(n => n.p)], onSelect: x => navigate(`/plant/${x.id}`) }); mp.focus(p.lon, p.lat, 8); });
+  let miniMap = null;
+  ensureMap().then(m => { miniMap = createMap(mapWrap, { map: m, plants: [p, ...nearby.map(n => n.p)], onSelect: x => navigate(`/plant/${x.id}`) }); miniMap.focus(p.lon, p.lat, 8); });
 
   let membersCard = null;
   if (cx) {
@@ -81,5 +82,5 @@ export async function render(container, params, ctx) {
   }
 
   container.append(head, h('div', { class: 'grid cols-2' }, overview, facts), h('div', { class: 'grid cols-2 mt' }, techCard, h('div', { class: 'flex col', style: { gap: '16px' } }, descCard, genCard)), h('div', { class: 'mt' }, nearCard), membersCard ? h('div', { class: 'mt' }, membersCard) : null);
-  return () => charts.forEach(destroyChart);
+  return () => { charts.forEach(destroyChart); if (miniMap) miniMap.destroy(); };
 }

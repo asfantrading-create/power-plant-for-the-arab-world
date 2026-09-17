@@ -49,7 +49,7 @@ export class PlantSimulation {
   initTech() {
     const s = this.state, t = this.techCode, cap = this.plant.capacityMw;
     if (t === 'csp_tower' || t === 'csp_trough') { s.storageMaxMwh = cap / (t === 'csp_tower' ? 0.40 : 0.37) * (t === 'csp_tower' ? 10 : 5); s.storageMwh = s.storageMaxMwh * 0.4; }
-    if (t === 'hydro_dam' || t === 'hydro_ror') { s.headM = t === 'hydro_dam' ? (this.plant.id === 'gppd-WRI1019990' ? 74 : 60) : 8; s.reservoirLevel = 0.85; }
+    if (t === 'hydro_dam' || t === 'hydro_ror') { s.headM = t === 'hydro_dam' ? (this.plant.id === 'gppd-WRI1000106' ? 74 : 60) : 8; s.reservoirLevel = 0.85; }
     if (t === 'wind_onshore') { this.rotorD = Math.sqrt(this.unitMw * 1e6 / (0.5 * 1.225 * 0.45 * Math.pow(12, 3) * Math.PI / 4)); }
     this.state.demandMw = cap * this.env.demandFrac;
   }
@@ -249,7 +249,7 @@ export class PlantSimulation {
   stepHydro(dt) {
     const s = this.state, env = this.env, cap = this.plant.capacityMw, dam = this.techCode === 'hydro_dam';
     const eta = 0.9;
-    s.headM = (dam ? (this.plant.id === 'gppd-WRI1019990' ? 74 : 60) : 8) * (0.7 + 0.3 * s.reservoirLevel);
+    s.headM = (dam ? (this.plant.id === 'gppd-WRI1000106' ? 74 : 60) : 8) * (0.7 + 0.3 * s.reservoirLevel);
     const qMaxPlant = cap * 1e6 / (1000 * 9.81 * s.headM * eta);
     const on = this.units.filter(u => u.state === 'on').length / this.units.length;
     const q = qMaxPlant * clamp(this.controls.gateFrac, 0, 1) * on;

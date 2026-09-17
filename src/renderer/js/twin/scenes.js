@@ -259,7 +259,7 @@ export function composeScene(plant, techCode, units, unitMw) {
       case 'coal_steam': add(buildSteam(spec, true)); break;
       case 'nuclear_pwr': add(buildNuclear(spec)); break;
       case 'pv': add(buildPV(spec)); break;
-      case 'csp_tower': add(buildTower({ ...spec, towerH: plant.id === 'gppd-WRI1023587' ? 243 : 200 })); break;
+      case 'csp_tower': add(buildTower({ ...spec, towerH: plant.id === 'gppd-WRI1061198' ? 243 : 200 })); break;
       case 'csp_trough': add(buildTrough(spec)); break;
       case 'wind_onshore': add(buildWind(spec)); break;
       case 'hydro_dam': case 'hydro_ror': add(buildHydro(spec, hero)); break;

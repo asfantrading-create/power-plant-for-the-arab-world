@@ -75,4 +75,5 @@ export async function render(container, params, ctx) {
   for (const s of [selCountry, selFuel, selTech, selStatus, selSort]) s.addEventListener('change', apply);
   minMw.addEventListener('input', debounce(apply, 300));
   draw();
+  return () => { if (map) map.destroy(); };
 }

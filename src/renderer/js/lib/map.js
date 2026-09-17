@@ -54,8 +54,10 @@ export function createMap(container, { map, plants, onSelect, onCountry, highlig
   let dragging = false, last = null, moved = false;
   const pt = e => { const r = svg.getBoundingClientRect(); const sx = W / r.width, sy = H / r.height; return [(e.clientX - r.left) * Math.max(sx, sy) - (Math.max(sx, sy) * r.width - W) / 2, (e.clientY - r.top) * Math.max(sx, sy) - (Math.max(sx, sy) * r.height - H) / 2]; };
   svg.addEventListener('mousedown', e => { dragging = true; moved = false; last = [e.clientX, e.clientY]; });
-  window.addEventListener('mousemove', e => { if (!dragging) return; const r = svg.getBoundingClientRect(); const f = W / r.width; tx += (e.clientX - last[0]) * f * (r.width * (H / W) >= r.height ? 1 : (H / r.height) / (W / r.width)); ty += (e.clientY - last[1]) * f * (r.width * (H / W) >= r.height ? 1 : (H / r.height) / (W / r.width)); last = [e.clientX, e.clientY]; moved = true; applyTransform(); });
-  window.addEventListener('mouseup', () => { dragging = false; });
+  const onMove = e => { if (!dragging) return; const r = svg.getBoundingClientRect(); const unitsPerPx = Math.max(W / r.width, H / r.height); tx += (e.clientX - last[0]) * unitsPerPx; ty += (e.clientY - last[1]) * unitsPerPx; last = [e.clientX, e.clientY]; moved = true; applyTransform(); };
+  const onUp = () => { dragging = false; };
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onUp);
   svg.addEventListener('wheel', e => { e.preventDefault(); const [mx, my] = pt(e); const f = e.deltaY < 0 ? 1.2 : 1 / 1.2; const ns = Math.max(.7, Math.min(20, scale * f)); const k = ns / scale; tx = mx - (mx - tx) * k; ty = my - (my - ty) * k; scale = ns; applyTransform(); }, { passive: false });
   function zoomBy(f) { const cx = W / 2, cy = H / 2; const ns = Math.max(.7, Math.min(20, scale * f)); const k = ns / scale; tx = cx - (cx - tx) * k; ty = cy - (cy - ty) * k; scale = ns; applyTransform(); }
   function reset() { scale = 1; tx = 0; ty = 0; applyTransform(); }
@@ -72,5 +74,5 @@ export function createMap(container, { map, plants, onSelect, onCountry, highlig
   controls.append(h('button', { class: 'btn sm', onClick: () => zoomBy(1.4) }, '+'), h('button', { class: 'btn sm', onClick: () => zoomBy(1 / 1.4) }, '−'), h('button', { class: 'btn sm', onClick: reset }, '⟲'));
   for (const [fuel, color] of Object.entries(FUEL_COLORS)) legend.append(h('span', null, h('i', { style: { background: color } }), fuel));
   drawCountries(); drawPoints(plants || []);
-  return { setPlants: drawPoints, focus, focusCountry, reset, svg, selectCountry(iso) { selectedCountry = iso; drawCountries(); } };
+  return { setPlants: drawPoints, focus, focusCountry, reset, svg, selectCountry(iso) { selectedCountry = iso; drawCountries(); }, destroy() { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); } };
 }
