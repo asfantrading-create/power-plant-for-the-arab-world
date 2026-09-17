@@ -366,7 +366,7 @@ export function powerhouse(units = 6, unitMw = 150, damH = 70) {
   const g = group(); g.name = 'powerhouse';
   const pitch = Math.max(14, 10 + Math.sqrt(unitMw) * 1.2), L = units * pitch + 16, W = 34, H = 24;
   g.add(hall(L, H, W, { mat: M.hallBlue, monitor: true }));
-  for (let i = 0; i < units; i++) { const x = -L / 2 + 8 + i * pitch + pitch / 2; const pen = tube([[x, damH * .62, -W / 2 - 60 - damH * .25], [x, damH * .3, -W / 2 - 40], [x, H * .3, -W / 2 - 6], [x, H * .3, -W / 2 + 2]], Math.max(2.2, Math.sqrt(unitMw) * .35), M.steelDark, { sharp: false, segments: 30, radial: 14 }); g.add(pen); g.add(box(pitch * .5, 3, 2, M.steelDark, x, H, W / 2 - 4)); }
+  for (let i = 0; i < units; i++) { const x = -L / 2 + 8 + i * pitch + pitch / 2; const pen = tube([[x, damH * .42, -W / 2 - 60 - damH * .25], [x, damH * .22, -W / 2 - 40], [x, H * .3, -W / 2 - 6], [x, H * .3, -W / 2 + 2]], Math.max(2.2, Math.sqrt(unitMw) * .35), M.steelDark, { sharp: false, segments: 30, radial: 14 }); g.add(pen); g.add(box(pitch * .5, 3, 2, M.steelDark, x, H, W / 2 - 4)); }
   for (let i = 0; i < Math.min(units, 8); i++) g.add(at(transformer(7, 4.5, 4.5), -L / 2 + 10 + i * Math.max(12, L / Math.min(units, 8)), 0, W / 2 + 10));
   g.add(slab(L + 20, W + 40, M.concretePad, 0, .05, 6));
   return g;
