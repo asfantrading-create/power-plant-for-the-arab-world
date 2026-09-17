@@ -24,7 +24,9 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Lint and test
+      - name: Build renderer bundle
+        run: npm run build:renderer
+      - name: Lint and test (includes jsdom end-to-end smoke test of the bundle)
         run: |
           npm run lint
           npm test
@@ -40,8 +42,6 @@ jobs:
         run: node scripts/check-release.mjs
         env:
           ALLOW_DEV_KEY_RELEASE: ${{ vars.ALLOW_DEV_KEY_RELEASE }}
-      - name: Build renderer bundle
-        run: npm run build:renderer
       - name: Build and publish installer
         run: npx electron-builder --win --x64 --publish always
         env:
