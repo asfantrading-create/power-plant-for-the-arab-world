@@ -42,10 +42,22 @@ jobs:
         run: node scripts/check-release.mjs
         env:
           ALLOW_DEV_KEY_RELEASE: ${{ vars.ALLOW_DEV_KEY_RELEASE }}
+      # Publishes to THIS repository by default. To keep the code private and publish to a separate PUBLIC
+      # releases repository, set repository variable RELEASE_REPO (and optionally RELEASE_OWNER) and the secret
+      # GH_RELEASE_TOKEN (a token with "Contents: read & write" on that releases repository).
       - name: Build and publish installer
-        run: npx electron-builder --win --x64 --publish always
+        shell: bash
+        run: |
+          EXTRA=""
+          if [ -n "$RELEASE_REPO" ]; then
+            EXTRA="-c.publish.owner=${RELEASE_OWNER:-${GITHUB_REPOSITORY_OWNER}} -c.publish.repo=${RELEASE_REPO}"
+            echo "Publishing to ${RELEASE_OWNER:-${GITHUB_REPOSITORY_OWNER}}/${RELEASE_REPO}"
+          fi
+          npx electron-builder --win --x64 --publish always $EXTRA
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          RELEASE_REPO: ${{ vars.RELEASE_REPO }}
+          RELEASE_OWNER: ${{ vars.RELEASE_OWNER }}
       - name: Upload installer as workflow artifact (manual runs)
         uses: actions/upload-artifact@v4
         with:

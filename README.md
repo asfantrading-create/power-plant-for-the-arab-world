@@ -56,7 +56,7 @@ npm run dist:win       # بناء المثبّت محلياً على ويندو�
 ```
 مفتاح تطوير جاهز للتجربة: `tools/license-cli/dev-keys/dev-license.lic` (لا يعمل في النسخة المثبّتة).
 
-المزيد: [docs/INSTALL.md](docs/INSTALL.md) · [docs/ADMIN-GUIDE.md](docs/ADMIN-GUIDE.md) · [docs/LICENSING.md](docs/LICENSING.md) · [docs/RELEASES.md](docs/RELEASES.md) · [docs/DATA.md](docs/DATA.md) · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+المزيد: [docs/RELEASE-CHECKLIST.md](docs/RELEASE-CHECKLIST.md) (خطوات البائع كاملة) · [docs/INSTALL.md](docs/INSTALL.md) · [docs/ADMIN-GUIDE.md](docs/ADMIN-GUIDE.md) · [docs/LICENSING.md](docs/LICENSING.md) · [docs/RELEASES.md](docs/RELEASES.md) · [docs/DATA.md](docs/DATA.md) · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 </div>
 

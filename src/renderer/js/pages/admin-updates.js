@@ -21,6 +21,6 @@ export async function render(container, params, ctx) {
   }
   draw();
   const off = onEvent('updater:event', s => { setState({ updater: s }); draw(s); });
-  container.append(h('div', { class: 'page-head' }, h('div', null, h('h1', null, t('updates.title')))), h('div', { class: 'grid cols-2' }, box, h('div', { class: 'card' }, h('h3', null, t('updates.how')), h('p', null, t('updates.howText')), h('p', { class: 'muted small ltr' }, 'https://github.com/asfantrading-create/power-plant-for-the-arab-world/releases/latest/download/ArabPowerTwin-Setup.exe'))));
+  container.append(h('div', { class: 'page-head' }, h('div', null, h('h1', null, t('updates.title')))), h('div', { class: 'grid cols-2' }, box, h('div', { class: 'card' }, h('h3', null, t('updates.how')), h('p', null, t('updates.howText')))));
   return off;
 }
