@@ -2,12 +2,13 @@
 import { t, LT, isAr } from '../i18n.js';
 import { escapeHtml as e, fmt } from '../ui.js';
 import { state } from '../state.js';
+import { BRAND } from './brand.js';
 
 const BASE_CSS = `body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;color:#13222f;margin:28px;font-size:13px}h1{font-size:22px;margin:0 0 4px}h2{font-size:16px;margin:18px 0 8px;border-bottom:2px solid #22b8cf;padding-bottom:4px}table{border-collapse:collapse;width:100%;margin:8px 0}th,td{border:1px solid #cbd6e0;padding:6px 8px;text-align:start;vertical-align:top}th{background:#eef3f7}.muted{color:#5d7488}.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700}.pass{background:#d9f7e6;color:#127a45}.fail{background:#fde0e3;color:#a12030}.head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #0c3d4e;padding-bottom:10px;margin-bottom:14px}.score{font-size:34px;font-weight:800;color:#0c3d4e}.q{margin:8px 0;padding:8px 10px;border:1px solid #e1e8ef;border-radius:8px;page-break-inside:avoid}.ok{color:#127a45}.bad{color:#a12030}.small{font-size:11px}.foot{margin-top:20px;font-size:11px;color:#5d7488;border-top:1px solid #cbd6e0;padding-top:6px}`;
 
 function docWrap(title, body) {
   const dir = isAr() ? 'rtl' : 'ltr';
-  return `<!DOCTYPE html><html lang="${isAr() ? 'ar' : 'en'}" dir="${dir}"><head><meta charset="utf-8"><title>${e(title)}</title><style>${BASE_CSS}</style></head><body>${body}<div class="foot">${e(t('app.name'))} · ${e(state.settings?.institutionName || '')} · ${e(new Date().toLocaleString())}</div></body></html>`;
+  return `<!DOCTYPE html><html lang="${isAr() ? 'ar' : 'en'}" dir="${dir}"><head><meta charset="utf-8"><title>${e(title)}</title><style>${BASE_CSS}</style></head><body>${body}<div class="foot">${e(t('app.name'))} · ${e(state.settings?.institutionName || '')} · ${e(new Date().toLocaleString())}</div><div class="foot">${e(isAr() ? BRAND.nameAr : BRAND.nameEn)} · ${e(BRAND.email)} · WhatsApp ${e(BRAND.whatsapp)}</div></body></html>`;
 }
 
 export function attemptReportHtml(a) {

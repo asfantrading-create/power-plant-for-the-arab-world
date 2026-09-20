@@ -285,3 +285,21 @@ details.expander summary { cursor: pointer; font-weight: 700; }
 .step-list { counter-reset: s; list-style: none; padding: 0; margin: 0; }
 .step-list li { counter-increment: s; display: flex; gap: 12px; margin-bottom: 10px; }
 .step-list li::before { content: counter(s); width: 26px; height: 26px; border-radius: 50%; background: var(--primary-soft); color: var(--primary); display: grid; place-items: center; font-weight: 800; flex: none; }
+
+/* ---------- vendor signature ---------- */
+.brand-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 28px; padding: 14px 18px; border-top: 1px solid var(--border); color: var(--text-3); font-size: .85rem; }
+.brand-footer .brand-left { display: flex; align-items: center; gap: 12px; }
+.brand-footer .brand-logo { height: 36px; width: auto; }
+.brand-footer b { color: var(--text-2); display: block; font-size: .95rem; }
+.brand-footer small { display: block; }
+.brand-footer .brand-contact { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+.brand-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-2); direction: ltr; unicode-bidi: isolate; font-weight: 600; }
+.brand-link:hover { color: var(--primary); text-decoration: none; }
+.brand-ico { display: inline-flex; color: var(--primary); }
+.brand-footer.compact { margin-top: 12px; padding: 12px 0 0; justify-content: center; text-align: center; }
+.fullscreen .brand-footer { width: min(520px, 100%); }
+.content.no-pad .brand-footer { margin: 0 12px 12px; }
+.company-card { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.company-card img { height: 56px; width: auto; }
+/* the Asfan wordmark is navy; use the white-text variant on dark backgrounds */
+:root[data-theme="dark"] .brand-footer .brand-logo, :root[data-theme="dark"] .company-card img { content: url('../assets/asfan-logo-dark.png'); }
