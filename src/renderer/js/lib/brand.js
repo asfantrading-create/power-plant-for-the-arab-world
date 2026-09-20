@@ -7,7 +7,7 @@ export const BRAND = {
   nameAr: 'شركة أصفان', nameEn: 'Asfan Co.',
   email: 'info@asfanco.com',
   whatsapp: '+962 77 614 0404', whatsappDigits: '962776140404',
-  logo: 'assets/asfan-logo.png', // replace this file with the official logo (PNG, transparent background, ~4:1)
+  logo: 'assets/asfan-logo.png', // official logo (transparent PNG); asfan-logo-dark.png is swapped in by CSS on the dark theme
 };
 export const brandName = () => (isAr() ? BRAND.nameAr : BRAND.nameEn);
 

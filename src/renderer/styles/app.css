@@ -301,3 +301,5 @@ details.expander summary { cursor: pointer; font-weight: 700; }
 .content.no-pad .brand-footer { margin: 0 12px 12px; }
 .company-card { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
 .company-card img { height: 56px; width: auto; }
+/* the Asfan wordmark is navy; use the white-text variant on dark backgrounds */
+:root[data-theme="dark"] .brand-footer .brand-logo, :root[data-theme="dark"] .company-card img { content: url('../assets/asfan-logo-dark.png'); }
