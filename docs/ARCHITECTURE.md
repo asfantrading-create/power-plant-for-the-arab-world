@@ -27,10 +27,13 @@ src/renderer/            UI (vanilla ES modules bundled by esbuild into dist/bun
   js/twin/lib/builders.js   per-technology layouts scaled by capacity/units (steam, CCGT, OCGT, diesel, nuclear, PV, CSP trough/tower, wind, hydro dam/run-of-river)
   js/twin/lib/env.js        physical sky (three.js Sky), sun/hemisphere lighting with shadows, terrain relief by biome, sea plane
   js/lib/map.js          offline SVG map (Natural Earth) with pan/zoom
-  js/lib/charts.js       Chart.js wrappers; js/lib/report.js printable reports
+  js/lib/charts.js       Chart.js wrappers; js/lib/report.js printable reports (Asfan footer)
+  js/lib/brand.js        Asfan Co. signature: footer on every screen, mailto/WhatsApp links, About card, manual buttons
 data/                    plants, countries, complexes, technologies, questions, map (+ sources/)
 scripts/                 build-dataset, build-map, build-renderer (esbuild), make-icons, check-syntax, check-release
 tools/license-cli/       vendor tool (keygen, issue, verify); dev-keys committed, prod keys git-ignored
+tools/manual/            capture.cjs (Playwright screenshot tour of every screen, AR+EN, seeded data) + build.cjs (HTML → PDF); content-ar/en.cjs
+docs/manual/             generated user manuals (PDF) shipped as extraResources → resources/manual, opened via app:openManual
 test/                    node:test suites (store, auth, license, exams/generator, dataset, csv)
 .github/workflows/       ci.yml (lint+test+bundle), release.yml (Windows NSIS build → GitHub Release)
 ```

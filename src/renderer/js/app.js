@@ -3,6 +3,7 @@ import { t, setLang, lang, L, isAr } from './i18n.js';
 import { api, onEvent } from './api.js';
 import { state, setState, isRole, hasModule } from './state.js';
 import { h, clear, icon, toast, fmt, progress } from './ui.js';
+import { brandFooter } from './lib/brand.js';
 import * as pages from './pages/index.js';
 
 const APP_VERSION = typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : 'dev';
@@ -126,7 +127,7 @@ async function start() {
   shellEls = null; bannerEl = null;
   clear(root);
   const lic = state.license;
-  const fullscreen = (content) => { bannerEl = h('div', { class: 'update-banner floating hidden' }); root.append(h('div', { class: 'fullscreen' }, bannerEl, h('div', { class: 'lang-switch' }, langSwitch()), content)); renderUpdateBanner(); };
+  const fullscreen = (content) => { bannerEl = h('div', { class: 'update-banner floating hidden' }); root.append(h('div', { class: 'fullscreen' }, bannerEl, h('div', { class: 'lang-switch' }, langSwitch()), content, brandFooter({ compact: true }))); renderUpdateBanner(); };
   if (!lic || !lic.valid) { fullscreen(pages.activation.render({ onActivated: async () => { await reloadBoot(); start(); } })); return; }
   if (state.boot.needsSetup) { fullscreen(pages.setup.render({ onDone: async () => { await reloadBoot(); start(); } })); return; }
   if (!state.user) { fullscreen(pages.login.render({ onLogin: async () => { await reloadBoot(); start(); } })); return; }
@@ -198,6 +199,7 @@ async function route() {
   try {
     const cleanup = await page.render(shellEls.content, params, { setTitle: s => { shellEls.title.textContent = s; } });
     if (typeof cleanup === 'function') currentCleanup = cleanup;
+    shellEls.content.append(brandFooter());
   } catch (err) {
     console.error(err);
     shellEls.content.append(h('div', { class: 'alert error' }, `${t('common.error')}: ${err.message}`));

@@ -22,6 +22,11 @@ files:
   - "!**/*.map"
   - "!**/node_modules/**/{CHANGELOG.md,README.md,README,readme.md,readme}"
   - "!**/node_modules/**/{test,__tests__,tests,powered-test,example,examples}"
+extraResources:
+  - from: docs/manual
+    to: manual
+    filter:
+      - "*.pdf"
 extraMetadata:
   main: src/main/main.js
 win:

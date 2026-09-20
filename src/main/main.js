@@ -114,10 +114,18 @@ function createWindow() {
   win.once('ready-to-show', () => { win.show(); if (bounds.maximized) win.maximize(); });
   win.on('close', () => { try { const b = win.getNormalBounds(); settings.set('windowBounds', { ...b, maximized: win.isMaximized() }); } catch { /* ignore */ } });
   win.on('closed', () => { win = null; });
-  win.webContents.setWindowOpenHandler(({ url }) => { if (/^https?:\/\//i.test(url)) shell.openExternal(url); return { action: 'deny' }; });
+  win.webContents.setWindowOpenHandler(({ url }) => { if (/^(https?:\/\/|mailto:)/i.test(url)) shell.openExternal(url); return { action: 'deny' }; });
   win.webContents.on('will-navigate', (e, url) => { if (url !== win.webContents.getURL()) e.preventDefault(); }); // allow reload only
   win.loadFile(path.join(APP_ROOT, 'src', 'renderer', 'index.html'));
 }
+
+/** Bundled PDF user manual (docs/manual in development, resources/manual in the installed app). */
+function manualPath(lang) {
+  const file = `ArabPowerTwin-UserManual-${lang === 'en' ? 'EN' : 'AR'}.pdf`;
+  const candidates = [path.join(process.resourcesPath || '', 'manual', file), path.join(APP_ROOT, 'docs', 'manual', file)];
+  return candidates.find(p => { try { return fs.existsSync(p); } catch { return false; } }) || null;
+}
+async function openManual(lang) { const p = manualPath(lang); if (!p) throw new Error('manual_missing'); const err = await shell.openPath(p); if (err) throw new Error(err); return true; }
 
 function buildMenu() {
   const isDev = !app.isPackaged;
@@ -125,7 +133,8 @@ function buildMenu() {
     { label: 'Arab Power Twin', submenu: [{ role: 'reload', label: 'إعادة تحميل / Reload' }, { type: 'separator' }, { role: 'quit', label: 'خروج / Quit' }] },
     { label: 'عرض / View', submenu: [{ role: 'resetZoom' }, { role: 'zoomIn' }, { role: 'zoomOut' }, { type: 'separator' }, { role: 'togglefullscreen' }, ...(isDev ? [{ role: 'toggleDevTools' }] : [])] },
     { label: 'مساعدة / Help', submenu: [
-      { label: 'الدليل / User guide (GitHub)', click: () => shell.openExternal('https://github.com/asfantrading-create/power-plant-for-the-arab-world#readme') },
+      { label: 'دليل المستخدم (PDF) / User manual – العربية', click: () => openManual('ar').catch(() => shell.openExternal('https://github.com/asfantrading-create/power-plant-for-the-arab-world#readme')) },
+      { label: 'User manual (PDF) – English', click: () => openManual('en').catch(() => shell.openExternal('https://github.com/asfantrading-create/power-plant-for-the-arab-world#readme')) },
       { label: 'التحقق من التحديثات / Check for updates', click: () => updater.check() },
       { label: 'حول / About', click: () => dialog.showMessageBox(win, { type: 'info', title: 'Arab Power Twin', message: `Arab Power Twin ${app.getVersion()}`, detail: `التوأم الرقمي لمحطات الطاقة في الوطن العربي\nMachine ID: ${machineId}\nWorkspace: ${store.dir}\nElectron ${process.versions.electron}, Chromium ${process.versions.chrome}` }) },
     ] },
@@ -138,7 +147,7 @@ app.whenReady().then(() => {
   session.defaultSession.setPermissionRequestHandler((_wc, permission, callback) => callback(['clipboard-sanitized-write', 'clipboard-read', 'fullscreen'].includes(permission)));
   ipc.register({
     log, settings, getWindow: () => win, store: () => store, auth: () => auth, exams: () => exams,
-    dataset, map, bank, updater, bootstrap, licenseStatus, activateLicense, removeLicense, setWorkspaceDir,
+    dataset, map, bank, updater, bootstrap, licenseStatus, activateLicense, removeLicense, setWorkspaceDir, openManual,
     get workspaceError() { return workspaceError; },
   });
   buildMenu();

@@ -16,6 +16,8 @@
 | **الترخيص** | مفاتيح موقّعة رقمياً (Ed25519) يصدرها البائع من صفحة مولّد تراخيص تعمل في المتصفح: مدى الحياة أو بتاريخ انتهاء، مع إمكانية ربطها بجهاز معيّن، وتحدد الوحدات والتقنيات المشمولة وعدد المقاعد، والتحقق يتم دون إنترنت |
 | **التحديثات** | يتحقق البرنامج تلقائياً من إصدارات GitHub؛ عند وجود إصدار أحدث يظهر إشعار ويُثبَّت بنقرة واحدة |
 | **اللغة** | عربي (افتراضي، RTL) وإنجليزي، مظهر داكن/فاتح |
+| **دليل المستخدم** | دليلا مستخدم PDF بالعربية والإنجليزية مع صور لكل شاشة، مضمّنان في البرنامج (قائمة «مساعدة» وصفحة «حول البرنامج») وفي `docs/manual/` |
+| **الدعم** | توقيع شركة أصفان في أسفل كل شاشة: `info@asfanco.com` · واتساب `+962 77 614 0404` |
 
 ## رابط التحميل الثابت للعملاء
 
@@ -58,6 +60,8 @@ npm install
 npm start              # يبني الواجهة ويشغّل Electron (تُقبل مفاتيح التطوير في هذا الوضع)
 npm test               # اختبارات الوحدات
 npm run dist:win       # بناء المثبّت محلياً على ويندوز
+npm run manual:capture # جولة تصوير آلية لكل الشاشات (Playwright + Chromium) إلى .tmp/manual-shots
+npm run manual:build   # بناء دليلي المستخدم PDF في docs/manual
 ```
 مفتاح تطوير جاهز للتجربة: `tools/license-cli/dev-keys/dev-license.lic` (لا يعمل في النسخة المثبّتة).
 
@@ -79,5 +83,7 @@ An educational Windows desktop application (single `.exe` installer) that provid
 **Issue a license:** double-click `tools/license-generator/index.html` (runs offline in the browser), load `vendor-private.pem`, fill in the customer, type, seats, optional machine ID, modules and technologies, then download the `.lic` file. CLI equivalent: `npm run license -- issue --org "University X" [--type term --expires 2027-09-30] [--seats 40] [--machine APT-....] [--modules twin,exams] [--technologies pv,wind_onshore] --out x.lic`. The app enforces the licensed modules (twin / exams), technologies (others show locked) and seats (maximum active accounts).
 
 **Develop:** `npm start` (dev license keys accepted), `npm test`, `npm run dist:win` (on Windows).
+
+**User manuals:** Arabic and English PDF manuals with a screenshot of every screen live in `docs/manual/`, ship inside the installer and open from the Help menu or the About page. Regenerate them after UI changes with `npm run manual:capture && npm run manual:build` (needs Playwright with Chromium). Every screen carries the Asfan Co. signature (`info@asfanco.com`, WhatsApp +962 77 614 0404).
 
 See the `docs/` folder for installation, administration, licensing, release/update and data-source guides. Data: WRI GPPD v1.3.0 (CC BY 4.0), Natural Earth (public domain), Cairo font (OFL). This is an educational product; simulations are simplified models, not live plant data.

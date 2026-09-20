@@ -1,5 +1,7 @@
 # دليل المشرف والمدرّس / Administrator & instructor guide
 
+> **دليل المستخدم الكامل بالصور** (عربي/إنجليزي): من داخل البرنامج قائمة **مساعدة** ← دليل المستخدم، أو أزرار صفحة «حول البرنامج»، أو الملفان `docs/manual/ArabPowerTwin-UserManual-AR.pdf` و`docs/manual/ArabPowerTwin-UserManual-EN.pdf`. الدعم: `info@asfanco.com` · واتساب `+962 77 614 0404`.
+
 ## الأدوار
 | الدور | الصلاحيات |
 |---|---|
@@ -37,4 +39,6 @@
 
 ---
 ## English
+The full illustrated user manual (Arabic/English PDF) opens from the program's **Help** menu or the About page (`docs/manual/`). Support: `info@asfanco.com` · WhatsApp +962 77 614 0404.
+
 Super admin (everything) > instructor (students, groups, exams, all results, sessions) > student (own results). Import students from CSV (`username,password,displayName,studentNumber,groupName,email`). Exams mix bank questions with questions generated from real plant data; every student receives a shuffled variant; answers are never sent before submission. Results page offers filters, statistics, charts, CSV/JSON export and per-student PDF reports. Backup/restore exports all records to one JSON file. The license (Administration → License) sets the seat limit (maximum active accounts), the included modules (twin / exams) and the included technologies; plants of other technologies show a 🔒 badge and cannot be simulated.

@@ -46,7 +46,8 @@ function register(ctx) {
 
   // ---- app / settings ----
   handle('app:bootstrap', null, () => ctx.bootstrap());
-  handle('app:openExternal', null, ({ url }) => { if (!/^https?:\/\//i.test(url)) throw new Error('bad_url'); return shell.openExternal(url); });
+  handle('app:openExternal', null, ({ url }) => { if (!/^(https?:\/\/|mailto:[^\s"'<>]+$)/i.test(url)) throw new Error('bad_url'); return shell.openExternal(url); });
+  handle('app:openManual', null, ({ lang }) => ctx.openManual(lang));
   handle('app:showItemInFolder', null, ({ path: p }) => { if (p) shell.showItemInFolder(p); return true; });
   handle('app:chooseDirectory', 'superadmin', async () => { const r = await dialog.showOpenDialog(win(), { properties: ['openDirectory', 'createDirectory'] }); return r.canceled ? null : r.filePaths[0]; });
   handle('app:openFileText', null, async ({ filters }) => {
