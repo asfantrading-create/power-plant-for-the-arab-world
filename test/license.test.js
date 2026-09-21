@@ -6,7 +6,29 @@ const lic = require('../src/main/services/license');
 const { publicKeyPem, privateKeyPem } = lic.generateKeyPair();
 const other = lic.generateKeyPair();
 
-test('lifetime license round-trips and verifies offline', () => {
+test('subscription plans compute the expiry date; staff licenses never expire; legacy keys map to a plan', () => {
+  assert.equal(lic.addPeriod('2026-01-31', 'monthly', 1), '2026-02-28');
+  assert.equal(lic.addPeriod('2026-12-15', 'monthly', 2), '2027-02-15');
+  assert.equal(lic.addPeriod('2028-02-29', 'yearly', 1), '2029-02-28');
+  assert.equal(lic.addPeriod('2026-09-21', 'yearly', 3), '2029-09-21');
+  assert.throws(() => lic.addPeriod('bad', 'monthly', 1), /start date/);
+  const monthly = lic.verify(lic.issue({ licensee: { org: 'Co' }, plan: 'monthly', startsAt: '2030-01-31', seats: 5 }, privateKeyPem), { publicKeyPems: [publicKeyPem], now: new Date('2030-02-10T00:00:00Z') });
+  assert.equal(monthly.valid, true); assert.equal(monthly.license.plan, 'monthly'); assert.equal(monthly.license.type, 'term'); assert.equal(monthly.license.expiresAt, '2030-02-28'); assert.equal(monthly.daysLeft, 19);
+  const yearly = lic.parse(lic.issue({ licensee: { org: 'Co' }, plan: 'yearly', periods: 2, startsAt: '2030-03-01' }, privateKeyPem)).payload;
+  assert.equal(yearly.plan, 'yearly'); assert.equal(yearly.expiresAt, '2032-03-01');
+  const dflt = lic.parse(lic.issue({ licensee: { org: 'Co' } }, privateKeyPem)).payload; // nothing specified => one-year subscription, never unlimited
+  assert.equal(dflt.plan, 'yearly'); assert.equal(dflt.expiresAt, lic.addPeriod(dflt.issuedAt, 'yearly', 1));
+  const staff = lic.verify(lic.issue({ licensee: { org: 'Asfan' }, plan: 'staff' }, privateKeyPem), { publicKeyPems: [publicKeyPem], now: new Date('2099-01-01') });
+  assert.equal(staff.valid, true); assert.equal(staff.license.type, 'lifetime'); assert.equal(staff.license.plan, 'staff'); assert.equal(staff.license.expiresAt, null); assert.equal(staff.daysLeft, null);
+  assert.equal(lic.parse(lic.issue({ licensee: { org: 'Co' }, plan: 'custom', expiresAt: '2031-01-01' }, privateKeyPem)).payload.plan, 'custom');
+  assert.throws(() => lic.issue({ licensee: { org: 'Co' }, plan: 'custom' }, privateKeyPem), /expiresAt/);
+  // legacy inputs and payloads (issued before 1.2.0 without `plan`)
+  assert.equal(lic.parse(lic.issue({ licensee: { org: 'Co' }, type: 'lifetime' }, privateKeyPem)).payload.plan, 'staff');
+  assert.equal(lic.parse(lic.issue({ licensee: { org: 'Co' }, type: 'term', expiresAt: '2031-01-01' }, privateKeyPem)).payload.plan, 'custom');
+  assert.equal(lic.planOf({ type: 'term', expiresAt: '2031-01-01' }), 'custom'); assert.equal(lic.planOf({ type: 'lifetime' }), 'staff'); assert.equal(lic.planOf({ type: 'term', plan: 'monthly' }), 'monthly'); assert.equal(lic.planOf(null), null);
+});
+
+test('staff (no-expiry) license round-trips and verifies offline', () => {
   const key = lic.issue({ licensee: { name: 'Dr. Test', org: 'Test University', email: 't@u.edu' }, type: 'lifetime', seats: 30 }, privateKeyPem);
   assert.ok(key.startsWith('APT1.'));
   const res = lic.verify(key, { publicKeyPems: [publicKeyPem] });

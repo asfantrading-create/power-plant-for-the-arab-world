@@ -25,7 +25,8 @@
 - جلسات المحاكاة: الإدارة ← جلسات المحاكاة يعرض لكل طالب المحطة والمدة والطاقة المولّدة ومعامل القدرة والفصلات والأحداث.
 
 ## الترخيص وما يتحكم به
-- الإدارة ← الترخيص تعرض: النوع وتاريخ الانتهاء، المقاعد، الوحدات المشمولة، التقنيات المشمولة، ومعرّف الجهاز.
+- الإدارة ← الترخيص تعرض: خطة الاشتراك (شهري / سنوي / محدد المدة) وتاريخ الانتهاء والأيام المتبقية، المقاعد، الوحدات المشمولة، التقنيات المشمولة، ومعرّف الجهاز.
+- **التجديد**: قبل انتهاء الاشتراك بأسبوعين يظهر شريط تنبيه أعلى البرنامج (وتنبيه عند الدخول قبل 30 يوماً). تواصل مع شركة أصفان للحصول على مفتاح التجديد ثم أدخله من الإدارة ← الترخيص ← تفعيل مفتاح جديد؛ وإن انتهى الاشتراك قبل ذلك تظهر شاشة التفعيل عند التشغيل ويكفي إدخال المفتاح الجديد. البيانات والحسابات لا تتأثر.
 - **المقاعد**: الحد الأقصى للحسابات النشطة بجميع الأدوار. عند بلوغه لا يمكن إضافة مستخدم أو استيراده أو إعادة تفعيله؛ يمكن تعطيل حساب قديم (الحالة: غير نشط) لتحرير مقعد، أو طلب ترخيص بمقاعد أكثر من البائع.
 - **الوحدات**: إن لم يشمل الترخيص «الاختبارات» تختفي صفحات الاختبارات والتدريب والنتائج؛ وإن لم يشمل «التوأم الرقمي» تختفي المحاكاة وجلساتها.
 - **التقنيات**: محطات التقنيات غير المشمولة تظهر بعلامة 🔒 (تصفح البيانات فقط، بلا محاكاة) ولا تدخل في الأسئلة المولّدة ولا في التدريب.
@@ -40,5 +41,6 @@
 ---
 ## English
 The full illustrated user manual (Arabic/English PDF) opens from the program's **Help** menu or the About page (`docs/manual/`). Support: `info@asfanco.com` · WhatsApp +962 77 614 0404.
+Customer licenses are monthly or annual subscriptions: the License page shows the plan, expiry date and days left, a bar warns two weeks before expiry, and renewal is done by activating the new key under Administration → License (or on the activation screen after expiry) without losing any data.
 
 Super admin (everything) > instructor (students, groups, exams, all results, sessions) > student (own results). Import students from CSV (`username,password,displayName,studentNumber,groupName,email`). Exams mix bank questions with questions generated from real plant data; every student receives a shuffled variant; answers are never sent before submission. Results page offers filters, statistics, charts, CSV/JSON export and per-student PDF reports. Backup/restore exports all records to one JSON file. The license (Administration → License) sets the seat limit (maximum active accounts), the included modules (twin / exams) and the included technologies; plants of other technologies show a 🔒 badge and cannot be simulated.

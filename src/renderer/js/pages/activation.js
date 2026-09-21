@@ -3,16 +3,21 @@ import { api } from '../api.js';
 import { state, features } from '../state.js';
 import { h, icon, toast, copyText, field } from '../ui.js';
 
+const PLANS = ['monthly', 'yearly', 'custom', 'staff'];
+/** Subscription plan of a license payload; keys issued before 1.2.0 carry only `type` (term -> custom, lifetime -> staff). */
+export function planOf(L) { if (!L) return null; if (PLANS.includes(L.plan)) return L.plan; return L.type === 'term' ? 'custom' : 'staff'; }
+
 export function licenseSummary(lic) {
   if (!lic || !lic.license) return null;
   const L = lic.license;
   const rows = [
     [t('license.licensee'), L.licensee.name || '—'], [t('license.org'), L.licensee.org || '—'],
-    [t('license.type'), L.type === 'term' ? t('license.term') : t('license.lifetime')],
-    [t('license.expires'), L.type === 'term' ? L.expiresAt : '∞'],
-    [t('license.seats'), L.seats > 0 ? String(L.seats) : t('license.unlimited')], [t('license.issued'), L.issuedAt], [t('license.id'), L.id],
-    [t('license.machineLock'), L.machineId ? L.machineId : t('common.no')],
+    [t('license.type'), t('license.plan.' + planOf(L))],
+    [t('license.expires'), L.expiresAt || '—'],
   ];
+  if (lic.daysLeft !== null && lic.daysLeft !== undefined) rows.push([t('license.daysLeft'), String(lic.daysLeft)]);
+  rows.push([t('license.seats'), L.seats > 0 ? String(L.seats) : t('license.unlimited')], [t('license.issued'), L.issuedAt], [t('license.id'), L.id],
+    [t('license.machineLock'), L.machineId ? L.machineId : t('common.no')]);
   const f = lic.features || features();
   rows.push([t('license.modules'), f.modules.map(m => t('module.' + m)).join('، ')]);
   const techNames = f.technologies ? f.technologies.map(c => { const tk = state.dataset && state.dataset.technologies[c]; return tk ? (document.documentElement.lang === 'ar' ? tk.nameAr : tk.nameEn) : c; }).join('، ') : t('license.allTechnologies');

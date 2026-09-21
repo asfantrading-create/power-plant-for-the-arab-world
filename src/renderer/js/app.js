@@ -3,7 +3,7 @@ import { t, setLang, lang, L, isAr } from './i18n.js';
 import { api, onEvent } from './api.js';
 import { state, setState, isRole, hasModule } from './state.js';
 import { h, clear, icon, toast, fmt, progress } from './ui.js';
-import { brandFooter } from './lib/brand.js';
+import { brandFooter, contactLinks } from './lib/brand.js';
 import * as pages from './pages/index.js';
 
 const APP_VERSION = typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : 'dev';
@@ -159,12 +159,20 @@ function renderShell() {
     h('a', { href: '#/profile', class: 'user-chip' }, h('div', { class: 'avatar' }, initials), h('div', null, h('span', null, user.displayName || user.username), h('small', null, t('role.' + user.role)))));
   const banner = h('div', { class: 'update-banner hidden' });
   const content = h('main', { class: 'content' });
-  const main = h('div', { style: { display: 'flex', flexDirection: 'column', overflow: 'hidden' } }, banner, content);
+  const main = h('div', { style: { display: 'flex', flexDirection: 'column', overflow: 'hidden' } }, banner, licenseBanner(), content);
   const shell = h('div', { class: 'shell' }, sidebar, topbar, main);
   root.append(shell);
   shellEls = { nav, title: topbar.querySelector('.title'), content, banner };
   bannerEl = banner;
   renderUpdateBanner();
+}
+
+/** Subscription ending within two weeks: a bar with the vendor's contact links (renewal happens outside the app). */
+function licenseBanner() {
+  const lic = state.license; const d = lic && lic.valid ? lic.daysLeft : null;
+  if (d === null || d === undefined || d > 14) return null;
+  return h('div', { class: 'update-banner license-banner' }, icon('key'), h('span', null, t('license.expiringSoon', { n: d })), h('span', { class: 'brand-contact' }, ...contactLinks()),
+    isRole('superadmin') ? h('a', { href: '#/admin/license', class: 'btn sm ghost' }, t('nav.license')) : null);
 }
 
 export function renderUpdateBanner() {

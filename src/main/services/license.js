@@ -3,9 +3,12 @@
  * Offline license keys signed with Ed25519 by the vendor's private key.
  *
  * Key format:  APT1.<base64url(payload JSON)>.<base64url(signature)>
- * Payload:     { v:1, id, product:'arab-power-twin', type:'lifetime'|'term', licensee:{name,org,email},
- *                issuedAt:'YYYY-MM-DD', expiresAt:'YYYY-MM-DD'|null, seats:number, machineId:string|null,
- *                features:['all'], notes:'' }
+ * Payload:     { v:1, id, product:'arab-power-twin', type:'lifetime'|'term', plan:'monthly'|'yearly'|'custom'|'staff',
+ *                licensee:{name,org,email}, issuedAt:'YYYY-MM-DD', expiresAt:'YYYY-MM-DD'|null, seats:number,
+ *                machineId:string|null, features:{modules,technologies}, notes:'' }
+ * Plans: monthly / yearly subscriptions expire after N periods from the start date, custom carries an explicit expiry
+ * date, staff (internal licenses for the vendor's own employees) never expires. Keys issued before 1.2.0 carry no
+ * `plan`; planOf() maps them (term -> custom, lifetime -> staff).
  * Verification is fully offline: the application only embeds the vendor's PUBLIC key.
  */
 const crypto = require('node:crypto');
@@ -14,6 +17,26 @@ const PREFIX = 'APT1';
 const PRODUCT = 'arab-power-twin';
 /** Application modules a license can include. */
 const MODULES = ['twin', 'exams'];
+/** Subscription plans: monthly/yearly expire after N periods, custom has an explicit expiry, staff never expires. */
+const PLANS = ['monthly', 'yearly', 'custom', 'staff'];
+
+/** Adds N months (monthly) or N years (yearly) to a YYYY-MM-DD date, clamping to the last day of the target month. */
+function addPeriod(dateStr, plan, periods) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(dateStr || ''));
+  if (!m) throw new Error('invalid start date (YYYY-MM-DD)');
+  const n = Math.max(1, Math.floor(Number(periods) || 1));
+  const months = plan === 'yearly' ? n * 12 : n;
+  const target = new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1 + months, 1));
+  const lastDay = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+  target.setUTCDate(Math.min(Number(m[3]), lastDay));
+  return target.toISOString().slice(0, 10);
+}
+/** Plan of a verified payload, including keys issued before 1.2.0 that only carry `type`. */
+function planOf(license) {
+  if (!license) return null;
+  if (PLANS.includes(license.plan)) return license.plan;
+  return license.type === 'term' ? 'custom' : 'staff';
+}
 
 const b64u = {
   encode: buf => Buffer.from(buf).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
@@ -38,18 +61,26 @@ function generateKeyPair() {
 }
 
 function issue(payloadInput, privateKeyPem) {
+  const issuedAt = payloadInput.issuedAt || new Date().toISOString().slice(0, 10);
+  const plan = PLANS.includes(payloadInput.plan) ? payloadInput.plan
+    : payloadInput.type === 'lifetime' ? 'staff'
+      : payloadInput.type === 'term' || payloadInput.expiresAt ? 'custom' : 'yearly';
+  let expiresAt = null;
+  if (plan === 'monthly' || plan === 'yearly') expiresAt = payloadInput.expiresAt || addPeriod(payloadInput.startsAt || issuedAt, plan, payloadInput.periods);
+  else if (plan === 'custom') expiresAt = payloadInput.expiresAt || null;
   const payload = {
     v: 1,
     id: payloadInput.id || crypto.randomUUID(),
     product: PRODUCT,
-    type: payloadInput.type === 'term' ? 'term' : 'lifetime',
+    type: plan === 'staff' ? 'lifetime' : 'term',
+    plan,
     licensee: {
       name: String(payloadInput.licensee?.name || '').trim(),
       org: String(payloadInput.licensee?.org || '').trim(),
       email: String(payloadInput.licensee?.email || '').trim(),
     },
-    issuedAt: payloadInput.issuedAt || new Date().toISOString().slice(0, 10),
-    expiresAt: payloadInput.type === 'term' ? payloadInput.expiresAt : null,
+    issuedAt,
+    expiresAt,
     seats: Number.isFinite(Number(payloadInput.seats)) && Number(payloadInput.seats) >= 0 ? Math.floor(Number(payloadInput.seats)) : 0, // 0 = unlimited accounts
     machineId: payloadInput.machineId ? String(payloadInput.machineId).trim().toUpperCase() : null,
     features: normalizeFeatures(payloadInput.features),
@@ -119,4 +150,4 @@ function formatMachineId(raw) {
   return `APT-${h.slice(0, 4)}-${h.slice(4, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}`;
 }
 
-module.exports = { PREFIX, PRODUCT, MODULES, generateKeyPair, issue, parse, verify, canonical, formatMachineId, normalizeFeatures, featuresOf };
+module.exports = { PREFIX, PRODUCT, MODULES, PLANS, generateKeyPair, issue, parse, verify, canonical, formatMachineId, normalizeFeatures, featuresOf, addPeriod, planOf };

@@ -38,8 +38,13 @@ test('license generator page issues keys the app accepts', { skip: !JSDOM }, asy
   assert.match(status, /✓/); assert.match(status, /لا يطابق/, 'dev key must warn that it is not the production key');
   // 2) customer + permissions
   doc.getElementById('org').value = 'جامعة الاختبار'; doc.getElementById('name').value = 'د. اختبار'; doc.getElementById('email').value = 't@u.edu';
-  doc.getElementById('type').value = 'term'; window.toggleExp(); doc.getElementById('expires').value = '2031-06-30';
-  assert.equal(doc.getElementById('expRow').style.display, '');
+  // customers only ever see subscription plans: no unlimited/lifetime option or wording unless staff mode is on
+  assert.deepEqual([...doc.querySelectorAll('#type option')].map(o => o.value), ['yearly', 'monthly', 'custom']);
+  const visibleText = () => { const c = doc.body.cloneNode(true); c.querySelectorAll('script').forEach(x => x.remove()); return c.textContent; };
+  assert.ok(!/مدى الحياة|lifetime|∞/i.test(visibleText()), 'no lifetime wording');
+  assert.equal(doc.getElementById('staffBadge').style.display, 'none');
+  doc.getElementById('type').value = 'custom'; window.planChanged(); doc.getElementById('expires').value = '2031-06-30';
+  assert.equal(doc.getElementById('expRow').style.display, ''); assert.equal(doc.getElementById('periodsRow').style.display, 'none');
   doc.getElementById('seats').value = '30'; doc.getElementById('machine').value = 'apt-1a2b-3c4d-5e6f-7a8b'; doc.getElementById('notes').value = 'test note';
   doc.querySelector('#modules input[data-module="exams"]').checked = false;
   doc.getElementById('allTechs').checked = false; window.toggleAllTechs();
@@ -52,7 +57,7 @@ test('license generator page issues keys the app accepts', { skip: !JSDOM }, asy
   // 3) the app accepts it
   const res = lic.verify(key, { publicKeyPems: [devPub], machineId: 'APT-1A2B-3C4D-5E6F-7A8B', now: new Date('2031-01-01') });
   assert.equal(res.valid, true, JSON.stringify(res));
-  assert.equal(res.license.type, 'term'); assert.equal(res.license.expiresAt, '2031-06-30'); assert.equal(res.license.seats, 30);
+  assert.equal(res.license.type, 'term'); assert.equal(res.license.plan, 'custom'); assert.equal(res.license.expiresAt, '2031-06-30'); assert.equal(res.license.seats, 30);
   assert.equal(res.license.machineId, 'APT-1A2B-3C4D-5E6F-7A8B'); assert.equal(res.license.licensee.org, 'جامعة الاختبار'); assert.equal(res.license.notes, 'test note');
   assert.deepEqual(res.license.features, { modules: ['twin'], technologies: ['ccgt', 'pv'] });
   assert.equal(lic.verify(key, { publicKeyPems: [devPub], machineId: 'APT-0000-0000-0000-0000', now: new Date('2031-01-01') }).reason, 'machine_mismatch');
@@ -76,12 +81,29 @@ test('license generator page issues keys the app accepts', { skip: !JSDOM }, asy
   window.setLang('en');
   assert.equal(doc.documentElement.dir, 'ltr'); assert.match(doc.querySelector('h1').textContent, /License Generator/);
   assert.equal(doc.querySelectorAll('#techs input[data-tech]:checked').length, 2);
-  // all technologies + lifetime => technologies null, no expiry
-  doc.getElementById('allTechs').checked = true; window.toggleAllTechs(); doc.getElementById('type').value = 'lifetime';
-  doc.querySelector('#modules input[data-module="exams"]').checked = true;
+  // monthly subscription: expiry computed from the start date (3 months from 31 Jan => 30 Apr) and shown before generating
+  doc.getElementById('allTechs').checked = true; window.toggleAllTechs(); doc.querySelector('#modules input[data-module="exams"]').checked = true;
+  doc.getElementById('type').value = 'monthly'; doc.getElementById('periods').value = '3'; doc.getElementById('start').value = '2030-01-31'; window.planChanged();
+  assert.equal(doc.getElementById('periodsRow').style.display, ''); assert.equal(doc.getElementById('expRow').style.display, 'none');
+  assert.match(doc.getElementById('planInfo').textContent, /2030-04-30/); assert.match(doc.getElementById('periodsLabel').textContent, /months/);
   await window.generate();
-  const life = lic.verify(doc.getElementById('out').textContent, { publicKeyPems: [devPub] });
-  assert.equal(life.valid, true); assert.equal(life.license.expiresAt, null); assert.deepEqual(life.license.features, { modules: ['twin', 'exams'], technologies: null });
-  assert.equal(doc.querySelectorAll('#register tbody tr').length, 2);
+  const monthly = lic.verify(doc.getElementById('out').textContent, { publicKeyPems: [devPub], now: new Date('2030-04-01') });
+  assert.equal(monthly.valid, true); assert.equal(monthly.license.plan, 'monthly'); assert.equal(monthly.license.expiresAt, '2030-04-30'); assert.deepEqual(monthly.license.features, { modules: ['twin', 'exams'], technologies: null });
+  assert.match(doc.getElementById('summary').textContent, /Monthly subscription – expires 2030-04-30/);
+  assert.match(doc.querySelector('#register tbody tr').textContent, /Monthly/);
+  // staff mode (hidden behind #staff / Ctrl+Shift+S) adds the internal no-expiry plan
+  doc.getElementById('type').value = 'staff'; await window.generate();
+  assert.notEqual(doc.getElementById('genError').textContent, '', 'staff plan refused outside staff mode');
+  window.setStaffMode(true);
+  assert.deepEqual([...doc.querySelectorAll('#type option')].map(o => o.value), ['yearly', 'monthly', 'custom', 'staff']);
+  assert.notEqual(doc.getElementById('staffBadge').style.display, 'none');
+  doc.getElementById('type').value = 'staff'; window.planChanged(); await window.generate();
+  assert.equal(doc.getElementById('genError').textContent, '');
+  const staff = lic.verify(doc.getElementById('out').textContent, { publicKeyPems: [devPub], now: new Date('2099-01-01') });
+  assert.equal(staff.valid, true); assert.equal(staff.license.type, 'lifetime'); assert.equal(staff.license.plan, 'staff'); assert.equal(staff.license.expiresAt, null);
+  assert.match(doc.querySelector('#register tbody tr').textContent, /Internal/); assert.match(doc.querySelector('#register tbody tr').textContent, /—/);
+  window.setStaffMode(false);
+  assert.equal(doc.querySelector('#type option[value="staff"]'), null); assert.equal(doc.getElementById('type').value, 'yearly');
+  assert.equal(doc.querySelectorAll('#register tbody tr').length, 3);
   window.close();
 });
