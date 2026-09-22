@@ -24,7 +24,14 @@ for (const mode of ['webcrypto', 'fallback']) {
     assert.equal(res.license.seats, 25); assert.deepEqual(res.license.features, { modules: ['twin'], technologies: ['pv', 'wind_onshore'] });
     assert.equal(lic.verify(key, { publicKeyPems: [publicKeyPem], now: new Date('2030-03-01') }).reason, 'expired');
     assert.equal(lic.verify(key, { publicKeyPems: [lic.generateKeyPair().publicKeyPem] }).reason, 'bad_signature');
-    assert.equal(payload.product, 'arab-power-twin');
+    assert.equal(payload.product, 'arab-power-twin'); assert.equal(payload.plan, 'custom');
+    // subscription plans: identical expiry arithmetic and payload in both implementations
+    assert.equal(LC.addPeriod('2026-01-31', 'monthly', 1), lic.addPeriod('2026-01-31', 'monthly', 1));
+    const sub = { licensee: { org: 'Sub Org' }, plan: 'monthly', periods: 3, startsAt: '2030-01-31', id: 'fixed-id', issuedAt: '2030-01-31' };
+    const web = await LC.issueLicense(sub, privateKeyPem); const node = lic.parse(lic.issue(sub, privateKeyPem)).payload;
+    assert.equal(web.payload.expiresAt, '2030-04-30'); assert.deepEqual(web.payload, node);
+    assert.equal(lic.verify(web.key, { publicKeyPems: [publicKeyPem], now: new Date('2030-04-01') }).valid, true);
+    assert.equal(LC.planOf({ type: 'lifetime' }), 'staff');
     // app -> browser
     const nodeKey = lic.issue({ licensee: { org: 'Node Org' }, type: 'lifetime', seats: 0, features: { modules: ['twin', 'exams'], technologies: null } }, privateKeyPem);
     const v = await LC.verifyLicense(nodeKey, publicKeyPem);

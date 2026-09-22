@@ -11,6 +11,7 @@
   'use strict';
   const PREFIX = 'APT1', PRODUCT = 'arab-power-twin';
   const MODULES = ['twin', 'exams'];
+  const PLANS = ['monthly', 'yearly', 'custom', 'staff'];
   const subtle = (typeof crypto !== 'undefined' && crypto.subtle) ? crypto.subtle : null;
   if (!subtle) throw new Error('WebCrypto (crypto.subtle) is required');
 
@@ -112,13 +113,29 @@
     const technologies = f && Array.isArray(f.technologies) && f.technologies.length ? f.technologies.map(String) : null;
     return { modules: modules.length ? modules : MODULES.slice(), technologies };
   }
+  function addPeriod(dateStr, plan, periods) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(dateStr || ''));
+    if (!m) throw new Error('invalid start date (YYYY-MM-DD)');
+    const n = Math.max(1, Math.floor(Number(periods) || 1));
+    const months = plan === 'yearly' ? n * 12 : n;
+    const target = new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1 + months, 1));
+    const lastDay = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+    target.setUTCDate(Math.min(Number(m[3]), lastDay));
+    return target.toISOString().slice(0, 10);
+  }
+  function planOf(license) { if (!license) return null; if (PLANS.includes(license.plan)) return license.plan; return license.type === 'term' ? 'custom' : 'staff'; }
   function buildPayload(input) {
-    const type = input.type === 'term' ? 'term' : 'lifetime';
+    const issuedAt = input.issuedAt || new Date().toISOString().slice(0, 10);
+    const plan = PLANS.includes(input.plan) ? input.plan : input.type === 'lifetime' ? 'staff' : input.type === 'term' || input.expiresAt ? 'custom' : 'yearly';
+    const type = plan === 'staff' ? 'lifetime' : 'term';
+    let expiresAt = null;
+    if (plan === 'monthly' || plan === 'yearly') expiresAt = input.expiresAt || addPeriod(input.startsAt || issuedAt, plan, input.periods);
+    else if (plan === 'custom') expiresAt = input.expiresAt || null;
     const payload = {
-      v: 1, id: input.id || crypto.randomUUID(), product: PRODUCT, type,
+      v: 1, id: input.id || crypto.randomUUID(), product: PRODUCT, type, plan,
       licensee: { name: String(input.licensee?.name || '').trim(), org: String(input.licensee?.org || '').trim(), email: String(input.licensee?.email || '').trim() },
-      issuedAt: input.issuedAt || new Date().toISOString().slice(0, 10),
-      expiresAt: type === 'term' ? input.expiresAt : null,
+      issuedAt,
+      expiresAt,
       seats: Number.isFinite(Number(input.seats)) && Number(input.seats) >= 0 ? Math.floor(Number(input.seats)) : 0,
       machineId: input.machineId ? String(input.machineId).trim().toUpperCase() : null,
       features: normalizeFeatures(input.features),
@@ -152,6 +169,6 @@
     if (p.type === 'term') { const exp = new Date(p.expiresAt + 'T23:59:59Z'); const now = opts.now || new Date(); result.daysLeft = Math.ceil((exp - now) / 86400000); if (now > exp) { result.reason = 'expired'; return result; } }
     result.valid = true; return result;
   }
-  const lib = { PREFIX, PRODUCT, MODULES, canonical, b64uEncode, b64uDecode, pemToDer, seedFromPrivatePem, pubFromPublicPem, publicPemFromRaw, publicKeyFromSeed, sign, verify, signFallback, verifyFallback, webCryptoSupported, buildPayload, issueLicense, parseLicense, verifyLicense, normalizeFeatures, useWebCrypto: true };
+  const lib = { PREFIX, PRODUCT, MODULES, PLANS, addPeriod, planOf, canonical, b64uEncode, b64uDecode, pemToDer, seedFromPrivatePem, pubFromPublicPem, publicPemFromRaw, publicKeyFromSeed, sign, verify, signFallback, verifyFallback, webCryptoSupported, buildPayload, issueLicense, parseLicense, verifyLicense, normalizeFeatures, useWebCrypto: true };
   return lib;
 });

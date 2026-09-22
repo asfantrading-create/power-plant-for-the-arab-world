@@ -2,7 +2,7 @@
 
 # التوأم الرقمي لمحطات الطاقة في الوطن العربي — Arab Power Twin
 
-برنامج تعليمي لأنظمة ويندوز (ملف `.exe` واحد) يقدّم **محاكاة رقمية (Digital Twin)** لمحطات طاقة حقيقية في **22 دولة عربية**، مع بيانات حقيقية لأكثر من **620 محطة** (غاز، بخار، نووي، شمسي كهروضوئي، شمسي مركّز، رياح، كهرومائي، ديزل، فحم، نفايات)، ونماذج ثلاثية الأبعاد، وبنك أسئلة واختبارات لتقييم الطلاب، ونظام مستخدمين بصلاحيات (مشرف عام / مدرّس / طالب)، وترخيص تجاري (مدى الحياة أو محدد المدة)، وتحديثات تلقائية.
+برنامج تعليمي لأنظمة ويندوز (ملف `.exe` واحد) يقدّم **محاكاة رقمية (Digital Twin)** لمحطات طاقة حقيقية في **22 دولة عربية**، مع بيانات حقيقية لأكثر من **620 محطة** (غاز، بخار، نووي، شمسي كهروضوئي، شمسي مركّز، رياح، كهرومائي، ديزل، فحم، نفايات)، ونماذج ثلاثية الأبعاد، وبنك أسئلة واختبارات لتقييم الطلاب، ونظام مستخدمين بصلاحيات (مشرف عام / مدرّس / طالب)، وترخيص تجاري بالاشتراك (شهري أو سنوي)، وتحديثات تلقائية.
 
 ## المزايا الرئيسية
 
@@ -13,7 +13,7 @@
 | **التوأم الرقمي** | محاكاة فيزيائية مبسّطة لكل تقنية (موقع الشمس الفعلي من الإحداثيات والوقت، منحنى قدرة توربينات الرياح، معادلة الطاقة الكهرومائية، الكفاءة والوقود وانبعاثات CO₂، الإقلاع والفصل، تردد الشبكة) + مشهد ثلاثي الأبعاد مفصّل لكل تقنية (مداخن، أبراج تبريد، غلايات، قاعات توربينات، خزانات، محطات تحويل، حقول شمسية ورياح، سدود) على موقع واقعي بسماء فيزيائية وظلال وتضاريس وبحر للمحطات الساحلية، ونماذج مخصصة للمحطات المميزة (براكة، السد العالي، نور ورزازات، مجمع محمد بن راشد…) + سيناريوهات تدريبية (فصل مفاجئ، موجة حر، عاصفة غبار…) |
 | **التقييم** | بنك أسئلة ثنائي اللغة (120+ سؤالاً في 10 موضوعات) + أسئلة مولّدة تلقائياً من بيانات المحطات الحقيقية، اختبارات رسمية يعدّها المدرّس (مدة، درجة نجاح، عدد محاولات، مجموعات) واختبارات تدريبية ذاتية |
 | **الإدارة** | المشرف العام (مثل أستاذ المقرر) يضيف الطلاب (يدوياً أو من CSV) والمجموعات، ويرى نتائج كل طالب وإحصاءات الصف وجلسات المحاكاة، ويصدّر النتائج كملفات CSV/JSON/PDF على الجهاز |
-| **الترخيص** | مفاتيح موقّعة رقمياً (Ed25519) يصدرها البائع من صفحة مولّد تراخيص تعمل في المتصفح: مدى الحياة أو بتاريخ انتهاء، مع إمكانية ربطها بجهاز معيّن، وتحدد الوحدات والتقنيات المشمولة وعدد المقاعد، والتحقق يتم دون إنترنت |
+| **الترخيص** | مفاتيح موقّعة رقمياً (Ed25519) يصدرها البائع من صفحة مولّد تراخيص تعمل في المتصفح: **اشتراك شهري أو سنوي** (أو بتاريخ انتهاء محدد) يُحسب انتهاؤه تلقائياً، مع إمكانية ربطه بجهاز معيّن، ويحدد الوحدات والتقنيات المشمولة وعدد المقاعد، والتحقق يتم دون إنترنت. ترخيص داخلي بلا انتهاء لموظفي الشركة فقط (مخفي في المولّد) |
 | **التحديثات** | يتحقق البرنامج تلقائياً من إصدارات GitHub؛ عند وجود إصدار أحدث يظهر إشعار ويُثبَّت بنقرة واحدة |
 | **اللغة** | عربي (افتراضي، RTL) وإنجليزي، مظهر داكن/فاتح |
 | **دليل المستخدم** | دليلا مستخدم PDF بالعربية والإنجليزية مع صور لكل شاشة، مضمّنان في البرنامج (قائمة «مساعدة» وصفحة «حول البرنامج») وفي `docs/manual/` |
@@ -38,14 +38,18 @@
 
 ## إصدار ترخيص لعميل
 
-**الطريقة الأسهل – صفحة مولّد التراخيص:** افتح `tools\license-generator\index.html` بالنقر المزدوج (يعمل في المتصفح دون إنترنت)، حمّل المفتاح الخاص `vendor-private.pem`، أدخل بيانات العميل ونوع الترخيص (مدى الحياة أو تاريخ انتهاء) وعدد المقاعد ومعرّف الجهاز إن أردت، وحدد الوحدات (التوأم الرقمي / الاختبارات) والتقنيات المشمولة، ثم «توليد» و«تنزيل ملف .lic». الصلاحيات تُفرض داخل البرنامج: الوحدة غير المشمولة تختفي، ومحطات التقنيات غير المشمولة تظهر مقفلة 🔒، والمقاعد حد أقصى للحسابات النشطة. التفاصيل في [docs/LICENSING.md](docs/LICENSING.md).
+**الطريقة الأسهل – صفحة مولّد التراخيص:** افتح `tools\license-generator\index.html` بالنقر المزدوج (يعمل في المتصفح دون إنترنت)، حمّل المفتاح الخاص `vendor-private.pem`، أدخل بيانات العميل وخطة الاشتراك (شهري أو سنوي مع عدد الفترات وتاريخ البدء، أو تاريخ انتهاء محدد) وعدد المقاعد ومعرّف الجهاز إن أردت، وحدد الوحدات (التوأم الرقمي / الاختبارات) والتقنيات المشمولة، ثم «توليد» و«تنزيل ملف .lic». الصلاحيات تُفرض داخل البرنامج: الوحدة غير المشمولة تختفي، ومحطات التقنيات غير المشمولة تظهر مقفلة 🔒، والمقاعد حد أقصى للحسابات النشطة. التفاصيل في [docs/LICENSING.md](docs/LICENSING.md).
 
 **أو بالأوامر:**
 ```bash
-# مدى الحياة
-npm run license -- issue --name "د. أحمد" --org "جامعة الملك سعود" --email a@ksu.edu.sa --seats 40 --out ksu.lic
-# محدد المدة (ينتهي 30-09-2027)
-npm run license -- issue --org "شركة كهرباء X" --type term --expires 2027-09-30 --seats 10 --out x.lic
+# اشتراك سنوي (سنة واحدة تبدأ اليوم)
+npm run license -- issue --name "د. أحمد" --org "جامعة الملك سعود" --email a@ksu.edu.sa --plan yearly --seats 40 --out ksu.lic
+# اشتراك شهري لثلاثة أشهر يبدأ في تاريخ محدد
+npm run license -- issue --org "شركة كهرباء X" --plan monthly --periods 3 --start 2026-10-01 --seats 10 --out x.lic
+# ينتهي بتاريخ محدد
+npm run license -- issue --org "شركة كهرباء X" --plan custom --expires 2027-09-30 --seats 10 --out x.lic
+# ترخيص داخلي بلا انتهاء لموظفي الشركة فقط (لا يُباع)
+npm run license -- issue --org "شركة أصفان" --name "موظف" --plan staff --out staff.lic
 # مرتبط بجهاز واحد (يظهر معرّف الجهاز في شاشة التفعيل عند العميل)
 npm run license -- issue --org "معهد Y" --machine APT-1A2B-3C4D-5E6F-7A8B --out y.lic
 # وحدات وتقنيات محددة (الباقي يظهر مقفلاً في البرنامج)
@@ -73,14 +77,14 @@ npm run manual:build   # بناء دليلي المستخدم PDF في docs/manu
 
 # Arab Power Twin (English)
 
-An educational Windows desktop application (single `.exe` installer) that provides a **digital twin** of real power plants across the **22 Arab League countries**: a database of **620+ real plants** (WRI Global Power Plant Database + curated 2019–2026 additions), an offline interactive map, plant information pages, a physics-based simulation with detailed procedural 3D scenes per technology on realistic sites (physical sky, shadows, terrain, coastline) and bespoke models for landmark plants, a bilingual question bank with auto-generated questions from real data, formal and practice exams, role-based accounts (super admin / instructor / student), per-student results with CSV/JSON/PDF export, signed offline licensing (lifetime or term, optional machine lock, licensed modules, technologies and seats) and automatic updates from GitHub Releases.
+An educational Windows desktop application (single `.exe` installer) that provides a **digital twin** of real power plants across the **22 Arab League countries**: a database of **620+ real plants** (WRI Global Power Plant Database + curated 2019–2026 additions), an offline interactive map, plant information pages, a physics-based simulation with detailed procedural 3D scenes per technology on realistic sites (physical sky, shadows, terrain, coastline) and bespoke models for landmark plants, a bilingual question bank with auto-generated questions from real data, formal and practice exams, role-based accounts (super admin / instructor / student), per-student results with CSV/JSON/PDF export, signed offline licensing (monthly or annual subscriptions, optional machine lock, licensed modules, technologies and seats) and automatic updates from GitHub Releases.
 
 **Permanent customer download link** (after the first release):
 `https://github.com/asfantrading-create/power-plant-for-the-arab-world/releases/latest/download/ArabPowerTwin-Setup.exe`
 
 **Vendor one-time setup:** `npm install` → `npm run license -- keygen` → commit `src/main/services/license-keys.js` → bump `version` in `package.json` → `git tag vX.Y.Z && git push origin vX.Y.Z`. GitHub Actions builds the Windows installer and publishes it together with `latest.yml` (the auto-update feed).
 
-**Issue a license:** double-click `tools/license-generator/index.html` (runs offline in the browser), load `vendor-private.pem`, fill in the customer, type, seats, optional machine ID, modules and technologies, then download the `.lic` file. CLI equivalent: `npm run license -- issue --org "University X" [--type term --expires 2027-09-30] [--seats 40] [--machine APT-....] [--modules twin,exams] [--technologies pv,wind_onshore] --out x.lic`. The app enforces the licensed modules (twin / exams), technologies (others show locked) and seats (maximum active accounts).
+**Issue a license:** double-click `tools/license-generator/index.html` (runs offline in the browser), load `vendor-private.pem`, fill in the customer, the subscription plan (monthly or annual with the number of periods and start date, or an explicit expiry date), seats, optional machine ID, modules and technologies, then download the `.lic` file. CLI equivalent: `npm run license -- issue --org "University X" [--plan monthly|yearly|custom|staff] [--periods N] [--start YYYY-MM-DD] [--expires YYYY-MM-DD] [--seats 40] [--machine APT-....] [--modules twin,exams] [--technologies pv,wind_onshore] --out x.lic`. Customer licenses are always subscriptions; the no-expiry `staff` plan is for the vendor's own employees and only appears in the generator in staff mode (`index.html#staff` or Ctrl+Shift+S). The app never shows a lifetime option. It enforces the licensed modules (twin / exams), technologies (others show locked) and seats (maximum active accounts).
 
 **Develop:** `npm start` (dev license keys accepted), `npm test`, `npm run dist:win` (on Windows).
 

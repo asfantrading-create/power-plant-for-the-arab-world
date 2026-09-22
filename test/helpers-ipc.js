@@ -31,7 +31,7 @@ function buildMainContext(workspace) {
     return orig.call(this, req, ...rest);
   };
   try { delete require.cache[require.resolve('../src/main/ipc/index.js')]; delete require.cache[require.resolve('../src/main/services/exporter.js')]; require('../src/main/ipc/index.js').register(ctx); } finally { Module._load = orig; }
-  const validKey = license.issue({ licensee: { name: 'Smoke Tester', org: 'Test University' }, type: 'lifetime', seats: 10 }, keys.privateKeyPem);
+  const validKey = license.issue({ licensee: { name: 'Smoke Tester', org: 'Test University' }, plan: 'yearly', seats: 10 }, keys.privateKeyPem);
   const issue = input => license.issue(input, keys.privateKeyPem);
   return { handlers, updater, validKey, auth, store, exams, issue };
 }

@@ -6,8 +6,12 @@
  *       Generates the production Ed25519 key pair. Private key -> tools/license-cli/keys/vendor-private.pem (git-ignored,
  *       BACK IT UP!). Public key is written into src/main/services/license-keys.js so the next build accepts your licenses.
  *   npm run license -- issue --name "Prof. Ahmed" --org "King Saud University" --email a@ksu.edu.sa \
- *                          [--type lifetime|term] [--expires 2027-09-30] [--seats 40 (0 = unlimited)] [--machine APT-XXXX-XXXX-XXXX-XXXX] \
+ *                          [--plan monthly|yearly|custom|staff (default yearly)] [--periods N (months or years, default 1)] [--start YYYY-MM-DD] \
+ *                          [--expires YYYY-MM-DD (plan custom)] [--seats 40 (0 = unlimited)] [--machine APT-XXXX-XXXX-XXXX-XXXX] \
  *                          [--modules twin,exams] [--technologies pv,wind_onshore,...] [--notes "..."] [--out license.lic] [--dev]
+ *       Plans: monthly / yearly subscriptions for customers (expiry computed from the start date, default today);
+ *       custom = explicit expiry date; staff = internal license for the vendor's own employees that never expires
+ *       (never sell it – the customer-facing app never shows an unlimited option).
  *       (a browser-based alternative lives in tools/license-generator/index.html)
  *       Prints (and optionally writes) a license key for a customer.
  *   npm run license -- verify <key-or-file> [--machine APT-...] [--dev]
@@ -78,9 +82,14 @@ switch (cmd) {
   case 'issue': {
     const privFile = opts.dev ? DEV_PRIV : PROD_PRIV;
     if (!fs.existsSync(privFile)) { console.error(`No private key at ${privFile}. Run: npm run license -- ${opts.dev ? 'dev-keygen' : 'keygen'}`); process.exit(1); }
+    const plan = opts.plan ? String(opts.plan) : opts.type === 'lifetime' ? 'staff' : opts.type === 'term' || opts.expires ? 'custom' : 'yearly';
+    if (!lic.PLANS.includes(plan)) { console.error(`--plan must be one of: ${lic.PLANS.join(', ')}`); process.exit(1); }
+    if (plan === 'custom' && !opts.expires) { console.error('--plan custom needs --expires YYYY-MM-DD'); process.exit(1); }
     const key = lic.issue({
       licensee: { name: opts.name || '', org: opts.org || '', email: opts.email || '' },
-      type: opts.type === 'term' || opts.expires ? 'term' : 'lifetime',
+      plan,
+      periods: opts.periods !== undefined ? Number(opts.periods) : 1,
+      startsAt: opts.start || undefined,
       expiresAt: opts.expires || null,
       seats: opts.seats !== undefined ? Number(opts.seats) : 0,
       machineId: opts.machine || null,
