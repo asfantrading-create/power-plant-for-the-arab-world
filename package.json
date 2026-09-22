@@ -33,6 +33,7 @@
     "prerelease:win": "node scripts/check-release.mjs",
     "release:win": "npm run build:renderer && electron-builder --win --x64 --publish always",
     "license": "node tools/license-cli/index.mjs",
+    "license:bundle": "node scripts/build-license-generator.mjs",
     "manual:capture": "npm run build:renderer && node tools/manual/capture.cjs",
     "manual:build": "node tools/manual/build.cjs",
     "postinstall": "electron-builder install-app-deps"

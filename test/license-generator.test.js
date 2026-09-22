@@ -107,3 +107,15 @@ test('license generator page issues keys the app accepts', { skip: !JSDOM }, asy
   assert.equal(doc.querySelectorAll('#register tbody tr').length, 3);
   window.close();
 });
+
+test('the single-file license generator bundle is in sync with index.html and license-crypto.js', { skip: !JSDOM }, async () => {
+  const { buildBundle, BUNDLE_PATH } = await import('../scripts/build-license-generator.mjs');
+  const expected = buildBundle();
+  assert.equal(fs.readFileSync(BUNDLE_PATH, 'utf8'), expected, 'run: npm run license:bundle');
+  assert.ok(!expected.includes('<script src='), 'bundle must be self-contained');
+  const dom = new JSDOM(expected, { runScripts: 'dangerously', url: 'http://localhost/', beforeParse(window) { Object.defineProperty(window.crypto, 'subtle', { value: nodeCrypto.webcrypto.subtle }); window.alert = () => {}; } });
+  await new Promise(r => setTimeout(r, 20));
+  assert.deepEqual([...dom.window.document.querySelectorAll('#type option')].map(o => o.value), ['yearly', 'monthly', 'custom']);
+  assert.equal(typeof dom.window.LicenseCrypto.addPeriod, 'function');
+  dom.window.close();
+});

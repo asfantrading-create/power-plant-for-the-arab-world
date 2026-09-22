@@ -22,6 +22,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { writeBundle } from '../../scripts/build-license-generator.mjs';
 
 const require = createRequire(import.meta.url);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -58,6 +59,7 @@ function writeKeysJs({ prod, dev }) {
     const html = fs.readFileSync(GENERATOR_HTML, 'utf8');
     const stamped = html.replace(/const EMBEDDED_PUBLIC_KEY_PEM = [^;]*;/, `const EMBEDDED_PUBLIC_KEY_PEM = ${JSON.stringify(P)};`);
     if (stamped !== html) fs.writeFileSync(GENERATOR_HTML, stamped);
+    try { writeBundle(); } catch (e) { console.error('could not rebuild the single-file license generator: ' + e.message); }
   }
 }
 
