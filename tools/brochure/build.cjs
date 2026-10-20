@@ -34,7 +34,7 @@ function html(L) {
   return `<!DOCTYPE html><html lang="${c.lang}" dir="${c.dir}"><head><meta charset="utf-8"><style>
 @font-face { font-family: 'Cairo'; src: url(${FONT}) format('truetype'); font-weight: 200 1000; }
 @page { size: A4; margin: 0; }
-:root { --ink:#1d2333; --ink2:#454c5e; --muted:#7c8293; --paper:#f7f5f0; --card:#ffffff; --line:#e3ded3; --v1:#5b63f2; --v2:#8b5cf6; --v3:#cf4ee6; --navy:#1b2030; }
+:root { --ink:#1d2333; --ink2:#454c5e; --muted:#7c8293; --paper:#ffffff; --card:#fbfbfd; --line:#e3ded3; --v1:#5b63f2; --v2:#8b5cf6; --v3:#cf4ee6; --navy:#1b2030; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { background: var(--paper); }
 body { font-family: 'Cairo', sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 10pt; line-height: 1.55; }
@@ -59,7 +59,7 @@ h2 { font-weight: 800; font-size: ${ar ? 21 : 23}pt; line-height: 1.25; margin: 
 .intro .lead { margin-top: 3mm; max-width: 158mm; }
 .hero { position: absolute; left: 0; right: 0; top: 133mm; height: 113mm; }
 .hero img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 55%; display: block; }
-.hero::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 16mm; background: linear-gradient(var(--paper), rgba(247,245,240,0)); z-index: 1; }
+.hero::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 16mm; background: linear-gradient(var(--paper), rgba(255,255,255,0)); z-index: 1; }
 .hero .cap { position: absolute; bottom: 4.5mm; ${ar ? 'right' : 'left'}: 18mm; z-index: 2; background: rgba(27,32,48,.72); color: #fff; font-size: 7.6pt; padding: 1.2mm 3.2mm; border-radius: 10mm; }
 .stats { position: absolute; left: 0; right: 0; bottom: 0; height: 51mm; background: var(--navy); color: #fff; display: grid; grid-template-columns: repeat(4, 1fr); padding: 0 18mm; align-items: center; }
 .stat { padding: 0 3mm; border-${ar ? 'right' : 'left'}: 1px solid rgba(255,255,255,.14); }
