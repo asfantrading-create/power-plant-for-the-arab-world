@@ -13,3 +13,4 @@ tools/license-cli/keys/
 # local scratch
 .tmp/
 src/renderer/.manual-harness.html
+tools/brochure/shots/
