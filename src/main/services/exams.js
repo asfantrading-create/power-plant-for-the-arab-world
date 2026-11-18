@@ -201,6 +201,15 @@ class Exams {
     a.passed = a.percent >= (a.passMark ?? 60);
     a.byTopic = byTopic;
     this.store.put('attempts', a);
+    // ASFAN LMS link: report the result when the program was opened from Asfan Academy
+    try {
+      const lms = require('../asfan-lms-link.cjs');
+      if (lms.active()) lms.report({
+        title: lms.info().lang === 'en' ? (a.examTitle || a.examTitleAr) : (a.examTitleAr || a.examTitle), kind: a.kind || 'exam',
+        score: a.score, maxScore: a.questions.length, correct: a.score, total: a.questions.length, percent: a.percent, passed: a.passed,
+        student: a.displayName || a.username, data: { byTopic: a.byTopic, durationSec: a.durationSec, late: !!a.late, attemptNumber: a.attemptNumber }
+      });
+    } catch (e) { /* the LMS link must never break the program */ }
     const exam = a.examId === 'practice' ? { showAnswers: true } : (this.get(a.examId) || { showAnswers: true });
     return this.result(a, exam.showAnswers !== false);
   }

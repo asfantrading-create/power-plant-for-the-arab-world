@@ -8,6 +8,7 @@ const { Settings } = require('./services/settings');
 const { Store } = require('./services/store');
 const { Auth } = require('./services/auth');
 const { Exams } = require('./services/exams');
+try { require('./asfan-lms-link.cjs'); } catch (e) { /* ASFAN LMS link is optional */ }
 const license = require('./services/license');
 const licenseKeys = require('./services/license-keys');
 const { getMachineId } = require('./services/machine-id');
@@ -142,7 +143,7 @@ function buildMenu() {
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
-app.on('second-instance', () => { if (win) { if (win.isMinimized()) win.restore(); win.focus(); } });
+app.on('second-instance', (event, argv) => { try { require('./asfan-lms-link.cjs').useArgs(argv); } catch (e) {} if (win) { if (win.isMinimized()) win.restore(); win.focus(); } });
 app.whenReady().then(() => {
   session.defaultSession.setPermissionRequestHandler((_wc, permission, callback) => callback(['clipboard-sanitized-write', 'clipboard-read', 'fullscreen'].includes(permission)));
   ipc.register({
